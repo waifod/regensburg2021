@@ -1,0 +1,241 @@
+\documentclass[a4paper,11pt]{amsart}
+\usepackage{amsmath,amssymb,bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{stmaryrd} % Eckige Klammern [[ \llbracket \rrbracket ]]
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Alg}{-Alg}
+\DeclareMathOperator{\CAlg}{-CAlg}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\h}{\mathbb{H}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\PP}{\mathcal{P}}
+\DeclareMathOperator{\SP}{\mathcal{SP}}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\mult}{mult}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\Log}{Log}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\thispagestyle{empty}
+
+
+\voffset       =  -1in         
+\hoffset       =  -1in
+\textheight    = 250mm         
+\textwidth     = 150mm %166 180mm x 260mm
+\evensidemargin=  30mm %2cm Randlinks/rechts
+\oddsidemargin =  30mm % 
+\topmargin     =  12mm % 2cm Rand oben/unten
+\headheight     =  12pt
+\headsep        =   6mm
+ 
+\def\stretch#1{\renewcommand{
+\baselinestretch}{#1}\small\normalsize}
+\stretch{1} % 1.5 zeilig !!!
+\parindent = 0pt                         
+\renewcommand{\labelenumi}
+{\textit{\roman{enumi}})}
+\parskip = \medskipamount  
+
+\setenumerate{label=\alph*)}
+\setenumerate[2]{label=\roman*)}
+
+\newcommand\punkte[1]{\ifhmode\unskip\fi\hspace*{1em plus 1fill}\parbox[t]{1cm}{#1}}
+
+%diagonal arrow
+\makeatletter
+\newcommand{\fixed@sra}{$\vrule height 2\fontdimen22\textfont2 width 0pt\shortrightarrow$}
+\newcommand{\shortarrow}[1]{%
+  \mathrel{\text{\rotatebox[origin=c]{\numexpr#1*45}{\fixed@sra}}}
+}
+\makeatother
+
+\newcommand{\F}{\mathcal F}
+\newcommand{\set}{\mathrm{Set}}
+\newcommand{\sst}{\subseteq}
+\newcommand{\ito}{\hookrightarrow}
+\newcommand{\C}{\mathcal C}
+\newcommand{\D}{\mathcal D}
+\renewcommand{\hom}{\operatorname{Hom}}
+\newcommand{\ilim}{\varinjlim}
+\newcommand{\plim}{\varprojlim}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\wh}{\widehat}
+
+%%%sheet3
+\newcommand{\cat}{\mathrm{Cat}}
+\newcommand{\gpd}{\mathrm{Gpd}}
+\newcommand{\G}{\mathcal G}
+\newcommand{\ob}{\mathrm{Ob}}
+\newcommand{\disc}{\operatorname{disc}}
+\newcommand{\wt}{\widetilde}
+
+
+\begin{document}
+\textbf{Name}\hfill\textbf{Semester}
+
+\vspace*{-.1cm} Yuhao ZHANG\hfill WS 2020/21
+
+
+\vspace*{.6cm}
+\rule{\linewidth}{1pt}
+\begin{center}
+\Large
+{\bf Higher Category Theory} \\
+Solutions to Sheet 3
+ % Vorlesungstitel
+\end{center}
+\rule{\linewidth}{1pt}
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\textbf{Solution to Exercise 3.} \textit{Proof}. \textbf{(i)} It suffices to show that the functor $\Hom_\cat(-,\C)$ is represented by $\C^\simeq$ for each $\C\in\ob(\cat)$. To this end, we note that for every $\G\in\gpd$, any functor $F\colon\G\to\C$ factorizes uniquely through $\C^\simeq$, because $F(f)$ is an isomorphism for any (iso-)morphism $f$ in $\G$, and if $F$ factorizes as 
+\[
+\G\overset{F'}{\to}\C\ito\C^\simeq\text{ and }\G\overset{F''}{\to}\C\ito\C^\simeq
+\]
+then $F'=F''$ on objects while for any morphism $f$ in $\G$, $F'(f)=F(f)=F''(f)$ (so $F'=F''$). This gives a bijection
+\[
+\hom_\cat(\G,\C)\cong\hom_\gpd(\G,\C^\simeq).
+\]
+To see the functoriality, take any $G\colon\G\to\G'$ in $\gpd$. Then we have a commutative diagram
+\[
+\begin{tikzcd}
+\hom_\cat(\G',\C)\arrow[r,equal,"\sim"]\arrow[d]& \hom_\gpd(\G',\C^\simeq)\arrow[d]\\
+\hom_\cat(\G,\C)\arrow[r,equal,"\sim"]& \hom_\gpd(\G,\C^\simeq)
+\end{tikzcd}
+\ 
+\begin{tikzcd}[column sep=small]
+F\arrow[rr,mapsto]\arrow[d,mapsto]&& F'\arrow[d,mapsto]\\
+F\circ G\arrow[r,mapsto]& (F\circ G)'\arrow[r,equal]& F'\circ G
+\end{tikzcd}
+\]
+where $F$, $F\circ G$ factorize through $F'$, $(F\circ G)'$ respectively. Note that $F'\circ G=(F\circ G)'$ since the composite $\G\overset{\G}{\to}\G'\overset{F'}{\to}\C^\simeq\ito\C$ is $F\circ G$.
+
+\textbf{(ii)} We claim that subgroupoids of $EX$ are of the form
+\[
+\coprod_{i\in I}EX_i
+\]
+where $(X_i)_{i\in I}$ is a family of disjoint subsets of $X$. Indeed, such subcateories $\coprod_{i\in I}EX_i$ is a groupoid, and thus a subgroupoid of $X$. On the other hand, for any subgroupoid $Y$ of $X$, we define $I$ to be the set of isomorphism classes of objects in $Y$. Therefore $Y=\coprod_{i\in I}Ei$, which can be seen from the fact that $\ob(Y)=\ob(\coprod_{i\in I}Ei)$ and for any $x,y\in\ob(Y)$, 
+\[
+\hom_Y(x,y)=\hom_{\coprod_IEi}(x,y)=\left\{\begin{array}{ll}
+\varnothing& \text{ if $x,y$ are not isomorphic}\\
+\{(x,y)\}&\text{ if $x,y$ are isomorphic}
+\end{array}\right.
+\]
+
+\textbf{(iii)} It is enough to show that for all small set $X$, the functor $\hom_\set(\ob(-),X)$ is represented by $EX$. To this end, for any map $F\colon\ob(\C)\to X$, we define a functor $\wt F$ by letting
+\begin{itemize}
+\item $\wt F(x)=F(x)$ for any $x\in\ob(\C)$;
+
+\item $\hom_\C(x,y)\to\hom_{EX}(Fx,Fy)$ is the constant map, sending each morphism $f\colon x\to y$ to $(Fx,Fy)$.
+\end{itemize}
+and we get a bijection
+\begin{align*}
+\hom_\set(\ob(\C),X)&\to\hom_\cat(\C,EX)\\
+F&\mapsto \wt F\\
+\ob(F)&\mapsfrom F
+\end{align*}
+(the verification of them being mutually inverse is straightforward).
+
+As for the functoriality, take any functor $G\colon\C\to\C'$. Then the diagram
+\[
+\begin{tikzcd}
+\hom_\set(\ob(\C'),X)\arrow[r,equal,"\sim"]\arrow[d]& \hom_\cat(\C',EX)\arrow[d]\\
+\hom_\set(\ob(\C),X)\arrow[r,equal,"\sim"]& \hom_\cat(\C,EX)
+\end{tikzcd}
+\ 
+\begin{tikzcd}[column sep=small]
+F\arrow[rr,mapsto]\arrow[d,mapsto]&& \wt F\arrow[d,mapsto]\\
+F\circ\ob(G)\arrow[r,mapsto]& \wt F\circ G\arrow[r,equal]& \wt{F\circ\ob(G)}
+\end{tikzcd}
+\]
+is commutative. Here $\wt F\circ G=\wt{F\circ\ob(G)}$ because they both equal to $F\circ \ob(G)$ on objects and hence they are the same on morphisms (since the map between hom sets $\hom_\C(x,y)\to\hom_{EX}(F(G(x)),F(G(y))$ is the constant map).
+
+\textbf{(iv)} Let us denote the functor sending $X$ to its associated discrete category by $\disc$. We write $C\colon\C\to\set$ for the constant functor sending each $X\mapsto *$. We will show that the functor $\hom_\cat(\C,\disc(-))$ is represented by $\pi_0(\C)$ for all $\C\in\ob(\cat)$. First of all, we define a map
+\[
+\Phi\colon\hom_\set(\pi_0(\C),S)\to\hom_\cat(\C,\disc(S))
+\]
+by letting for every $F\colon\pi_0(\C)\to S$ 
+\begin{itemize}
+\item $\ob(\Phi(F))\colon\ob(\C)\to S$, $X\mapsto F\circ\iota_X(*)$, and
+
+\item $\hom_\C(X,Y)\to\hom_{\disc(S)}(\Phi X,\Phi Y)$ be $\left\{\begin{array}{ll}
+\varnothing,&\text{ if }\Phi X\neq\Phi Y\\
+\{\id\},&\text{ if }\Phi X=\Phi Y,
+\end{array}\right.$
+\end{itemize}
+where $\iota\colon C\to \pi_0(\C)_\C$ is the coprojection.
+\[
+\begin{tikzcd}
+C(X)=*\arrow[dr,"\iota_X"]\arrow[drrr,bend left=15,"*\mapsto G(X)"]\arrow[dd,"\id_*"']&&&\\
+&\ilim_\C C\arrow[rr,dotted,"\Psi(G)"]&& S\\
+C(Y)=*\arrow[ur,"\iota_Y"']\arrow[urrr,bend right=15,"*\mapsto G(Y)"']&&&
+\end{tikzcd}
+\]
+Next we intend to define an inverse $\Psi$ to $\Phi$. For any functor $G\colon\C\to\disc(S)$, note that $G(X)=G(Y)$ if there is a morphism $X\to Y$ in $\C$. From this we get a cocone $C\to S_\C$ with $C(X)\to S$ sending $*\mapsto G(X)$, which defines a unique map $\ilim_\C C\to S$ via the universal property of colimits and we denote it by $\Psi(G)$. 
+
+To see that $\Psi$ and $\Phi$ are mutually inverse, we have
+\[
+\Phi\circ\Psi(G)(X)=\Psi(G)\circ\iota_X(*)=G(X)
+\]
+for all $X\in\ob(\C)$ and $G\colon\C\to\disc (S)$, and
+\[
+(\Psi\circ\Phi(F))\circ\iota_X(*)=(\Psi(X\mapsto F\circ\iota_X(*)))\circ\iota_X(*)=F\circ\iota_X(*)
+\]
+for all $X\in\ob(\C)$ and $F\colon\pi_0(\C)\to S$. Therefore $\Psi\circ\Phi=\id$. Also, since the target of $\Phi\circ\Psi(G)$ is $\disc(S)$, in which the hom sets are either $\varnothing$ or $\id$, we have $\Phi\circ\Psi=\id$. 
+
+As for the functoriality, one has the following commutative diagram
+\[
+\begin{tikzcd}
+\hom_\set(\pi_0(\C),S)\arrow[r,equal,"\sim"]\arrow[d]& \hom_\cat(\C,\disc(S))\arrow[d]\\
+\hom_\set(\pi_0(\C),S')\arrow[r,equal,"\sim"]& \hom_\cat(\C,\disc(S'))
+\end{tikzcd}
+\ 
+\begin{tikzcd}[column sep=small]
+F\arrow[rr,mapsto]\arrow[d,mapsto]&& \Phi(F)\arrow[d,mapsto]\\
+s\circ F\arrow[r,mapsto]& \Phi(s\circ F)\arrow[r,equal]& \disc(s)\circ\Phi(F)
+\end{tikzcd}
+\]
+for any map $s\colon S\to S'$ of sets. Here the equality is because
+\[
+\Phi(s\circ F)(X)=(s\circ F)\circ \iota_X(*)
+\]
+and
+\[
+\disc(s)\circ\Phi(F)(X)=s\circ\ob(\Phi(F))(X)=s\circ(F\circ\iota_X(*))
+\]
+for all $X\in\ob(\C)$.
+
+\textbf{(v)} For a groupoid $\G$, $\pi_0(\G)$ is the set of isomorphism classes of $\G$. This can be seen by verifying the universal property of colimits. For the moment we denote by $\pi'_0(\G)$ the set of isomorphism classes. Define the coprojections $\iota_X\colon C(X)\to\pi_0'(\G)$ by sending $*\mapsto[X]$ (the isomorphism class of $X\in\ob(\G)$). Suppose that we have a cocone $F\colon C\to S_\G$ for some small set $S$. Then we can define a map
+\[
+f\colon\pi'_0(\G)\to S
+\]
+by $[X]\mapsto F_X(*)$. This is well-defined, since $F_X=F_Y\circ\id_*$ whenever $X\cong Y$. Such $f$ is unique, since if there is another $f'\colon\pi_0'(\G)\to S$, then 
+\[
+f'([X])=f'\circ \iota_X(*)=F_X(*)=f\circ\iota_X(*)=f([X])
+\]
+for all $X\in\ob(\G)$. This shows $\pi_0'(\G)\cong\pi_0(\G)$.
+
+\end{document}

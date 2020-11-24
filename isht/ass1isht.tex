@@ -1,0 +1,150 @@
+\documentclass[a4paper,11pt,openany]{scrartcl}
+\usepackage{../../basic}
+
+\begin{document}
+
+\title{Introduction to Stable Homotopy Theory\\ Assignment 1}
+
+\author{Matteo Durante}
+
+\maketitle
+
+\exercise{1}
+\begin{proof}
+    Let us consider the continuous maps $|s_n|$, $|s_{n+1}|$. We can construct
+    an homotopy $H$ between them by setting
+    \begin{align*}
+        H\colon|\Delta^n|\times|\Delta^1|&\rightarrow |\Delta^{n+1}| \\
+        (t,\lambda) &\mapsto (1-\lambda)\cdot |s_n|(t)+\lambda\cdot
+        |s_{n+1}|(t)
+    \end{align*}
+
+    Given a topological space $Y$ and the associated simplicial set $X=Sing(Y)$,
+    consider two $n$-simplices $\sigma,\tau\in X_n$. If they are
+    homotopic we have a $(n+1)$-simplex $\psi\in X_{n+1}$ such that
+    $\partial_n\psi=\sigma$, $\partial_{n+1}\psi=\tau$ and
+    $\partial_i\psi=s_i\partial_{n-1}\sigma=s_i\partial_{n-1}\tau$ for every $i$ such
+    that $0\leq i\leq n-1$.
+
+    As we know, $\psi$ is a continuous map $|\Delta^{n+1}|\rightarrow Y$ and as
+    such we can compose it with $H$ to get a map $\psi\cdot
+    H\colon|\Delta^n|\times|\Delta^1|\rightarrow Y$. By construction,
+    $H|_{|\Delta^n|\times\{0\}}=|\partial_n|$ and
+    $H|_{|\Delta^n|\times\{1\}}=|\partial_{n+1}|$, thus we have that $\psi\cdot
+    H|_{|\Delta^n|\times\{0\}}=\sigma$, $\psi\cdot
+    H|_{|\Delta^n|\times\{1\}}=\tau$. Also, $\psi\cdot
+    H|_{|\partial\Delta^n|\times\{\lambda\}}$ satisfies the desired equalities.
+
+    On the other hand, suppose that there is a homotopy $H\colon\Delta^n\times
+    I\rightarrow Y$ such that $H(-,0)=\sigma$, $H(-,1)=\tau$,
+    $H|_{\partial\Delta^n\times\{\lambda\}}=\sigma|_{\partial\Delta^n}=\tau|_{\partial\Delta^n}$
+    for all $\lambda\in I$.
+    We want to construct a $(n+1)$-simplex $\psi$ showing $\sigma,\tau$ to be
+    homotopic. Since this is an equivalence relation, we shall prove that there
+    is a $n$-simplex $\theta$ which is homotopic to both of them, which will
+    conclude the proof. In order to do this, we only need to cover
+    $\Delta^n\times\Delta^1$ by two $(n+1)$-simplices and then compose our covering with
+    $H\colon\Delta^n\times\Delta^1\rightarrow X$. In order to do this, we
+    will only specify where the verteces because, seeing these simplicial sets
+    as categories (which does not lose any information since they lie in the
+    image of the nerve functor), they correspond to an order and a preorder
+    respectively.
+    \begin{align*}
+        t_0\colon\Delta^{n+1}&\rightarrow\Delta^n\times\Delta^1 \\
+        v_i &\mapsto\begin{cases}
+                        (v_i,0)\text{ if $i<n+1$,} \\
+                        (v_{n+1},1)\text{ otherwise}
+                    \end{cases} \\
+        t_1\colon\Delta^{n+1}&\rightarrow\Delta^n\times\Delta^1 \\
+        v_i &\mapsto\begin{cases}
+                        (v_0,0)\text{ if $i=0$,} \\
+                        (v_{i-1},1)\text{ otherwise}
+                    \end{cases}
+    \end{align*}
+    Notice that the two simplices share a face, respectively their first ones.
+    After proving that the homotopy relation is equivalent to the one we get by
+    considering the $0$th and the first face, this gives us the proof.
+\end{proof}
+
+~\\
+\exercise{2}
+\begin{proof}
+    Consider homotopies $H\colon X\times\Delta^1\rightarrow Y$, $H'\colon
+    Y\times\Delta^1\rightarrow Z$, respectively between $f,f'$ and $g,g'$.
+    Considering the maps $gH\colon X\times\Delta^1\rightarrow Z$,
+    $H'(f'\times\id_{\Delta_1})\colon X\times\Delta^1\rightarrow Z$, we see that
+    they define homotopies between $gf,gf'$ and $gf',g'f'$ respectively since
+    $gH(-,0)=gf$, $gH(-,1)=gf'$ and
+    $H'(f'\times\Delta^1)(-,0)=H'(f',0)=(H'(-,0))f'=gf'$,
+    $H'(f'\times\Delta^1)(-,1)=H'(f',1)=(H'(-,1))f'=g'f'$.
+
+    We now want to prove that the homotopy relation is transitive, which will
+    then imply that $gf$ is homotopic to $g'f'$.
+
+    Let us consider three morphisms of Kan complexes $f,g,h\colon X\rightarrow
+    Y$ with homotopies $H\colon X\times\Delta^1\rightarrow Y$ between $f,g$ and
+    $H'\colon X\times\Delta^1\rightarrow Y$ between $g,h$. We want to construct a morphism
+    $H''\colon X\times\Lambda^2_1\rightarrow Y$ such that $H''(-,0)=f$,
+    $H''(-,1)=g$ and $H''(-,2)=h$, extend it to a new one $H'''\colon
+    X\times\Delta^2\rightarrow Y$ and then restrict it to
+    $\tilde{H}=H'''(\id_X\times\partial^2_1)\colon X\times\Delta^1\rightarrow Y$.
+
+    First of all, by adjunction we get from $H,H'$ two morphisms of simplicial
+    sets $G,G'\colon\Delta^1\rightarrow\underline{\sSet}(X,Y)$, which we then glue together by
+    considering the pushout diagram
+    \[
+        \begin{tikzcd}
+            \Delta_0\ar[r, "\partial_0^1"]\ar[d, "\partial_1^1"]
+            & \Delta_1\ar[d]\ar[ddr, bend left, "G"] \\
+            \Delta_1\ar[r]\ar[drr, bend right, "G'"]
+            & \Lambda_1^2\ar[dr, dotted, "\tilde{G}"] \\
+            && \underline{\sSet}(X,Y)
+        \end{tikzcd}
+    \]
+    Since $\sSeten(X,Y)$ is a Kan complex, we can fill the horn and get a morphism
+    $\Delta^2\rightarrow\sSeten(X,Y)$, which by adjunction corresponds to a
+    morphism $H'''\colon X\times\Delta^2\rightarrow Y$ such that
+    $H'''(\id_X\times\partial^2_2)=H$, $H'''(\id_X\times\partial^2_0)=H'$.
+    Composing this morphism with
+    $\id_X\times\partial^2_1$, we get then the desired homotopy $\tilde{H}\colon
+    X\times\Delta^1\rightarrow Y$ between $f$ and $h$.
+\end{proof}
+
+~\\
+\exercise{3}
+\begin{proof}
+    Consider two Kan complexes $X,Y$, two morphisms $f,g\colon X\rightarrow Y$
+    and an homotopy $H\colon X\times\Delta^1\rightarrow Y$ between them. We
+    will abuse the notation and
+    identify an $n$-simplex with the unique map from $\Delta^n$ identified by
+    Yoneda.
+
+    Given $x\in X_0$ and $t\in X_n$ such that $t|_{\partial\Delta^n}=x$ (here we
+    mean that the map $\partial\Delta^n\rightarrow X$ given by composing
+    $t\colon\Delta^n\rightarrow X$ with the inclusion
+    $\partial\Delta^n\rightarrow\Delta^n$ maps all simplices to the degenerate
+    ones identified by $x$), consider $ft,gt\in Y_n$,
+    $\gamma_x=H|_{\{x\}\times\Delta^1}\colon\Delta^1\xrightarrow{(x,\id_{\Delta^1})}X\times\Delta^1\xrightarrow{H} Y$.
+    By definition,
+    $(ev_0)^{-1}_*\colon\pi_n(Y,fx)\rightarrow\pi_n(\sSeten(\Delta^1,Y),\gamma_x)$
+    sends the class of $ft$ to the class an $n$-simplex
+    $\alpha\colon\Delta^n\rightarrow\sSeten(\Delta^1,Y)$ such that
+    $\alpha|_{\partial\Delta^n}=\gamma_x$ (again, all simplices are mapped to
+    the degenerate ones simplex given bythe $0$-simplex $\gamma_x$) and
+    corresponding to a morphism $\alpha'\colon\Delta^n\times\Delta^1\rightarrow
+    Y$ satisfying $\alpha'|_{\Delta^n\times\{0\}}=ft$.
+
+    We pick $\beta'\colon \Delta^n\times\Delta^1\xrightarrow{t\times\id_{\Delta^1}}X\times\Delta^1\xrightarrow{H}Y$
+    as our $\alpha'$ since by construction
+    $\beta'|_{\Delta^n\times\{0\}}=H(t,0)=ft$ and
+    $\beta'|_{\partial\Delta^n\times\Delta^1}=H(t|_{\partial\Delta^n}\times\id_{\Delta_1})=H(x\times\Delta^1)=H|_{\{x\}\times\Delta^1}=\gamma_1$.
+    $\beta$ is then sent by $(ev_1)_*$ to $\beta'|_{\Delta^n\times\{1\}}=gt$,
+    which proves the commutativity of the diagram.
+
+    Since this holds for every $n\geq 0$ and all $x\in X_0$ and the evaluation
+    maps are isomorphisms, we have shown that
+    an homotopy equivalence $H\colon X\times\Delta^1\rightarrow Y$ induces an
+    isomorphism $(\gamma_x)_*\colon\pi_n(Y,fx)\rightarrow\pi_n(Y,gx)$ on
+    homotopy groups.
+\end{proof}
+\end{document}
