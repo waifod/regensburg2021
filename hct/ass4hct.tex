@@ -140,7 +140,7 @@ Assignment 4
     (3) Once again, the small object argument applies with $I=\{1\rightarrow
     2\}$. Consider a function $f\colon X\rightarrow Y$. If $X=0$, since there
     are no functions $1\rightarrow 0$, there are no commutative squares with $f$
-    on the left and $1\rightarrow 2$ on the right, hence $f\in r(I)$ trivially.
+    on the right and $1\rightarrow 2$ on the left, hence $f\in r(I)$ trivially.
     Suppose now $X\neq 0$. A commutative square
     \[\begin{tikzcd}
 	{1} & {X} \\
@@ -163,8 +163,9 @@ Assignment 4
     S\rightarrow T$. If $T=0$, then $g=\id_0$ and it has the left lifting
     property against any function thanks to the initiality of 0. If $S\neq 0$,
     then the only lifting problems we have to consider are the ones where the
-    function $f$ on the right is surjective and has a non-empty codomain. By an
-    argument provided in (1), we see that such a $g$ must be injective. Finally,
+    function $f$ on the right is surjective and has a non-empty domain. By an
+    argument provided in (1) using $2\rightarrow 1$, we see that such a $g$ must
+    be injective. Finally,
     if $S=0$, $T\neq 0$ we have for any pair of functions $f\colon
     X=0\rightarrow Y$, $q\colon T\rightarrow Y$ a commutative square
     \[\begin{tikzcd}
@@ -177,8 +178,8 @@ Assignment 4
     \end{tikzcd}\]
     which does not admit a filling, hence $g\not\in l(r(I))$.
 
-    It follows that $l(r(I))$ is the class of functions which are either
-    injective or have an empty domain.
+    It follows that $l(r(I))$ is the class of functions which are
+    injective and have either a non-empty domain or an empty codomain.
 
     (4) Consider a weak factorization system $(\cA,\cB)$. We will show that it
     falls in one of the cases we have already studied.
@@ -241,8 +242,7 @@ Assignment 4
     itself lies in $\cA$ as its
     retraction, which implies that functions in $\cB$ are all surjective,
     leading to an absurd since $0\rightarrow 1$ is not. It follows that all of
-    the functions in $\cA$ are injective and therefore $\cA=\cA_3$, which
-    implies $\cA\subset\cA_3$.
+    the functions in $\cA$ are injective and therefore $\cA\subset\cA_3$.
 
     Suppose $\cB_1\subsetneq\cA$. We want to prove that $\cA_3=\cA$, which will
     conclude the proof. By assumption, there exists a function $g\colon
@@ -264,8 +264,6 @@ Assignment 4
     \end{tikzcd}\]
     exhibiting $1\rightarrow 2$ as a retract of $g$, proving that it lies in
     $\cA$. This gives us $\cA_3\subset\cA$.
-
-    claim.
 \end{proof}
 
 \end{document}
