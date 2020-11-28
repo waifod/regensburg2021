@@ -1,5 +1,6 @@
 \documentclass[a4paper,11pt,openany]{scrartcl}
 \usepackage{../reg2021}
+\usepackage{../quiver}
 
 \begin{document}
 \noindent\textbf{Authors}\hfill\textbf{Semester} \linebreak
@@ -24,6 +25,247 @@ Assignment 4
 ~\\
 \exercise{2}
 \begin{proof}
+    (1) Since $\Set$ is locally small, we may check that $(\cA_1,\cB_1)$ is a weak
+    factorization system and $\cA_1$ is the smallest saturated class containing
+    $I=\{0\rightarrow 1,2\rightarrow 1\}$ by applying the small object argument
+    to $I$ itself and showing that $\cA_1=l(r(I))$. Indeed, $\Set(0,-)$ is the
+    constant diagram at $1$ by initiality of
+    $0$ and therefore,
+    for any filtered diagram $D\colon\cI\rightarrow\Set$ (i.e.\ a functor whose
+    indexing category is small and filtered), we get
+    $\Set(0,\colim_{\cI}Di)=1=\colim_{\cI}1=\colim_\cI\Set(0,Di)$. Also,
+    since $\Set(1,-)\cong\Id_{\Set}$, $D\cong\Set(1,D-)$ and therefore the colimit
+    is trivially preserved. It follows that the small object argument applies
+    and $l(r(I))$ is the smallest saturated class containing $I$.
+
+    Let's fix a function $f\colon X\rightarrow Y$. For any element $y\in Y$, we
+    may construct the following commutative diagram.
+    \[
+        \begin{tikzcd}
+            0\ar[r]\ar[d]
+            & X\ar[d, "f"] \\
+            1\ar[r, "y"]
+            & Y
+        \end{tikzcd}
+    \]
+    We see that there exists an element $x\in X$ such that $f(x)=y$ if and only
+    if there exists a function $x\colon 1\rightarrow X$ filling the diagram.
+    Since every commutative square with these vertical arrows has this form, we
+    have that $f$ is surjective if and only if it has the right lifting property
+    with respect to $0\rightarrow 1$.
+
+    Consider now $y\in Y$ and a commutative square
+    \[
+        \begin{tikzcd}
+            2\ar[r, "g"]\ar[d]
+            & X\ar[d, "f"] \\
+            1\ar[r, "y"]
+            & Y
+        \end{tikzcd}
+    \]
+    For such a square to exists we need a $g$ with $f(g(*_0))=f(g(*_1))=y$, that
+    is its image must be mapped to $y$ under $f$ and therefore $y\in\im(f)$.
+    A filling is a choice of an element $x\in X$ such that $f(x)=y$ and
+    $x=g(*_0)=g(*_1)$.
+
+    \noindent If $f$ is injective then we have a unique $x\in X$ mapped
+    to $y$, thus there is a unique $g$ making the diagram commute and a filling
+    $x\colon 1\rightarrow X$. On the other hand, if it is not injective we can
+    choose a $y\in Y$ such that $y=f(x_0)=f(x_1)$, $x_0\neq x_1$, and define $g$
+    as $g(*_i)=x_i$, which with $y\colon 1\rightarrow Y$ will create a
+    commutative diagram not admitting a filler. It follows that $f$ has the
+    right lifting property with respect to $2\rightarrow 1$ if and only if it is
+    injective.
+
+    By what we have shown, $f\in r(I)$ if and only if it is bijective
+    and therefore an isomorphism, thus $r(I)=\cB_1$.
+
+    Consider now a function $g\colon X\rightarrow Y$, $f\in r(I)$ and a
+    commutative diagram
+    \[\begin{tikzcd}
+	{X} & {S} \\
+	{Y} & {T}
+	\arrow["{g}"', from=1-1, to=2-1]
+	\arrow["{f}", from=1-2, to=2-2]
+	\arrow["{q}"', from=2-1, to=2-2]
+	\arrow["{p}", from=1-1, to=1-2]
+    \end{tikzcd}\]
+    We can construct a filler by setting $h:=f^{-1}\cdot q$ since $h\cdot
+    g=f^{-1}\cdot q\cdot g=f^{-1}\cdot f\cdot p=p$ and $f\cdot h=f\cdot
+    f^{-1}\cdot q=q$, hence $g\in l(r(I))$ and $\cA_1=l(r(I))$.
+
+    This in particular shows that $\cA_1$ and $\cB_1$ are saturated classes. We
+    want to prove that $(\cB_1,\cA_1)$ is a weak factorization system as well.
+
+    Given a function $f\colon X\rightarrow Y$, we see that $f=f\cdot\id_X$,
+    where $\id_X\in\cB_1$, $f\in\cA_1$, while looking at the previous
+    commutative square and supposing that $g\in\cB_1$, $f\in\cA_1$, we get a
+    filler by considering $h:=p\cdot g^{-1}$, thus $\cB_1\subset l(\cA_1)$ and
+    we have the thesis.
+
+    (2) As we have said earlier, $\Set$ is locally small and $\Set(0,-)$
+    preserves filtered colimits, thus setting $I=\{0\rightarrow 1\}$ and
+    applying the small object argument we get that $(l(r(I)),r(I))$ is a weak
+    factorization system and $l(r(I))$ is the smallest saturated class in $\Set$
+    containing $I$.
+
+    By what we have shown in (1), $r(I)$ is the class of all surjective
+    functions. Let's consider a commutative square
+    \[
+        \begin{tikzcd}
+            X\ar[d, "f"]\ar[r, "p"]
+            & S\ar[d, "g"] \\
+            Y\ar[r, "q"]
+            & T
+        \end{tikzcd}
+    \]
+    where $g\in r(I)$. To construct a filler $h\colon Y\rightarrow S$ we need to
+    pick for every $y\in Y$ an element $h(y)\in g^{-1}(q(y))$ in such a way that,
+    whenever $y=f(x)$, we also have $h(y)=p(x)$.
+
+    \noindent If $f$ is injective, then we
+    set $h(f(x)):=p(x)$ for all $x\in X$, while for all $y\in Y\setminus \im(f)$
+    we choose freely $h(y)$ from $g^{-1}(q(y))$ and this constitutes a filler.
+
+    \noindent On the other hand, if it is not
+    injective, then there are two distinct elements $x_0,x_1\in X$ such that
+    $y=f(x_0)=f(x_1)$ and we may consider the surjection $2\rightarrow 1$ as
+    $g$, the unique map $Y\rightarrow 1$ as $q$ and pick $p$ such that
+    $p(x_i)=*_i$ and the square commutes. A filling $h\colon Y\rightarrow 2$
+    would have to satisfy $h(f(x_0))=h(f(x_1))$ and $h(f(x_i))=p(x_i)=*_i$,
+    which is absurd.
+
+    \noindent It follows that $l(r(I))$ is the class of all injective functions.
+
+    (3) Once again, the small object argument applies with $I=\{1\rightarrow
+    2\}$. Consider a function $f\colon X\rightarrow Y$. If $X=0$, since there
+    are no functions $1\rightarrow 0$, there are no commutative squares with $f$
+    on the left and $1\rightarrow 2$ on the right, hence $f\in r(I)$ trivially.
+    Suppose now $X\neq 0$. A commutative square
+    \[\begin{tikzcd}
+	{1} & {X} \\
+	{2} & {Y}
+	\arrow["{x}", from=1-1, to=1-2]
+	\arrow["{q}", from=2-1, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{f}", from=1-2, to=2-2]
+    \end{tikzcd}\]
+    is given by a choice of a pair $(x,y)\in X\times Y$, where $x$ defines the
+    upper map and $q(*_0):=f(x)$, $q(*_1):=y$. A filling $h\colon 2\rightarrow
+    X$ then exists if and only if there exists $x'\in X$ such that
+    $f(x')=q(*_1)$, in which case $h(*_0)=x$, $h(*_1)=x'$. Asking for all the
+    fillings to exist is equivalent to saying that $f$ is surjective.
+
+    It follows that $r(I)$ is the class of functions which are either surjective
+    or have empty domain.
+
+    We now have to compute $l(r(I))$. Let's consider a function $g\colon
+    S\rightarrow T$. If $T=0$, then $g=\id_0$ and it has the left lifting
+    property against any function thanks to the initiality of 0. If $S\neq 0$,
+    then the only lifting problems we have to consider are the ones where the
+    function $f$ on the right is surjective and has a non-empty codomain. By an
+    argument provided in (1), we see that such a $g$ must be injective. Finally,
+    if $S=0$, $T\neq 0$ we have for any pair of functions $f\colon
+    X=0\rightarrow Y$, $q\colon T\rightarrow Y$ a commutative square
+    \[\begin{tikzcd}
+	{0} & {0} \\
+	{T} & {Y}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{q}", from=2-1, to=2-2]
+    \arrow["{g}", from=1-1, to=2-1]
+	\arrow["{f}", from=1-2, to=2-2]
+    \end{tikzcd}\]
+    which does not admit a filling, hence $g\not\in l(r(I))$.
+
+    It follows that $l(r(I))$ is the class of functions which are either
+    injective or have an empty domain.
+
+    (4) Consider a weak factorization system $(\cA,\cB)$. We will show that it
+    falls in one of the cases we have already studied.
+
+    We begin by noticing that any bijection
+    lies in $\cA\cap\cB$ since it has the right and left lifting property with
+    respect to every map, as shown in (1).
+
+    Since any function $f$ admits a factorization
+    $p\cdot i$, where $i\in\cA$, $p\in\cB$, we have $\cA,\cB\neq\emptyset$. In
+    particular, for the injection $0\rightarrow 1$ we have $i\colon 0\rightarrow
+    X$.
+
+    Let's focus on $i$ and suppose $X\neq 0$. Then we have a retraction
+    \[\begin{tikzcd}
+	{0} & {0} & {0} \\
+	{1} & {X} & {1}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-1, to=2-2]
+    \end{tikzcd}\]
+    which implies that $0\rightarrow 1$ lies in $\cA$ and therefore
+    $\cA_2\subset\cA$, $\cB\subset\cB_2$.
+
+    If $\cA$ does not contain a non-injective function, then $\cA=\cA_2$ and
+    $\cB=\cB_2$, that is we are in case (2). On the other hand, if it does
+    contain a non-injective function
+    $g\colon S\rightarrow T$, consider $s_0,s_1\in S$ such that
+    $t=g(s_0)=g(s_1)$. Constructing $f\colon 2\rightarrow S$ with $f(*_i)=s_i$
+    and taking a retraction $r\colon S\rightarrow 2$, we get the commutative
+    diagram
+    \[\begin{tikzcd}
+	{2} & {S} & {2} \\
+	{1} & {T} & {1}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["r", from=1-2, to=1-3]
+	\arrow[from=1-1, to=2-1]
+	\arrow["g", from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-3]
+	\arrow["t", from=2-1, to=2-2]
+    \end{tikzcd}\]
+    exhibiting $2\rightarrow 1$ as a retract of $g$, in which case $\cA_1=\cA$
+    and therefore $\cB=\cB_1$, hence we are in case (1.a).
+
+    Suppose instead that a factorization of $0\rightarrow 1$ where $X\neq 0$
+    does not exist. Then, $0\rightarrow 1$ lies in $\cB$. We want to show that
+    we are in case (1.b) or (3).
+
+    By the argument provided in (3), given a function $g$, having the left
+    lifting property with respect to $0\rightarrow 1$ implies that either the
+    codomain is empty (i.e.\ $g=\id_0$) or the domain is non-empty.
+
+    Consider now a non-injective function $g\colon S\rightarrow T$ in $\cA$.
+    Then we may proceed as we have already done and get that $2\rightarrow 1$
+    itself lies in $\cA$ as its
+    retraction, which implies that functions in $\cB$ are all surjective,
+    leading to an absurd since $0\rightarrow 1$ is not. It follows that all of
+    the functions in $\cA$ are injective and therefore $\cA=\cA_3$, which
+    implies $\cA\subset\cA_3$.
+
+    Suppose $\cB_1\subsetneq\cA$. We want to prove that $\cA_3=\cA$, which will
+    conclude the proof. By assumption, there exists a function $g\colon
+    S\rightarrow T$ such that $S\neq 0$ and $g$ is injective but not surjective,
+    hence we may take $t_0,t_1\in T$ such that $g(s)=t_0$ for some $s\in S$ and
+    $t_1\not\in\im(g)$. We may now define $q\colon 2\rightarrow T$ as
+    $q(*_i):=t_i$ and take a retraction $r$, which allows us to construct the
+    commutative diagram
+    \[\begin{tikzcd}
+	{1} & {S} & {1} \\
+	{2} & {T} & {2}
+	\arrow["{s}", from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{q}", from=2-1, to=2-2]
+	\arrow["{r}", from=2-2, to=2-3]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{g}", from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+    \end{tikzcd}\]
+    exhibiting $1\rightarrow 2$ as a retract of $g$, proving that it lies in
+    $\cA$. This gives us $\cA_3\subset\cA$.
+
+    claim.
 \end{proof}
 
 \end{document}
