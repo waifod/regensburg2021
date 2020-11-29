@@ -181,7 +181,8 @@ Assignment 4
     It follows that $l(r(I))$ is the class of functions which are
     injective and have either a non-empty domain or an empty codomain.
 
-    (4) Consider a weak factorization system $(\cA,\cB)$. We will show that it
+    (4) Consider a weak factorization system $(\cA,\cB)$ and remember that
+    $\cA=l(\cB)$ implies that $\cA$ is saturated. We will show that it
     falls in one of the cases we have already studied.
 
     We begin by noticing that any bijection
@@ -208,7 +209,7 @@ Assignment 4
     which implies that $0\rightarrow 1$ lies in $\cA$ and therefore
     $\cA_2\subset\cA$, $\cB\subset\cB_2$.
 
-    If $\cA$ does not contain a non-injective function, then $\cA=\cA_2$ and
+    If $\cA$ does not contain any non-injective function, then $\cA=\cA_2$ and
     $\cB=\cB_2$, that is we are in case (2). On the other hand, if it does
     contain a non-injective function
     $g\colon S\rightarrow T$, consider $s_0,s_1\in S$ such that
@@ -237,15 +238,8 @@ Assignment 4
     lifting property with respect to $0\rightarrow 1$ implies that either the
     codomain is empty (i.e.\ $g=\id_0$) or the domain is non-empty.
 
-    Consider now a non-injective function $g\colon S\rightarrow T$ in $\cA$.
-    Then we may proceed as we have already done and get that $2\rightarrow 1$
-    itself lies in $\cA$ as its
-    retraction, which implies that functions in $\cB$ are all surjective,
-    leading to an absurd since $0\rightarrow 1$ is not. It follows that all of
-    the functions in $\cA$ are injective and therefore $\cA\subset\cA_3$.
-
-    Suppose $\cB_1\subsetneq\cA$. We want to prove that $\cA_3=\cA$, which will
-    conclude the proof. By assumption, there exists a function $g\colon
+    Suppose $\cB_1\subsetneq\cA$. We want to prove that $\cA_3\subset\cA$. By
+    assumption, there exists a function $g\colon
     S\rightarrow T$ such that $S\neq 0$ and $g$ is injective but not surjective,
     hence we may take $t_0,t_1\in T$ such that $g(s)=t_0$ for some $s\in S$ and
     $t_1\not\in\im(g)$. We may now define $q\colon 2\rightarrow T$ as
@@ -264,7 +258,24 @@ Assignment 4
 	\arrow[from=1-3, to=2-3]
     \end{tikzcd}\]
     exhibiting $1\rightarrow 2$ as a retract of $g$, proving that it lies in
-    $\cA$. This gives us $\cA_3\subset\cA$.
+    $\cA$. This gives us $\cA_3\subset\cA$, $\cB\subset\cB_3$.
+
+    Consider now a non-injective function $g\colon S\rightarrow T$ in $\cA$.
+    Then we may proceed as we have already done and get that $2\rightarrow 1$
+    itself lies in $\cA$ as its
+    retraction, which implies that functions in $\cB$ are injective and, since
+    they also belong to $\cB_3$, either they are bijections or they have empty
+    domains.
+
+    Given a function $h\colon S\rightarrow T$, $S\neq 0$, we see that the only
+    possible factorization $h=p\cdot i$ in this system is such that $p$ is an
+    isomorphism
+    and therefore $h$ has the left lifting property against it, thus it is a
+    retract of $i$ and $h\in\cA$. On the other hand, if $S=0$ we have that
+    $i=\id_0$ and
+    $h=p\in\cB$. It follows that $\cA$ is the class of all functions which are
+    bijections or have non-empty domain, while $\cB$ is the one of all functions
+    which are bijections or have empty domain.
 \end{proof}
 
 \end{document}
