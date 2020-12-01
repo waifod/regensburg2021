@@ -18,14 +18,117 @@ Assignment 4
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newcommand{\La}{\Lambda}
+\newcommand{\pa}{\partial}
+\newcommand{\ob}{\operatorname{Ob}}
+\newcommand{\mor}{\operatorname{Mor}}
+\newcommand{\sto}{\twoheadrightarrow}
+
 \exercise{1}
 \begin{proof}
+\textbf{(1)} The inclusion maps induce functors 
+\[
+\tau(\La^3_k)\to\tau(\pa\Delta^3)\to\tau(\Delta^3)=\tau N([3])\cong[3].
+\]
+Recall that 
+\[
+\pa\Delta^3([i])=\{f\colon[i]\to[3]\mid\text{$f$ is not surjective}\}
+\]
+and it follows that $\Delta^3([i])=\pa\Delta^3([i])$ for $i<3$. Hence $Sk_2(\pa\Delta^3)=Sk_2(\Delta^3)$. Since $\tau(X)\cong\tau(Sk_2(X))$ for any simplicial set $X$, we get $\tau(\pa\Delta^3)\cong\tau(\Delta^3)$ by the functoriality of $Sk_2$. It remains to check that $\tau(\La^3_k)\to\tau(\Delta^3)$ (via composition) is an isomorphism for $k=1,2$. To this end, by the construction of $\tau$, we can depict $\tau(\La^3_1)$ as
+\[
+\begin{tikzcd}[sep=small]
+& 1\arrow[dr]&\\
+0\arrow[ur]\arrow[dr]\arrow[rr]&& 3\\
+& 2\arrow[ur]\arrow[from=uu,crossing over]&
+\end{tikzcd}
+\]
+where each face is commutative except possibly the face opposite to $1$, and the functor $\tau(\La^3_1)\to\tau(\Delta^3)$ sends $0\to 3$ and the composition $0\to 2\to 3$ to the same morphism $0\to 3$ in $\tau(\Delta^3)$. However, we claim that the face $0-2-3$ in $\tau(\La^3_1)$ is actually commutative. Indeed, the composition $0\to 2\to 3$ equals to the composition $0\to 1\to 2\to 3$, which in turns equals to $(0\to 1\to 3)=(0\to 3)$. The proof for $k=2$ is similar, only to focus on the face opposite to $2$. Combining the obtained isomorphisms yields the desired ones $\tau(\La^n_k)\cong\tau(\pa\Delta^3)\cong\tau(\Delta^3)$.\\
+\\
+\textbf{(2)} Recall that for any simplicial set $X$, $\tau(X)$ is defined by 
+\begin{itemize}
+\item $\ob(\tau(X))=X_0$, and
+
+\item $\mor(\tau(X))=\{\Delta^1\to X\}/\text{commutative triangles}$.
+\end{itemize}   
+Also, note that
+\[
+\La^n_k([1])=\big\{f\colon[1]\to[n]\mid \im(f)\not\supseteq\{0,\cdots,k-1,k+1,\cdots,n\}\big\}
+\]
+and thus we have $\mor(\tau(\La^n_k))=\mor(\tau(\Delta^n))$ for $n\geqslant 3$; $(0\mapsto 1,1\mapsto2)\not\in\mor(\tau(\La^2_0))$, $(0\mapsto0,1\mapsto1)\not\in\mor(\tau(\La^2_2))$ for $n=2$; $(0\mapsto0,1\mapsto1)\not\in\mor(\tau(\La^1_0))\text{ and }\mor(\tau(\La^1_1))$. This shows that
+\[
+\tau(\La^n_0)=\left\{\begin{array}{ll}
+\tau(\Delta^n)=[n]& n\geqslant3\\
+\begin{tikzcd}[sep=tiny]
+& 1&[-5pt]\\
+0\arrow[ur]\arrow[rr]&& 2
+\end{tikzcd}& n=2\\
+0\quad1& n=1\\
+0& n=0
+\end{array}\right.\text{ and }
+\tau(\La^n_n)=\left\{\begin{array}{ll}
+\tau(\Delta^n)=[n]& n\geqslant3\\
+\begin{tikzcd}[sep=tiny]
+&[-5pt] 1\arrow[dr]&\\
+0\arrow[rr]&& 2
+\end{tikzcd}& n=2\\
+0\quad1& n=1\\
+0& n=0
+\end{array}\right.
+\]
+Here all identity morphisms are omitted.\\
+\\
+\textbf{(3)} By definition, we must show that $C$ is a groupoid if and only if 
+\[
+\Hom_{\sSet}(\La^n_k,N(C))\sto\Hom_{\sSet}(\Delta^n,N(C))
+\]
+for all $n\geqslant1$ and all $0\leqslant k\leqslant n$. Since $C$ is a category, the epimorphism holds for $n\geqslant2$ and $0<k<n$, and hence one only needs to check the case $k=0,n$. Consider the adjunction
+\[
+\begin{tikzcd}
+\Hom_{\sSet}(\La^n_k,N(C))\arrow[r,equal,"\sim"]& \Hom_{\Cat}(\tau\La^n_k,C)\\
+\Hom_{\sSet}(\Delta^n,N(C))\arrow[u]\arrow[r,equal,"\sim"]& \Hom_{\Cat}(\tau\Delta^n,C)\arrow[u]
+\end{tikzcd}
+\]
+and the left vertical arrow is epic if and only if the right vertical arrow is so. Thus far we reduced the case to proving that $C$ is a groupoid if and only if
+\[
+\Hom_{\Cat}(\tau\Delta^n,C)\sto\Hom_{\Cat}(\tau\La^n_k,C)\tag{$*$}
+\]
+for all $n\geqslant1$ and $k=0,n$. Moreover, by (2), it suffices to check the case of $n=2$.
+
+To this end, if $(*)$ is epic for $k=0$ and $n$, then the diagrams
+\[
+\begin{tikzcd}
+\tau\La^2_0\arrow[r]\arrow[d]& C\\
+\text{[2]}\arrow[ur,dotted]
+\end{tikzcd}
+\text{ and }
+\begin{tikzcd}
+\tau\La^2_2\arrow[r]\arrow[d]& C\\
+\text{[2]}\arrow[ur,dotted]
+\end{tikzcd}
+\]
+admit extensions. In particular, we take $\tau\La^2_0\to C$ sending $0\to 2$ to some $\id_x$ and $0\to 1$ to any morphism $f\colon x\to y$. Then the extension provides a left inverse 
+\[
+\begin{tikzcd}[sep=small]
+& y\arrow[dr,dotted,"g"]&\\
+x\arrow[rr,"\id_x"']\arrow[ur,"f"]&& x
+\end{tikzcd}
+\]
+On the other hand, we take $\tau\La^2_2\to C$ sending $0\to 2$ to $\id_x$ and $1\to 2$ to $f$, then the extension gives a right inverse $g'$ to $f$, which means that $f$ is an isomorphism. So $C$ is a groupoid.
+
+Conversely, if $C$ is a groupoid, for any $\tau\La^2_0\to C$, which is given by some
+\[
+\begin{tikzcd}[sep=small]
+& y&\\
+x\arrow[rr,"g"']\arrow[ur,"f"]&& z
+\end{tikzcd}
+\]
+we can invert $f$ to define $y\to z$, and this in turn gives rise to a functor $[2]\to C$ extending $\tau\La^2_0\to C$. This shows that $(*)$ is surjective for $k=0$. Analogously we can perform the same argument for $k=n$.
 \end{proof}
 
 ~\\
 \exercise{2}
 \begin{proof}
-    (1) Since $\Set$ is locally small, we may check that $(\cA_1,\cB_1)$ is a weak
+    \textbf{(1)} Since $\Set$ is locally small, we may check that $(\cA_1,\cB_1)$ is a weak
     factorization system and $\cA_1$ is the smallest saturated class containing
     $I=\{0\rightarrow 1,2\rightarrow 1\}$ by applying the small object argument
     to $I$ itself and showing that $\cA_1=l(r(I))$. Indeed, $\Set(0,-)$ is the
@@ -101,9 +204,9 @@ Assignment 4
     where $\id_X\in\cB_1$, $f\in\cA_1$, while looking at the previous
     commutative square and supposing that $g\in\cB_1$, $f\in\cA_1$, we get a
     filler by considering $h:=p\cdot g^{-1}$, thus $\cB_1\subset l(\cA_1)$ and
-    we have the thesis.
-
-    (2) As we have said earlier, $\Set$ is locally small and $\Set(0,-)$
+    we have the thesis.\\
+    \\
+     \textbf{(2)} As we have said earlier, $\Set$ is locally small and $\Set(0,-)$
     preserves filtered colimits, thus setting $I=\{0\rightarrow 1\}$ and
     applying the small object argument we get that $(l(r(I)),r(I))$ is a weak
     factorization system and $l(r(I))$ is the smallest saturated class in $\Set$
@@ -135,9 +238,9 @@ Assignment 4
     would have to satisfy $h(f(x_0))=h(f(x_1))$ and $h(f(x_i))=p(x_i)=*_i$,
     which is absurd.
 
-    \noindent It follows that $l(r(I))$ is the class of all injective functions.
-
-    (3) Once again, the small object argument applies with $I=\{1\rightarrow
+    \noindent It follows that $l(r(I))$ is the class of all injective functions.\\
+    \\
+     \textbf{(3)} Once again, the small object argument applies with $I=\{1\rightarrow
     2\}$. Consider a function $f\colon X\rightarrow Y$. If $X=0$, since there
     are no functions $1\rightarrow 0$, there are no commutative squares with $f$
     on the right and $1\rightarrow 2$ on the left, hence $f\in r(I)$ trivially.
@@ -179,11 +282,11 @@ Assignment 4
     which does not admit a filling, hence $g\not\in l(r(I))$.
 
     It follows that $l(r(I))$ is the class of functions which are
-    injective and have either a non-empty domain or an empty codomain.
-
-    (4) Consider a weak factorization system $(\cA,\cB)$ and remember that
+    injective and have either a non-empty domain or an empty codomain.\\
+    \\
+     \textbf{(4)} Consider a weak factorization system $(\cA,\cB)$ and remember that
     $\cA=l(\cB)$ implies that $\cA$ is saturated and with $\cB=r(\cA)$ means
-    that is is enough to determine one of them. We will show that it
+    that is enough to determine one of them. We will show that it
     falls in one of the cases we have already studied.
 
     We begin by noticing that any bijection
