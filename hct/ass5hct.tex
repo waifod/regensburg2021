@@ -1,0 +1,128 @@
+\documentclass[a4paper,11pt,openany]{scrartcl}
+\usepackage{../reg2021}
+\usepackage{../quiver}
+
+\begin{document}
+\noindent\textbf{Authors}\hfill\textbf{Semester} \linebreak
+\vspace*{-.1cm} Matteo Durante, Yuhao Zhang\hfill WS 2020/21 \\
+
+\noindent
+\rule{\linewidth}{1pt}
+\begin{center}
+\Large
+\textbf{Higher Category Theory} \\
+Assignment 5
+\end{center}
+\rule{\linewidth}{1pt}
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\La}{\Lambda}
+\newcommand{\pa}{\partial}
+\newcommand{\ob}{\operatorname{Ob}}
+\newcommand{\mor}{\operatorname{Mor}}
+\newcommand{\sto}{\twoheadrightarrow}
+
+\exercise{1}
+\begin{proof}
+    (1) Let $\cC=[3]$. We see that $N([3])=\Delta_3$, which has a non-degenerate
+    3-simplex given by $\id_{\Delta_3}$. On the other hand, by definition all of
+    the simplices of $Sk_2(\Delta_3)$ of dimension $>2$ are degenerate, hence
+    the canonical inclusion $Sk_2(\Delta_3)\rightarrow \Delta_3$ is not an
+    isomorphism.
+
+    (2) Since (co)limits of presheaves are defined pointwisely and a morphism of
+    presheaves is a monomorphism if and only if every component of the natural
+    transformation is, we only need to check that for all $a\in\Ob(\cA)$ the
+    pushout squares
+    \[\begin{tikzcd}
+	{X_a} & {Y_a} \\
+	{X'_a} & {Y'_a}
+	\arrow["{i_a}"', from=1-1, to=2-1]
+	\arrow["{i'_a}", from=1-2, to=2-2]
+	\arrow["{g_a}"', from=2-1, to=2-2]
+	\arrow["{f_a}", from=1-1, to=1-2]
+    \end{tikzcd}\]
+    are also pullback squares, so we shall be working solely in $\Set$, allowing
+    us to drop the $a$, without creating ambiguity.
+
+    Since the class of monomorphisms in $\Set$ is saturated, we know that $i'$
+    is a monomorphism too. We will now verify that $X$ has the universal
+    property of the pullback by exhibiting the universal property.
+
+    Consider then $h_1\colon Z\rightarrow X'$, $h_2\colon Z\rightarrow Y$
+    making the diagram commute. We are forced to define a candidate
+    factorization $h\colon Z\rightarrow X$ by mapping $z\in Z$ to the unique
+    $x\in X$ such that $h_1(z)=i(x)$,
+    which grants us the uniqueness of an eventual factorization.
+    By construction, $h$ is well-defined and $h_1=i\cdot h$, so we only have
+    to check that $h_2=f\cdot h$. Notice that $i'\cdot h_2=g\cdot
+    h_1=g\cdot i\cdot h=i'\cdot f\cdot h$ and, by injectivity of $i'$,
+    we have the thesis.
+\end{proof}
+
+~\\
+\exercise{2}
+\begin{proof}
+    (1) Once more, we only need to check that for all objects $a\in\Ob(\cA)$ the
+    following is a coequalizer diagram.
+    \[\begin{tikzcd}
+	{X_a\times_{Y_a}X_a} & {X_a} & {\im(f)_a}
+	\arrow["{p_a}", from=1-1, to=1-2, shift left=1]
+	\arrow["{q_a}"', from=1-1, to=1-2, shift right=1]
+	\arrow["{\pi_a}"', from=1-2, to=1-3, swap]
+    \end{tikzcd}\]
+    Here by $\pi$ we refer to the morphism we get from $f$ by restricting the
+    codomain. $f\colon X\rightarrow Y$. From now on, like in the previous
+    exercise, we shall work in $\Set$ and therefore drop every $a$.
+
+    We begin by noticing that $\im(f)\cong X_{/\sim}$ under $\pi\colon
+    X\rightarrow\im(f)$, $x\mapsto f(x)$, where $x\sim x'$
+    whenever $f(x)=f(x')$. By construction, $\pi$ is surjective and this
+    suffices.
+
+    Consider then a function $g\colon X\rightarrow Z$ coequalizing $p$ and $q$.
+    All we have to do is show that, if $x\sim x'$, then $g(x)=g(x')$, since then
+    $g$ will factor through $\pi\colon X\rightarrow X_{/\sim}$ as
+    $\tilde{g}\colon X_{/\sim}\rightarrow Z$, $[x]\mapsto g(x)$. By construction,
+    $\tilde{g}$ will coequalize $p$ and $q$, while the uniqueness of the
+    factorization will follow from the surjectivity of $\pi$. To do this, we
+    first characterize $X\times_YX$ explicitly.
+
+    We claim that the pullback is given by $S=\{(x,x')\in X\times X\ |\
+    f(x)=f(x')\}$ with the obvious projection maps $\pi_1(x,x')=x$,
+    $\pi(x,x')=x'$. Indeed, consider a pair of maps $h_1,h_2\colon Z\rightarrow
+    X$ such that $f\cdot h_1=f\cdot h_2$. Then, we may construct a factorization
+    $h\colon Z\rightarrow S$ by setting $h(z):=(h_1(z),h_2(z))$. This is
+    well-defined since $f(h_1(z))=(f\cdot h_1)(z)=(f\cdot h_2)(z)=f(h_2(z))$ and
+    therefore $(h_1(z),h_2(z))\in S$. Also, by construction $\pi_i\cdot h=h_i$
+    and the uniqueness of the factorization follows from the fact that these
+    last equations specify both entries of $h(z)$.
+
+    We now check that the $\tilde{g}$ we defined earlier is actually
+    well-defined by checking that $x\sim x'$ implies $g(x)=g(x')$. This follows
+    from the fact that $x\sim x'$ means $f(x)=f(x')$, thus $(x,x')\in
+    X\times_YX$ and $g(x)=g(p(x,x'))=(g\cdot p)(x,x')=(g\cdot
+    q)(x,x')=g(q(x,x'))=g(x')$.
+
+    (2) Suppose $T$ to be a representable presheaf, i.e.\ isomorphic to $\yo_a$
+    for some $a\in\Ob(\cA)$. Since $\cA$ is small, $\hat{\cA}$ is locally small
+    and therefore the hom-sets are actual sets. Writing equalities in place of
+    natural isomorphisms, we have the following chain of identities:
+    $\hat{\cA}(T,Y)=\hat{\cA}(\yo_a,Y)=Y_a=\bigcup_{i\in I}Y_{i,a}=\bigcup_{i\in
+    I}\hat{\cA}(\yo_a,Y_i)=\bigcup_{i\in I}\hat{\cA}(T,Y_i)$. Here a natural
+    transformation $s\colon T\cong\yo_a\rightarrow Y_i$ on the right is
+    identified in $\bigcup_{i\in I}\hat{\cA}(T,Y_i)$ with all
+    other natural transformations $s'\colon T\cong\yo_a\rightarrow Y_j$ such
+    that $s=s'\in Y_a$ and the equality between the two extremes is exhibited by
+    the map sending such a natural transformation $s\colon T\rightarrow Y_i$ to
+    the one we get by composing with the inclusion $Y_i\rightarrow Y$.
+\end{proof}
+
+~\\
+\exercise{3}
+\begin{proof}
+\end{proof}
+
+\end{document}
