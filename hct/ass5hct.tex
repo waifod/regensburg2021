@@ -1,6 +1,6 @@
 \documentclass[a4paper,11pt,openany]{scrartcl}
-\usepackage{../reg2021}
-\usepackage{../quiver}
+\usepackage{reg2021}
+\usepackage{quiver}
 
 \begin{document}
 \noindent\textbf{Authors}\hfill\textbf{Semester} \linebreak
@@ -30,8 +30,8 @@ Assignment 5
     3-simplex given by $\id_{\Delta_3}$. On the other hand, by definition all of
     the simplices of $Sk_2(\Delta_3)$ of dimension $>2$ are degenerate, hence
     the canonical inclusion $Sk_2(\Delta_3)\rightarrow \Delta_3$ is not an
-    isomorphism.
-
+    isomorphism.\\
+\\
     (2) Since (co)limits of presheaves are defined pointwisely and a morphism of
     presheaves is a monomorphism if and only if every component of the natural
     transformation is, we only need to check that for all $a\in\Ob(\cA)$ the
@@ -103,8 +103,8 @@ Assignment 5
     well-defined by checking that $x\sim x'$ implies $g(x)=g(x')$. This follows
     from the fact that $x\sim x'$ means $f(x)=f(x')$, thus $(x,x')\in
     X\times_YX$ and $g(x)=g(p(x,x'))=(g\cdot p)(x,x')=(g\cdot
-    q)(x,x')=g(q(x,x'))=g(x')$.
-
+    q)(x,x')=g(q(x,x'))=g(x')$.\\
+\\
     (2) Suppose $T$ to be a representable presheaf, i.e.\ isomorphic to $\yo_a$
     for some $a\in\Ob(\cA)$. Since $\cA$ is small, $\hat{\cA}$ is locally small
     and therefore the hom-sets are actual sets. Writing equalities in place of
@@ -123,6 +123,50 @@ Assignment 5
 ~\\
 \exercise{3}
 \begin{proof}
+(1) Recall that the nerve functor $N$ being a right adjoint, preserves products, and thus $\Delta^p\times\Delta^q\cong N([p]\times[q])$. For any $n$-simplex $s\colon\Delta^n\to\Delta^p\times\Delta^q$, under the adjunction
+\[
+\Hom_{\Cat}([n],[p]\times[q])\cong\Hom_{\sSet}(\Delta^n,\Delta^p\times\Delta^q)
+\]
+it corresponds to a unique $s'\colon[n]\to[p]\times[q]$. Suppose that $s$ is not a monomorphism. Then $s'$ is not either, which implies that $s'$ factorizes through some $[m]$ ($m<n$), say, into $[n]\overset{f'}{\to}[m]\overset{t'}{\to}[p]\times[q]$. Indeed, since $s'(i)=s'(j)$ for some $0\leqslant i<j\leqslant n$, it suffices to take $m=n-1$ and $f'$ to be the unique surjective map $[n]\to[n-1]$ hitting $i$ twice. Again $f',t'$ correspond to some $f\colon[n]\to[m]$ and $t\colon\Delta^m\to\Delta^p\times\Delta^q$ via the adjunction $\tau\dashv N$, and one has $s=tf=f^*(t)$. This shows that $s$ is degenerate. Hence the proof.\\
+\\
+(2) We claim that if $\Delta\to X$ and $\Delta^n\to Y$ are both degenerate, then so is $\Delta^n\to X\times Y$. To see this, assume they are degenerate and then $\Delta^n\to X$ and $\Delta^n\to Y$ factorize through $\Delta^k$, $\Delta^l$ for some $0\leqslant k,l<n$ respectively. Without loss of generality, one may further assume that $k\leqslant l$, then $\Delta^n\to\Delta^k$ factorizes through $\Delta^l$. We obtain a morphism $\Delta^k\to X\times Y$ by the universal property of products, through which $\Delta^n\to X\times Y$ factorizes, as depicted below:
+\[
+\begin{tikzcd}
+\Delta^n\arrow[r]\arrow[d]& \Delta^l\arrow[dr]\arrow[from=dl]&\\
+\Delta^k\arrow[dr]\arrow[r,dotted]& X\times Y\arrow[r]\arrow[d]\arrow[from=ul,crossing over]& Y\\
+& X&
+\end{tikzcd}
+\]
+Hence $\Delta^n\to X\times Y$ is degenerate, and this confirms our claim.
+
+Therefore, if $\Delta^n\to X\times Y$ is non-degenerate, then either $\Delta^n\to X$ or $\Delta^n\to Y$ is degenerate, which implies that either $\Delta^n\to X$ or $\Delta^n\to Y$ is a monomorphism by the regularity of $X$ and $Y$. We thus may assume that $\Delta^n\to X$ is monic. Then by definition, $\Delta^n([m])\to X_m$ is an injective map of sets for all $m\geqslant 0$, and this in turn entails that
+\[
+\Delta^n([m])\to X_m\times Y_m=(X\times Y)_m
+\]
+is an injective map of sets. Consequently $\Delta^n\to X\times Y$ is a monomorphism.\\
+\\
+(3) Consider the diagram $F\colon I\to\sSet$ where $I$ is finite and $X^i:=F(i)$ is regular for each $i\in I$. Recall that finite limits can be exhibited by finite products and equalizers:
+\[
+\lim_IF=\ker\big(
+\begin{tikzcd}[sep=small]
+\prod_{i\in I}X_i\arrow[r,shift right]\arrow[r,shift left]&\prod_{i\to j}X_i
+\end{tikzcd}\big)
+\]
+and by (2) plus induction we know that $\prod_{i\in I}X_i$ is regular if each $X_i$ is. 
+
+Thus the case is reduced to equalizers: in other words, it suffices to show that for any diagram $X\rightrightarrows Y$ in $\sSet$, the equalizer
+\[
+K:=\ker\big(X\rightrightarrows Y\big)
+\]
+is a regular simplicial set if $X$ is so. To this end, suppose that an $n$-simplex $s\colon\Delta^n\to K$ is not a monomorphism. Then the composition $\Delta^n\to K\to X$ is not a monomorphism (since it will not be injective over some $[l]$) as well, and by the fact that $X$ is regular, the composite $\Delta^n\to X$ factors through some $\Delta^m$.
+\[
+\begin{tikzcd}
+K\arrow[r]& X\arrow[r,shift right]\arrow[r,shift left]& Y\\
+\Delta^n\arrow[u,"s"']\arrow[ur,dotted]\arrow[d,"t"]&&\\
+\Delta^m\arrow[uur,dotted]\arrow[uu,bend left=45,dotted,"u"]&&
+\end{tikzcd}
+\]
+From this we can see that $\Delta^m\to X$ equalizes $X\rightrightarrows Y$, and by the universal property of equalizers, there is a unique morphism $u\colon\Delta^m\to K$. Using the universal property of equalizers again yields that $ut=s$, which means $s\colon\Delta^n\to K$ being degenerate.
 \end{proof}
 
 \end{document}
