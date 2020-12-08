@@ -18,11 +18,16 @@ Assignment 5
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%sheet4
 \newcommand{\La}{\Lambda}
 \newcommand{\pa}{\partial}
 \newcommand{\ob}{\operatorname{Ob}}
 \newcommand{\mor}{\operatorname{Mor}}
 \newcommand{\sto}{\twoheadrightarrow}
+
+%%%sheet5
+\newcommand{\plim}{\varprojlim}
+\newcommand{\sst}{\subseteq}
 
 \exercise{1}
 \begin{proof}
@@ -127,7 +132,7 @@ Assignment 5
 \[
 \Hom_{\Cat}([n],[p]\times[q])\cong\Hom_{\sSet}(\Delta^n,\Delta^p\times\Delta^q)
 \]
-it corresponds to a unique $s'\colon[n]\to[p]\times[q]$. Suppose that $s$ is not a monomorphism. Then $s'$ is not either, which implies that $s'$ factorizes through some $[m]$ ($m<n$), say, into $[n]\overset{f'}{\to}[m]\overset{t'}{\to}[p]\times[q]$. Indeed, since $s'(i)=s'(j)$ for some $0\leqslant i<j\leqslant n$, it suffices to take $m=n-1$ and $f'$ to be the unique surjective map $[n]\to[n-1]$ hitting $i$ twice. Again $f',t'$ correspond to some $f\colon[n]\to[m]$ and $t\colon\Delta^m\to\Delta^p\times\Delta^q$ via the adjunction $\tau\dashv N$, and one has $s=tf=f^*(t)$. This shows that $s$ is degenerate. Hence the proof.\\
+it corresponds to a unique $s'\colon[n]\to[p]\times[q]$. Suppose that $s$ is not a monomorphism. Then $s'$ is not either, which implies that $s'$ factorizes through some $[m]$ ($m<n$), say, into $[n]\overset{f'}{\to}[m]\overset{t'}{\to}[p]\times[q]$. Indeed, since the image $s'([n])\sst[p]\times[q]$ is a finite totally ordered set and $s'$ is not injective, there exists some $m<n$ such that $[m]\cong s'([n])$, and we may just take $f'$ to be the composition $[n]\to s'([n])\cong[m]$ and $t'\colon[m]\to[p]\times[q]$ to be the inclusion of a subset. Again $f',t'$ correspond to some $f\colon[n]\to[m]$ and $t\colon\Delta^m\to\Delta^p\times\Delta^q$ via the adjunction $\tau\dashv N$, and one has $s=tf=f^*(t)$. This shows that $s$ is degenerate. Hence the proof.\\
 \\
 (2) We claim that if $\Delta\to X$ and $\Delta^n\to Y$ are both degenerate, then so is $\Delta^n\to X\times Y$. To see this, assume they are degenerate and then $\Delta^n\to X$ and $\Delta^n\to Y$ factorize through $\Delta^k$, $\Delta^l$ for some $0\leqslant k,l<n$ respectively. Without loss of generality, one may further assume that $k\leqslant l$, then $\Delta^n\to\Delta^k$ factorizes through $\Delta^l$. We obtain a morphism $\Delta^k\to X\times Y$ by the universal property of products, through which $\Delta^n\to X\times Y$ factorizes, as depicted below:
 \[
