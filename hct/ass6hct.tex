@@ -1,0 +1,205 @@
+\documentclass[a4paper,11pt,openany]{scrartcl}
+\usepackage{../reg2021}
+\usepackage{../quiver}
+
+\begin{document}
+\noindent\textbf{Authors}\hfill\textbf{Semester} \linebreak
+\vspace*{-.1cm} Matteo Durante, Yuhao Zhang\hfill WS 2020/21 \\
+
+\noindent
+\rule{\linewidth}{1pt}
+\begin{center}
+\Large
+\textbf{Higher Category Theory} \\
+Assignment 5
+\end{center}
+\rule{\linewidth}{1pt}
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%sheet4
+\newcommand{\La}{\Lambda}
+\newcommand{\pa}{\partial}
+\newcommand{\ob}{\operatorname{Ob}}
+\newcommand{\mor}{\operatorname{Mor}}
+\newcommand{\sto}{\twoheadrightarrow}
+
+%%%sheet5
+\newcommand{\plim}{\varprojlim}
+\newcommand{\sst}{\subseteq}
+\newcommand{\eq}{\operatorname{eq}}
+
+\exercise{1}
+\begin{proof}
+\end{proof}
+
+~\\
+\exercise{2}
+\begin{proof}
+    (1) Notice that $N(0)=\Delta^{-1}$. Now, applying (1.2), we see that
+    $\Delta^i*\Delta^{n-i-1}=N([i])*N([n-i-1])\cong N([i]*[n-i-1])$, so it is
+    enough to check that $[n]\cong [i]*[n-i-1]$.
+
+    In $[i]*[n-i-1]$ there is exactly one morphism between any pair of objects
+    coming from $[i]$ or from $[n-i-1]$. Also, given an object in $[i]$ and one
+    in $[n-i-1]$, by definition of $[i]*[n-i-1]$ there is exactly one morphism
+    between the two of them in this category, from the former to the latter.
+    This shows that $[i]*[n-i-1]$ is an order and, since its set of objects has
+    cardinality $n+1=(i+1)+((n-i-1)+1)$ like the one of $[n]$, we get that the
+    two categories are (uniquely) isomorphic, as desired. \\
+
+    (2) \\
+
+    (3) Let's apply the operator $(-)^{\op}$ to the commutative diagram
+    \[\begin{tikzcd}
+	{\Lambda^n_k} & {X*Y} \\
+	{\Delta^n} & {\Delta^1}
+	\arrow["{u}", from=1-1, to=1-2]
+	\arrow["{v}"', from=2-1, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{p}", from=1-2, to=2-2]
+    \end{tikzcd},\]
+    giving us a commutative diagram which admits a filler $g$ by (2.2). Here we
+    use the fact that $(X*Y)^{\op}\cong Y^{\op}*X^{\op}$.
+    \[\begin{tikzcd}
+	{\Lambda^n_{n-k}} & {Y^{\op}*X^{\op}} \\
+	{\Delta^n} & {\Delta^1}
+	\arrow["{u^{\op}}", from=1-1, to=1-2]
+	\arrow["{v^{\op}}"', from=2-1, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{p^{\op}}", from=1-2, to=2-2]
+	\arrow["{g}" description, from=2-1, to=1-2, dotted]
+    \end{tikzcd}\]
+    By reapplying the operator (which is an involution) we get then the desired
+    filler $f=g^{\op}$.
+    \[\begin{tikzcd}
+	{\Lambda^n_k} & {X*Y} \\
+	{\Delta^n} & {\Delta^1}
+	\arrow["{u}", from=1-1, to=1-2]
+	\arrow["{v}"', from=2-1, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{p}", from=1-2, to=2-2]
+	\arrow["{f}" description, from=2-1, to=1-2, dotted]
+    \end{tikzcd}\] \\
+
+    (4) Since the diagram is commutative and the map on the left is a
+    monomorphism, the fact that $v(j)=0$ is equivalent
+    to $pu(j)=0$ and therefore, by definition of $p$ and $i$, $u(j)\in X_0$ for
+    all $0\leq j\leq i$, $u(j)\in Y_0$ for all $i<j\leq n$.
+
+    Suppose to have a lifting $f$ already. We will start showing its uniqueness
+    by rewriting $\Delta^n$ as $\Delta^i*\Delta^{n-i-1}$. This gives us the
+    restrictions $v|_{\Delta^i}=v|_{v^{-1}(0)}$,
+    $v|_{\Delta^{n-i-1}}=v|_{v^{-1}(1)}$, which map all 0-simplices respectively
+    to 0 and 1 by our previous ovservation. Precomposing by the inclusion
+    $\Lambda^n_i\rightarrow\Delta^n_i$, we get that $v|_{\Delta^i}=pu|_{\Delta^i}$,
+    $v|_{\Delta^{n-i-1}}=pu|_{\Delta^{n-i-1}}$, thus all of $\Delta^i$ is sent
+    to $X$ and all of $\Delta^{n-i-1}$ to $Y$ under $u$ by the description of
+    $p$. This allows us to construct the following commutative diagram
+
+    \[\begin{tikzcd}
+	&& {X\sqcup Y} \\
+	{\Delta^i\sqcup\Delta^{n-i-1}} & {\Lambda^n_i} & {X*Y} \\
+	{\Delta^i*\Delta^{n-i-1}} & {\Delta^n} & {\Delta^1} \\
+	{\partial\Delta^1} \\
+	\arrow["{u}", from=2-2, to=2-3]
+	\arrow["{v}", from=3-2, to=3-3]
+	\arrow[from=2-2, to=3-2, hook]
+	\arrow["{p}", from=2-3, to=3-3]
+	\arrow[from=3-1, to=3-2, shift right=1, no head]
+	\arrow[from=3-1, to=3-2, no head]
+	\arrow[from=2-1, to=3-1, hook]
+	\arrow[from=1-3, to=2-3, hook]
+	\arrow[from=2-1, to=2-2, hook]
+    \arrow["{f}" description, from=3-2, to=2-3, dotted]
+	\arrow["{u|_{\Delta^i}\sqcup u|_{\Delta^{n-i-1}}}", from=2-1, to=1-3]
+	\arrow[from=2-1, to=4-1, curve={height=46pt}]
+	\arrow[from=4-1, to=3-3]
+    \end{tikzcd}\]
+    Now, restricting our focus to the commutative diagram
+    \[\begin{tikzcd}
+	& {X\sqcup Y} & {X*Y} \\
+	{\Delta^i\sqcup\Delta^{n-i-1}} & {\Delta^n} \\
+	{\partial\Delta^1} & {\Delta^1} \\
+	\arrow[from=1-2, to=1-3, hook]
+	\arrow["{v}", from=2-2, to=3-2]
+	\arrow["{p}", from=1-3, to=3-2, curve={height=-6pt}]
+	\arrow["{f}" description, from=2-2, to=1-3, dotted]
+	\arrow["{u|_{\Delta^i}\sqcup u|_{\Delta^{n-i-1}}}", from=2-1, to=1-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=3-1, to=3-2, hook]
+	\arrow[from=1-2, to=3-1, curve={height=-6pt}]
+	\arrow[from=2-1, to=2-2, hook, crossing over]
+    \end{tikzcd},\]
+    we see that there can be at most one $f$ solving our initial lifting problem
+    since all solutions must fill this diagram and we have the universal
+    property of the join.
+
+    Notice now that
+    $u|_{\Delta^i}*u|_{\Delta^{n-i-1}}\colon\Delta^n\cong\Delta^i*\Delta^{n-i-1}\rightarrow
+    X*Y$ solves the lifting problem we started from by construction, hence the
+    thesis. \\
+
+    (5) Since the nerve functor is fully faithful, this is equivalent to
+    $N(ho(X*Y))\cong N(ho(X)*ho(Y))\cong N(ho(X))*N(ho(Y))$, which we may do by
+    exhibiting the universal property of the morphism $X*Y\rightarrow
+    N(ho(X))*N(ho(Y))$ obtained by joining the universal morphisms $\eta_X\colon
+    X\rightarrow N(ho(X))$, $\eta_Y\colon Y\rightarrow N(ho(Y))$.
+
+    Notice that, since both maps are surjective on every level, so will be their
+    join, which will then be an epimorphism, granting us the uniqueness of an eventual
+    factorization of $f\colon X*Y\rightarrow N(\cC)$. We now construct a
+    candidate factorization $g$ in the unique way possible, that is by sending
+    $([t_X],[t_Y])\in (N(ho(X))*N(ho(y)))_n$ to $f(t_X,t_Y)\in N(\cC)_n$ and
+    $([t_X],*),(*,[t_Y])$ to $f(t_X,*),f(*,t_Y)$ respectively. If these
+    associations are well-defined, then naturality follows trivially since for
+    any morphism $[m]\rightarrow [n]$ we have the diagram
+    \[\begin{tikzcd}
+	{(X*Y)_n} & {(N(ho(X))*N(ho(Y)))_n} & {N(\cC)_n} \\
+	{(X*Y)_m} & {(N(ho(X))*N(ho(Y)))_m} & {N(\cC)_m}
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-1, to=1-3, curve={height=-18pt}]
+	\arrow[from=2-1, to=2-3, curve={height=18pt}]
+    \end{tikzcd},\]
+    where the outer square, the one on the left and the triangles all commute
+    and the horizontal arrows on the left are epimorphisms.
+
+    Let's check that the construction is well-defined. One only needs to check
+    on objects (where it is trivial) and on morphisms since every other element
+    of the join of the nerves is constructed from them and the codomain is the
+    nerve of a category.
+
+    --------------
+    It is enough to check that $ho(X*Y)$ has the universal property of the join
+    of $ho(X)$ and $ho(Y)$. Let's consider then functors $q\colon\cA\rightarrow
+    [1]$, $u_0\colon\cA_0\rightarrow ho(X)$, $u_1\colon\cA_1\rightarrow ho(Y)$
+    and the obvious embedding $ho(X)\sqcup ho(Y)\rightarrow ho(X*Y)$ (it's
+    faithful because joining two $\infty$-categories does not produce new
+    2-simplices establishing homotopy relations between the morphisms in $X$ or
+    in $Y$).
+
+    We construct a lift $f\colon\cA\rightarrow ho(X*Y)$ by composing
+    $u_0\sqcup u_1$ with the embedding, which gives us
+    $a\mapsto u_i(a)$ for $a\in\Ob(\cA_i)$, $g\mapsto u_i(g)$ for
+    $g\in\mor(\cA_i)$. To extend then this functor to $\cA$, we are forced to send maps
+    $a_0\rightarrow a_1$ to the unique morphism $f(a_0)\rightarrow f(a_1)$ given
+    by the element $(f(a_0),f(a_1))\in X_0*Y_0\subset (X*Y)_1$. Notice that
+    there are no morphisms $a_1\rightarrow a_0$ in $\cA$ by the definition of
+    the $\cA_i$ since they would need to be mapped to an arrow $1\rightarrow 0$
+    under q, which is not there.
+
+    We see that identities are trivially preserved and compositions of arrows all in $\cA_i$
+    are too since the $u_i$ and the embedding are functors. If one composes
+    instead an arrow with one whose domain and codomain lie in different
+    categories the result is again a map with domain and codomain lieing in
+    different categories.
+\end{proof}
+
+\end{document}
