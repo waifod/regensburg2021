@@ -30,11 +30,74 @@ Assignment 5
 \newcommand{\sst}{\subseteq}
 \newcommand{\eq}{\operatorname{eq}}
 
+%%%sheet6
+\newcommand{\f}{\varphi}
+
 \exercise{1}
 \begin{proof}
+(1) From definition one sees that $\Ob(\cA)=\Ob(\cA_0)\cup\Ob(\cA_1)$. We construct the functor $u\colon\cA\to\cC*\cD$ as follows: on objects, 
+\[
+u(a):=\left\{
+\begin{array}{ll}
+u_0(a),&\text{if }a\in\Ob(\cA_0)\\
+u_1(a),&\text{if }a\in\Ob(\cA_1)
+\end{array}
+\right.
+\]
+and on morphisms,
+\[
+u(a\to b):=\left\{
+\begin{array}{ll}
+u_i(a\to b),&\text{if } a,b\in\Ob(\cA_i),\ i=0,1\\
+0,&\text{if $a\in\Ob(\cA_0)$ and $b\in\Ob(\cA_1)$}.
+\end{array}
+\right.
+\]
+Note that there is no $a\to b$ with $a\in\Ob(\cA_1)$ and $b\in\Ob(\cA_0)$, since otherwise applying $q\colon\cA\to[1]$ to it yields a morphism $1\to0$. From the definition it follows that the restriction of $u$ to $\cA_0$ and $\cA_1$ are $u_0$ and $u_1$ respectively. Next we check that $pu=q$. Indeed, we have $pu(a)=pu_i(a)=i=q(a)$ for $a\in\Ob(\cA_i)$ ($i=0,1$), and
+\[
+pu(a\to b)=\left\{
+\begin{array}{ll}
+pu_i(a\to b)=\id_i=q(a\to b),&\text{if }a,b\in\Ob(\cA_i),\ i=0,1\\
+0\to 1=q(a\to b),&\text{if }a\in\Ob(\cA_0)\text{ and }b\in\Ob(\cA_1).
+\end{array}
+\right.
+\]
+Suppose that there is another $u'\colon\cA\to\cC*\cD$ such that $pu'=q$ and that $u'$ restricts to $u_i$ on $\cA_i$. Then $u$ and $u'$ agree on $\cA_i$, and for any $a\to b$ in $\cA$ with $a\in\Ob(\cA_0)$, $b\in\Ob(\cA_1)$, $u'(a\to b)=u(a\to b)-0$ is the only morphism between $u(a)=u'(a)\in\Ob(\cC)$ and $u(b)=u'(b)\in\Ob(\cD)$. Hence $u=u'$.\\
+\\
+(2) Recall that $N(\cC)*N(\cD)$ is given by
+\[
+(N(\cC)*N(\cD))_n=\coprod_{\substack{i+1+j=n\\-1\leqslant i,j\leqslant n}}N(\cC)_i\times N(\cD)_j
+\]
+for each $[n]\in\Ob(\Delta)$. We then define a map
+\[
+\f_n\colon (N(\cC)*N(\cD))_n\to N(\cC*\cD)_n
+\]
+as below. Take an arbitrary $(x,y)\in N(\cC)_i\times N(\cD)_j$ with $-1\leqslant i,j\leqslant n$ and $i+1+j=n$, where $x$ or $y$ may be empty. Then $(x,y)$ corresponds to a unique $([i]\overset{u_0}{\to}\cC,[j]\overset{u_1}{\to}\cD)$ via the adjunction $\tau\dashv N$ plus the facts that the counit is an isomorphism and $\Delta^i=N([i])$. Moreover, let us define a functor $q\colon[n]\to[1]$ by sending $i\mapsto0$ and $i+1\mapsto 1$. Then by (1), we get a unique functor $u\colon[n]\to\cC*\cD$ such that $q=pu$ and $u|_{[i]}=u_0$, $u|_{[j]}=u_1$, where $p\colon\cC*\cD\to[1]$ is the same as in (1). Again under the adjunction, $u$ corresponds uniquely to a simplicial map $\Delta^n\to N(\cC*\cD)$ (a.k.a an element of $N(\cC*\cD)_n$), which we denote by $\f_n(x,y)$.
+
+We claim that $\f_n$ is a bijection. To this end, we construct an inverse $\psi_n$ to $\f_n$. Take an element $z$ in $N(\cC*\cD)_n$, and it corresponds via adjunction to some $u\colon[n]\to\cC*\cD$. Put $q:=pu$, $i:=\max\{i\mid q(i)=0\}$ and $j:=n-i-1$. Then we can define $u_0\colon[i]\to \cC$ by restricting $u$ to $[i]$, and $u_1\colon[j]\to\cD$ by the composition $[j]\overset{k\mapsto k+i+1}{\longrightarrow}[n]\overset{u}{\to}\cC*\cD$, which actually lands in $\cD$. Again the pair $(u_0,u_1)$ corresponds under adjunction to an element of $N(\cC)_i\times N(\cD)_j$, for which we write $\psi_n(z)$. 
+
+The well-definedness of $\f_n$ and $\psi_n$ lies in the adjunction bijection and the universal property of joins, which in every step of out construction provides a unique choice. 
+
+Verifying $\psi_n$ and $\f_n$ being mutually inverse is straightforward. For example, to check that $\f_n\psi_n=\id_{N(\cC*\cD)_n}$, we consider an arbitrary $u\colon[n]\to\cC*\cD$ and $u_0,u_1$ constructed as above. By the universal property of joins, the $u'\colon[n]\to\cC*\cD$ such that $q=pu'$ and $u'|_{[i]}=u_0$, $u'|_{[j]}=u_1$ is unique (and thus equals to $u$), which corresponds to the image under $\f_n\psi_n$. The argument for $\psi_n\f_n=\id_{(N(\cC)*N(\cD))_n}$ is similar.
+
+In what follows we show that the bijection $\f_n\colon (N(\cC)*N(\cD))_n\to N(\cC*\cD)_n$ is functorial in $[n]$. For this, we take a functor $f\colon[m]\to[n]$ and $-1\leqslant i,j\leqslant n$ such that $i+j+1=n$. Then there exists a unique pair of integers $(a,b)$  and functors $f_a\colon[a]\to[i]$, $f_b\colon[b]\to[j]$ satisfying $a+1+b=m$ and $f_a*f_b=f$. Explicitly, one has $a=\max\{a\mid f(a)\leqslant i\}$, $f_a(k)=f(k)$ and $f_b(k)=f(k+a+1)-i-1$. Consider the following diagram
+\[
+\begin{tikzcd}
+(N(\cC)*N(\cD))_n\arrow[r]\arrow[d]& N(\cC*\cD)_n\arrow[d]\\
+(N(\cC)*N(\cD))_m\arrow[r]& N(\cC*\cD)_m
+\end{tikzcd}
+\quad
+\begin{tikzcd}[sep=small]
+(x,y)\arrow[rr,mapsto]\arrow[d,mapsto]&& \f_n(x,y)\arrow[d,mapsto]\\
+(f^*_ax,f^*_by)\arrow[r,mapsto]& \f_m(f^*_ax,f^*_by)& f^*\f_n(x,y)
+\end{tikzcd}
+\]
+Note that under the adjunction, $f^*\f_n(x,y)$ corresponds to $u\circ f$, whereas $f^*_ax$, $f^*_by$ corresponds to $u_0\circ f_a$ and $u_1\circ f_b$, which correspond to some $u'\colon[m]\to\cC*\cD$. Note that the restriction of $u\circ f$ on $[a]$ and $[b]$ are respectively $u_0\circ f_a$ and $u_1\circ f_b$, and also that $p\circ u'=q_m=q_n\circ f=p\circ u\circ f$, where $q_m\colon[m]\to[1]$ and $q_n\colon[n]\to[1]$ are given by $[a]\mapsto0,[a+1]\mapsto1$ and $[i]\mapsto0,[i+1]\mapsto1$ respectively. By the universal property of joins (1), one has $u'=u\circ f$. Therefore $\f_m(f^*_ax,f^*_bx)=f^*\f_n(x,y)$, and in conclusion, $\f_n$ is functorial with regard to $[n]$.
+
+So far we have proved $N(\cC*\cD)\cong N(\cC)* N(\cD)$.
 \end{proof}
 
-~\\
+\newpage
 \exercise{2}
 \begin{proof}
     (1) Notice that $N(0)=\Delta^{-1}$. Now, applying (1.2), we see that
