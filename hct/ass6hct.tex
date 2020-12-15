@@ -63,7 +63,7 @@ pu_i(a\to b)=\id_i=q(a\to b),&\text{if }a,b\in\Ob(\cA_i),\ i=0,1\\
 \right.
 \]
 Suppose that there is another $u'\colon\cA\to\cC*\cD$ such that $pu'=q$ and that $u'$ restricts to $u_i$ on $\cA_i$. Then $u$ and $u'$ agree on $\cA_i$, and for any $a\to b$ in $\cA$ with $a\in\Ob(\cA_0)$, $b\in\Ob(\cA_1)$, $u'(a\to b)=u(a\to b)-0$ is the only morphism between $u(a)=u'(a)\in\Ob(\cC)$ and $u(b)=u'(b)\in\Ob(\cD)$. Hence $u=u'$.\\
-\\
+
 (2) Recall that $N(\cC)*N(\cD)$ is given by
 \[
 (N(\cC)*N(\cD))_n=\coprod_{\substack{i+1+j=n\\-1\leqslant i,j\leqslant n}}N(\cC)_i\times N(\cD)_j
@@ -76,9 +76,9 @@ as below. Take an arbitrary $(x,y)\in N(\cC)_i\times N(\cD)_j$ with $-1\leqslant
 
 We claim that $\f_n$ is a bijection. To this end, we construct an inverse $\psi_n$ to $\f_n$. Take an element $z$ in $N(\cC*\cD)_n$, and it corresponds via adjunction to some $u\colon[n]\to\cC*\cD$. Put $q:=pu$, $i:=\max\{i\mid q(i)=0\}$ and $j:=n-i-1$. Then we can define $u_0\colon[i]\to \cC$ by restricting $u$ to $[i]$, and $u_1\colon[j]\to\cD$ by the composition $[j]\overset{k\mapsto k+i+1}{\longrightarrow}[n]\overset{u}{\to}\cC*\cD$, which actually lands in $\cD$. Again the pair $(u_0,u_1)$ corresponds under adjunction to an element of $N(\cC)_i\times N(\cD)_j$, for which we write $\psi_n(z)$. 
 
-The well-definedness of $\f_n$ and $\psi_n$ lies in the adjunction bijection and the universal property of joins, which in every step of out construction provides a unique choice. 
+The well-definedness of $\f_n$ and $\psi_n$ lies in the adjunction bijection and the universal property of the join, which in every step of out construction provides a unique choice. 
 
-Verifying $\psi_n$ and $\f_n$ being mutually inverse is straightforward. For example, to check that $\f_n\psi_n=\id_{N(\cC*\cD)_n}$, we consider an arbitrary $u\colon[n]\to\cC*\cD$ and $u_0,u_1$ constructed as above. By the universal property of joins, the $u'\colon[n]\to\cC*\cD$ such that $q=pu'$ and $u'|_{[i]}=u_0$, $u'|_{[j]}=u_1$ is unique (and thus equals to $u$), which corresponds to the image under $\f_n\psi_n$. The argument for $\psi_n\f_n=\id_{(N(\cC)*N(\cD))_n}$ is similar.
+Verifying $\psi_n$ and $\f_n$ being mutually inverse is straightforward. For example, to check that $\f_n\psi_n=\id_{N(\cC*\cD)_n}$, we consider an arbitrary $u\colon[n]\to\cC*\cD$ and $u_0,u_1$ constructed as above. By the universal property of the join, the $u'\colon[n]\to\cC*\cD$ such that $q=pu'$ and $u'|_{[i]}=u_0$, $u'|_{[j]}=u_1$ is unique (and thus equals to $u$), which corresponds to the image under $\f_n\psi_n$. The argument for $\psi_n\f_n=\id_{(N(\cC)*N(\cD))_n}$ is similar.
 
 In what follows we show that the bijection $\f_n\colon (N(\cC)*N(\cD))_n\to N(\cC*\cD)_n$ is functorial in $[n]$. For this, we take a functor $f\colon[m]\to[n]$ and $-1\leqslant i,j\leqslant n$ such that $i+j+1=n$. Then there exists a unique pair of integers $(a,b)$  and functors $f_a\colon[a]\to[i]$, $f_b\colon[b]\to[j]$ satisfying $a+1+b=m$ and $f_a*f_b=f$. Explicitly, one has $a=\max\{a\mid f(a)\leqslant i\}$, $f_a(k)=f(k)$ and $f_b(k)=f(k+a+1)-i-1$. Consider the following diagram
 \[
@@ -92,7 +92,7 @@ In what follows we show that the bijection $\f_n\colon (N(\cC)*N(\cD))_n\to N(\c
 (f^*_ax,f^*_by)\arrow[r,mapsto]& \f_m(f^*_ax,f^*_by)& f^*\f_n(x,y)
 \end{tikzcd}
 \]
-Note that under the adjunction, $f^*\f_n(x,y)$ corresponds to $u\circ f$, whereas $f^*_ax$, $f^*_by$ corresponds to $u_0\circ f_a$ and $u_1\circ f_b$, which correspond to some $u'\colon[m]\to\cC*\cD$. Note that the restriction of $u\circ f$ on $[a]$ and $[b]$ are respectively $u_0\circ f_a$ and $u_1\circ f_b$, and also that $p\circ u'=q_m=q_n\circ f=p\circ u\circ f$, where $q_m\colon[m]\to[1]$ and $q_n\colon[n]\to[1]$ are given by $[a]\mapsto0,[a+1]\mapsto1$ and $[i]\mapsto0,[i+1]\mapsto1$ respectively. By the universal property of joins (1), one has $u'=u\circ f$. Therefore $\f_m(f^*_ax,f^*_bx)=f^*\f_n(x,y)$, and in conclusion, $\f_n$ is functorial with regard to $[n]$.
+Note that under the adjunction, $f^*\f_n(x,y)$ corresponds to $u\circ f$, whereas $f^*_ax$, $f^*_by$ corresponds to $u_0\circ f_a$ and $u_1\circ f_b$, which correspond to some $u'\colon[m]\to\cC*\cD$. Note that the restriction of $u\circ f$ on $[a]$ and $[b]$ are respectively $u_0\circ f_a$ and $u_1\circ f_b$, and also that $p\circ u'=q_m=q_n\circ f=p\circ u\circ f$, where $q_m\colon[m]\to[1]$ and $q_n\colon[n]\to[1]$ are given by $[a]\mapsto0,[a+1]\mapsto1$ and $[i]\mapsto0,[i+1]\mapsto1$ respectively. By the universal property of the join (1), one has $u'=u\circ f$. Therefore $\f_m(f^*_ax,f^*_bx)=f^*\f_n(x,y)$, and in conclusion, $\f_n$ is functorial with regard to $[n]$.
 
 So far we have proved $N(\cC*\cD)\cong N(\cC)* N(\cD)$.
 \end{proof}
@@ -112,7 +112,18 @@ So far we have proved $N(\cC*\cD)\cong N(\cC)* N(\cD)$.
     cardinality $n+1=(i+1)+((n-i-1)+1)$ like the one of $[n]$, we get that the
     two categories are (uniquely) isomorphic, as desired. \\
 
-    (2) \\
+    (2) Note that the $m$-simplices of $\La^i_k$ are those $f\colon[m]\to[i]$ missing $k$. Since $v(i)=0$, then $v$ carries each $m$-simplex to $0\colon[m]\to[1]$. Therefore $v$ sends $\La^i_k$ to $0$ in $\Delta^1$.
+
+Next we show that there exists $\alpha\colon\Delta^i\to X$ extending $u|_{\La^i_k}$. For this, we claim that $u|_{\La^i_k}\colon\La^i_k\to X*Y$ lands in $X$. Indeed, in the commutative diagram below,
+\[
+\begin{tikzcd}
+\La^i_k\arrow[r,"u|_{\Lambda^i_k}"]\arrow[d,hookrightarrow]& X*Y\arrow[d,"p"]\\
+\Delta^i\arrow[r,"v|_{\Delta^i}"]& \Delta^1
+\end{tikzcd}
+\]
+since the restriction of $v$ to $\La^i_k$ sends it to $0$, so does $pu|_{\La^i_k}$. Note also that $p\colon X*Y\to\Delta^0*\Delta^0=\Delta^1$ is given by sending each $n$-simplex $(x,y)\in X_r\times Y_s$ ($r+1+s=n$) to $([r]\to[0],[s]\to[0])$. Hence $pu|_{\La^i_k}$ sending $\La^i_k$ to $0$ in $\Delta^1$ means that the $Y$-entries of $u|_{\La^i_k}$ are all empty, i.e. it lands in $X$. Then by the fact that $X$ is an $\infty$-category, we get a lift $\alpha\colon\Delta^i\to X$ extending $u|_{\La^i_k}$.
+
+If there is $\beta\colon\Delta^{n-i-1}\to Y$, then by (1) we have $\alpha*\beta\colon\Delta^n=\Delta^i*\Delta^{n-i-1}\to X*Y$. To show $p(\alpha*\beta)=v$, we claim that $v=(\Delta^i\to\Delta^0)*(\Delta^{n-i-1}\to\Delta^0)$, where $\Delta^i\to\Delta^0$ and $\Delta^{n-i-1}\to\Delta^0$ are the unique simplicial maps. Indeed, it suffices to note that  $v$ is given by $[i]*[n-i-1]\to[0]*[0]$ since $i=\max\{i\mid v(i)=0\}$. Then we conclude that $p(\alpha*\beta)=v$ by noting again that $\Delta^i\to\Delta^0$ and $\Delta^{n-i-1}\to\Delta^0$ are unique, and so $p(\alpha*\beta)$ and $v$ agree on both entries of each $m$-simplex.\\
 
     (3) Let's apply the operator $(-)^{\op}$ to the commutative diagram
     \[\begin{tikzcd}
