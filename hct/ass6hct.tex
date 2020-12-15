@@ -147,7 +147,7 @@ So far we have proved $N(\cC*\cD)\cong N(\cC)* N(\cD)$.
     \end{tikzcd}\] \\
 
     (4) Since the diagram is commutative and the map on the left is a
-    monomorphism, the fact that $v(j)=0$ is equivalent
+    monomorphism bijective on objects, the fact that $v(j)=0$ is equivalent
     to $pu(j)=0$ and therefore, by definition of $p$ and $i$, $u(j)\in X_0$ for
     all $0\leq j\leq i$, $u(j)\in Y_0$ for all $i<j\leq n$.
 
@@ -204,65 +204,56 @@ So far we have proved $N(\cC*\cD)\cong N(\cC)* N(\cD)$.
     X*Y$ solves the lifting problem we started from by construction, hence the
     thesis. \\
 
-    (5) Since the nerve functor is fully faithful, this is equivalent to
-    $N(ho(X*Y))\cong N(ho(X)*ho(Y))\cong N(ho(X))*N(ho(Y))$, which we may do by
-    exhibiting the universal property of the morphism $X*Y\rightarrow
-    N(ho(X))*N(ho(Y))$ obtained by joining the universal morphisms $\eta_X\colon
-    X\rightarrow N(ho(X))$, $\eta_Y\colon Y\rightarrow N(ho(Y))$.
-
-    Notice that, since both maps are surjective on every level, so will be their
-    join, which will then be an epimorphism, granting us the uniqueness of an eventual
-    factorization of $f\colon X*Y\rightarrow N(\cC)$. We now construct a
-    candidate factorization $g$ in the unique way possible, that is by sending
-    $([t_X],[t_Y])\in (N(ho(X))*N(ho(y)))_n$ to $f(t_X,t_Y)\in N(\cC)_n$ and
-    $([t_X],*),(*,[t_Y])$ to $f(t_X,*),f(*,t_Y)$ respectively. If these
-    associations are well-defined, then naturality follows trivially since for
-    any morphism $[m]\rightarrow [n]$ we have the diagram
-    \[\begin{tikzcd}
-	{(X*Y)_n} & {(N(ho(X))*N(ho(Y)))_n} & {N(\cC)_n} \\
-	{(X*Y)_m} & {(N(ho(X))*N(ho(Y)))_m} & {N(\cC)_m}
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=2-2, to=2-3]
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=1-3, to=2-3]
-	\arrow[from=2-1, to=2-2]
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-1, to=2-1]
-	\arrow[from=1-1, to=1-3, curve={height=-18pt}]
-	\arrow[from=2-1, to=2-3, curve={height=18pt}]
-    \end{tikzcd},\]
-    where the outer square, the one on the left and the triangles all commute
-    and the horizontal arrows on the left are epimorphisms.
-
-    Let's check that the construction is well-defined. One only needs to check
-    on objects (where it is trivial) and on morphisms since every other element
-    of the join of the nerves is constructed from them and the codomain is the
-    nerve of a category.
-
-    --------------
-    It is enough to check that $ho(X*Y)$ has the universal property of the join
-    of $ho(X)$ and $ho(Y)$. Let's consider then functors $q\colon\cA\rightarrow
-    [1]$, $u_0\colon\cA_0\rightarrow ho(X)$, $u_1\colon\cA_1\rightarrow ho(Y)$
-    and the obvious embedding $ho(X)\sqcup ho(Y)\rightarrow ho(X*Y)$ (it's
+    (5) It is enough to check that $ho(X*Y)$ has the universal property of the
+    join of $ho(X)$ and $ho(Y)$. Let's consider then functors
+    $q\colon\cA\rightarrow [1]$, $u_0\colon\cA_0\rightarrow ho(X)$,
+    $u_1\colon\cA_1\rightarrow ho(Y)$, and the obvious embedding $ho(X)\sqcup
+    ho(Y)\rightarrow ho(X*Y)$ (it's
     faithful because joining two $\infty$-categories does not produce new
     2-simplices establishing homotopy relations between the morphisms in $X$ or
-    in $Y$).
-
-    We construct a lift $f\colon\cA\rightarrow ho(X*Y)$ by composing
-    $u_0\sqcup u_1$ with the embedding, which gives us
-    $a\mapsto u_i(a)$ for $a\in\Ob(\cA_i)$, $g\mapsto u_i(g)$ for
-    $g\in\mor(\cA_i)$. To extend then this functor to $\cA$, we are forced to send maps
-    $a_0\rightarrow a_1$ to the unique morphism $f(a_0)\rightarrow f(a_1)$ given
-    by the element $(f(a_0),f(a_1))\in X_0*Y_0\subset (X*Y)_1$. Notice that
-    there are no morphisms $a_1\rightarrow a_0$ in $\cA$ by the definition of
-    the $\cA_i$ since they would need to be mapped to an arrow $1\rightarrow 0$
-    under q, which is not there.
+    in $Y$). $p\colon ho(X*Y)\rightarrow [1]$ will be given by $x\mapsto 0$,
+    $y\mapsto 1$, and $p(x\rightarrow y)=(0\rightarrow 1)$. Notice that there's
+    no map $y\rightarrow x$ since it would come from $(y,x)\in Y_0\times X_0$.
+    \[\begin{tikzcd}
+	& {ho(X)\sqcup ho(Y)} & {ho(X*Y)} \\
+	{\cA_0\sqcup\cA_1} & {\cA} \\
+	{[0]\sqcup[0]} & {[1]}
+	\arrow["{u_0\sqcup u_1}", from=2-1, to=1-2]
+	\arrow["{f}" description, from=2-2, to=1-3, dotted]
+	\arrow[from=1-2, to=1-3, hook]
+	\arrow["{q}", from=2-2, to=3-2]
+	\arrow["{p}", from=1-3, to=3-2, curve={height=-6pt}]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=3-1, to=3-2, hook]
+	\arrow[from=1-2, to=3-1, curve={height=-6pt}]
+	\arrow[from=2-1, to=2-2, hook, crossing over]
+    \end{tikzcd}\]
+    To construct a factorization $f\colon\cA\rightarrow ho(X*Y)$ of $q$ making
+    the diagram commute we are forced to start
+    by composing $u_0\sqcup u_1$ with the embedding, which gives us
+    $a_i\mapsto u_i(a)$ for $a_i\in\Ob(\cA_i)$, $g\mapsto u_i(g)$ for
+    $g\in\mor(\cA_i)$. To extend then this functor to $\cA$, we have to to send
+    maps $a_0\rightarrow a_1$ to the unique morphism $f(a_0)\rightarrow f(a_1)$
+    given by the element $(f(a_0),f(a_1))\in X_0\times Y_0\subset (X*Y)_1$.
+    Notice that there are no morphisms $a_1\rightarrow a_0$ in $\cA$ by the
+    definition of the $\cA_i$ since they would need to be mapped to an arrow
+    $1\rightarrow 0$ under $q$, but it is not there.
 
     We see that identities are trivially preserved and compositions of arrows all in $\cA_i$
     are too since the $u_i$ and the embedding are functors. If one composes
-    instead an arrow with one whose domain and codomain lie in different
-    categories the result is again a map with domain and codomain lieing in
-    different categories.
+    instead an arrow $a'_0\rightarrow a_0$ with one $a_0\rightarrow a_1$ whose
+    domain and codomain lie in different
+    categories the result is again a map $a'_0\rightarrow a_1$ with domain and
+    codomain lying in
+    different categories and will therefore be mapped to the unique map
+    $f(a'_0)\rightarrow f(a_1)$. Likewise, the composition of the maps one
+    obtains by first applying $f$ and then composing in $ho(X*Y)$ is again the
+    unique map $f(a'_0)\rightarrow f(a_1)$. A symmetric argument for
+    $a_0\rightarrow a_1$ and $a_1\rightarrow a'_1$ then gives us functoriality.
+
+    By construction, the desired diagram commutes and uniqueness of
+    factorization follows from the fact that when we were defining $f$
+    we had a unique possible choice at every step.
 \end{proof}
 
 \end{document}
