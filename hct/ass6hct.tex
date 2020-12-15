@@ -80,7 +80,8 @@ The well-definedness of $\f_n$ and $\psi_n$ lies in the adjunction bijection and
 
 Verifying $\psi_n$ and $\f_n$ being mutually inverse is straightforward. For example, to check that $\f_n\psi_n=\id_{N(\cC*\cD)_n}$, we consider an arbitrary $u\colon[n]\to\cC*\cD$ and $u_0,u_1$ constructed as above. By the universal property of the join, the $u'\colon[n]\to\cC*\cD$ such that $q=pu'$ and $u'|_{[i]}=u_0$, $u'|_{[j]}=u_1$ is unique (and thus equals to $u$), which corresponds to the image under $\f_n\psi_n$. The argument for $\psi_n\f_n=\id_{(N(\cC)*N(\cD))_n}$ is similar.
 
-In what follows we show that the bijection $\f_n\colon (N(\cC)*N(\cD))_n\to N(\cC*\cD)_n$ is functorial in $[n]$. For this, we take a functor $f\colon[m]\to[n]$ and $-1\leqslant i,j\leqslant n$ such that $i+j+1=n$. Then there exists a unique pair of integers $(a,b)$  and functors $f_a\colon[a]\to[i]$, $f_b\colon[b]\to[j]$ satisfying $a+1+b=m$ and $f_a*f_b=f$. Explicitly, one has $a=\max\{a\mid f(a)\leqslant i\}$, $f_a(k)=f(k)$ and $f_b(k)=f(k+a+1)-i-1$. Consider the following diagram
+In what follows we show that the bijection $\f_n\colon (N(\cC)*N(\cD))_n\to
+    N(\cC*\cD)_n$ is natural in $[n]$. For this, we take a functor $f\colon[m]\to[n]$ and $-1\leqslant i,j\leqslant n$ such that $i+j+1=n$. Then there exists a unique pair of integers $(a,b)$  and functors $f_a\colon[a]\to[i]$, $f_b\colon[b]\to[j]$ satisfying $a+1+b=m$ and $f_a*f_b=f$. Explicitly, one has $a=\max\{a\mid f(a)\leqslant i\}$, $f_a(k)=f(k)$ and $f_b(k)=f(k+a+1)-i-1$. Consider the following diagram
 \[
 \begin{tikzcd}
 (N(\cC)*N(\cD))_n\arrow[r]\arrow[d]& N(\cC*\cD)_n\arrow[d]\\
@@ -92,7 +93,16 @@ In what follows we show that the bijection $\f_n\colon (N(\cC)*N(\cD))_n\to N(\c
 (f^*_ax,f^*_by)\arrow[r,mapsto]& \f_m(f^*_ax,f^*_by)& f^*\f_n(x,y)
 \end{tikzcd}
 \]
-Note that under the adjunction, $f^*\f_n(x,y)$ corresponds to $u\circ f$, whereas $f^*_ax$, $f^*_by$ corresponds to $u_0\circ f_a$ and $u_1\circ f_b$, which correspond to some $u'\colon[m]\to\cC*\cD$. Note that the restriction of $u\circ f$ on $[a]$ and $[b]$ are respectively $u_0\circ f_a$ and $u_1\circ f_b$, and also that $p\circ u'=q_m=q_n\circ f=p\circ u\circ f$, where $q_m\colon[m]\to[1]$ and $q_n\colon[n]\to[1]$ are given by $[a]\mapsto0,[a+1]\mapsto1$ and $[i]\mapsto0,[i+1]\mapsto1$ respectively. By the universal property of the join (1), one has $u'=u\circ f$. Therefore $\f_m(f^*_ax,f^*_bx)=f^*\f_n(x,y)$, and in conclusion, $\f_n$ is functorial with regard to $[n]$.
+Note that under the adjunction, $f^*\f_n(x,y)$ corresponds to $u\circ f$,
+    whereas $f^*_ax$, $f^*_by$ corresponds to $u_0\circ f_a$ and $u_1\circ f_b$,
+    which correspond to some $u'\colon[m]\to\cC*\cD$. Note that the restriction
+    of $u\circ f$ on $[a]$ and $[b]$ are respectively $u_0\circ f_a$ and
+    $u_1\circ f_b$, and also that $p\circ u'=q_m=q_n\circ f=p\circ u\circ f$,
+    where $q_m\colon[m]\to[1]$ and $q_n\colon[n]\to[1]$ are given by
+    $[a]\mapsto0,[a+1]\mapsto1$ and $[i]\mapsto0,[i+1]\mapsto1$ respectively. By
+    the universal property of the join (1), one has $u'=u\circ f$. Therefore
+    $\f_m(f^*_ax,f^*_bx)=f^*\f_n(x,y)$, and in conclusion, $\f_n$ is natural
+    with regard to $[n]$.
 
 So far we have proved $N(\cC*\cD)\cong N(\cC)* N(\cD)$.
 \end{proof}
@@ -210,10 +220,22 @@ If there is $\beta\colon\Delta^{n-i-1}\to Y$, then by (1) we have $\alpha*\beta\
     since all solutions must fill this diagram and we have the universal
     property of the join.
 
-    Notice now that
-    $u|_{\Delta^i}*u|_{\Delta^{n-i-1}}\colon\Delta^n\cong\Delta^i*\Delta^{n-i-1}\rightarrow
-    X*Y$ solves the lifting problem we started from by construction, hence the
-    thesis. \\
+    Remember that
+    $v=v|_{\Delta^i}*v|_{\Delta^{n-i-1}}\colon\Delta^i*\Delta^{n-i-1}\rightarrow\Delta^0*\Delta^0$
+    and, by essentially the same argument,
+    $p=p|_X*p|_Y\colon X*Y\rightarrow\Delta^0*\Delta^0$.
+
+    Now,
+    $f:=u|_{\Delta^i}*u|_{\Delta^{n-i-1}}\colon\Delta^n\cong\Delta^i*\Delta^{n-i-1}\rightarrow
+    X*Y$ is such that
+    $pf=(p|_X*p|_Y)\cdot(u|_{\Delta^i}*u|_{\Delta^{n-i-1}})=(p|_X\cdot
+    u|_{\Delta^i})*(p|_Y\cdot
+    u|_{\Delta^{n-i-1}})=pu|_{\Delta^i}*pu|_{\Delta^{n-i-1}}=v|_{\Delta^i}*v|_{\Delta^{n-i-1}}=v$
+    and, by construction, $f$ coincides with $u$ when restricted to
+    $\Delta^i*\partial\Delta^1$ and $\Lambda^i_i*\Delta^{n-i-1}$ seen as
+    subobjects of $\Lambda^n_i$ covering it. This shows that
+    $u=f|_{\Lambda^n_i}$, thus $f$ solves the lifting problem we started from.
+    \\
 
     (5) It is enough to check that $ho(X*Y)$ has the universal property of the
     join of $ho(X)$ and $ho(Y)$. Let's consider then functors
