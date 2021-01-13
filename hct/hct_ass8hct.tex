@@ -1,0 +1,96 @@
+\documentclass[a4paper,11pt,openany]{scrartcl}
+\usepackage{../reg2021}
+\usepackage{../quiver}
+
+\begin{document}
+\noindent\textbf{Authors}\hfill\textbf{Semester} \linebreak
+\vspace*{-.1cm} Matteo Durante, Yuhao Zhang\hfill WS 2020/21 \\
+
+\noindent
+\rule{\linewidth}{1pt}
+\begin{center}
+\Large
+\textbf{Higher Category Theory} \\
+Assignment 8
+\end{center}
+\rule{\linewidth}{1pt}
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%sheet4
+\newcommand{\La}{\Lambda}
+\newcommand{\pa}{\partial}
+\newcommand{\ob}{\operatorname{Ob}}
+\newcommand{\mor}{\operatorname{Mor}}
+\newcommand{\sto}{\twoheadrightarrow}
+
+%%%sheet5
+\newcommand{\plim}{\varprojlim}
+\newcommand{\sst}{\subseteq}
+\newcommand{\eq}{\operatorname{eq}}
+
+%%%sheet6
+\newcommand{\f}{\varphi}
+
+%%%sheet8
+\newcommand{\sing}{\operatorname{Sing}}
+
+~\\
+\exercise{1}
+\begin{proof}
+If $f\colon X\to Y$ is a homotopy equivalence of topological spaces, then there exists $g\colon Y\to X$ such that $gf\sim\id_X$ and $fg\sim\id_Y$. Suppose that $H\colon[0,1]\times X\to X$ is a homotopy between $gf$ and $\id_X$. Consider the composite
+\[
+[0,1]\times|\sing(X)|\to[0,1]\times X\overset{H}{\to}X
+\]
+where the first map is given by the unit of the adjunction $|\cdot|\dashv\sing$. By the naturality of adjunctions\footnote{Given an adjunction $G\dashv F$ of functors and a morphism between objects $f\colon C\to D$, the naturality implies that 
+$$
+\begin{tikzcd}[ampersand replacement=\&]
+\Hom(FC,FC)\arrow[r]\arrow[d,equal,"\wr"']\& \Hom(FC,FD)\arrow[d,equal,"\wr"]\\
+\Hom(GFC,C)\arrow[r]\& \Hom(GFC,D)
+\end{tikzcd}\quad
+\begin{tikzcd}[ampersand replacement=\&]
+\id\arrow[r,mapsto]\& Ff\\
+\varepsilon_C\arrow[r,mapsto]\arrow[u,mapsto]\& f\varepsilon_C\arrow[u,mapsto]
+\end{tikzcd}
+$$ So it suffices to take $F=\sing$, $G=|\cdot|$ and $f=H$ above.}, the composite corresponds to $\sing(H)\colon\Delta^1\times\sing(X)\to\sing(X)$ under the adjunction. Hence we get $\sing(g)\sing(f)=\sing(gf)\sim 1_{\sing(X)}$. Similarly one also has $\sing(f)\sing(g)\sim 1_{\sing(Y)}$. Thus $\sing(f)$ is a $\Delta^1$-homotopy equivalence.
+\end{proof}
+\ \\
+\exercise{2}
+\begin{proof}
+(2) Define $f\colon C\to[0]$ to be the unique functor and $g\colon[0]\to C$ by sending $0$ to $\omega$ on objects. Define a functor $h\colon[1]\times C\to C$ by sending 
+\[
+(1,a)\mapsto\omega\text{ and }(0,a)\mapsto a
+\]
+on objects (where $a\in\Ob(C)$), and 
+\begin{align*}
+&\big((0,a)\to(0,b)\big)\to\big(a\to b\big),\\
+&\big((1,a)\to(1,b)\big)\to\id_\omega,\\
+&\big((0,a)\to(1,b)\big)\mapsto\big(a\to\omega\big)
+\end{align*} on morphisms. Note that $h_0=1_C$ and $h_1=gf$. Thus taking nerves $N(h)$ gives a $\Delta^1$-homotopy $N(g)N(f)\sim 1_{N(C)}$. Conversely since $fg=1_{[0]}$ the construction is obvious. As a consequence, $N(f)\colon N(C)\to\Delta^0$ is a $\Delta^1$-homotopy equivalence. It can be a $J$-homotopy equivalence: for example, take $C=[0]$.\\
+
+(3) Since $f\colon X\to Y$ is an equivalence of $\infty$-categories, it is a $J$-homotopy equivalence. Hence $f_*\colon[S,X]\to[S,Y]$ is a bijection for any simplicial set $S$, which in turn gives a bijection $f_*\times 1_{[S,T]}\colon[S,X\times T]=[S,X]\times[S,T]\to[S,Y]\times[S,T]=[S,Y\times T]$. Therefore $f\times 1_T$ is a $J$-homotopy equivalence.
+\end{proof}
+\ \\
+\exercise{3}
+\begin{proof}
+(1) Suppose that $f\colon X\to Y$ is an $I$-homotopy equivalence and $g\colon U\to V$ is a retract of it. Namely we have the commutative diagram
+\[
+\begin{tikzcd}
+U\arrow[r,"s"]\arrow[d,"g"]& X\arrow[r,"p"]\arrow[d,"f"]& U\arrow[d,"g"]\\
+V\arrow[r,"t"]& Y\arrow[r,"q"]& V
+\end{tikzcd}
+\]
+with $ps=1_U$ and $qt=1_V$. Applying $[T,-]$ to it (where $T\in\widehat{A}$ is any presheaf) yields a commutative diagram in $\Set$:
+\[
+\begin{tikzcd}
+\text{[}T,U\text{]}\arrow[r,"s_*"]\arrow[d,"g_*"]& \text{[}T,X\text{]}\arrow[r,"p_*"]\arrow[d,"f_*"]& \text{[}T,U\text{]}\arrow[d,"g_*"]\\
+\text{[}T,V\text{]}\arrow[r,"t_*"]& \text{[}T,Y\text{]}\arrow[r,"q_*"]& \text{[}T,V\text{]}
+\end{tikzcd}
+\]
+where $p_*s_*=\id$ and $q_*t_*=\id$. Since $f$ is an $I$-homotopy equivalence, $f_*$ is a bijection. Note that $s_*=(f_*)^{-1}t_*g_*$ is injective, hence so is $g_*$. Similarly $g_*$ is surjective because $q_*=g_*p_*(f_*)^{-1}$ is so. Therefore $g_*$ is a bijection, which entails that $g$ is an $I$-homotopy equivalence.\\
+
+(2) Applying $[T,-]$ to $h=gf$, we get $h_*=g_*f_*$, where $T$ is an arbitrary presheaf on $A$. Since any two of $f_*$, $g_*$, $h_*$ being bijective implies the third one being bijective, we have the proof.
+\end{proof}
+
+\end{document}
