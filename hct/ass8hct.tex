@@ -1,0 +1,292 @@
+\documentclass[a4paper,11pt,openany]{scrartcl}
+\usepackage{../reg2021}
+\usepackage{../quiver}
+
+\begin{document}
+\noindent\textbf{Authors}\hfill\textbf{Semester} \linebreak
+\vspace*{-.1cm} Matteo Durante, Yuhao Zhang\hfill WS 2020/21 \\
+
+\noindent
+\rule{\linewidth}{1pt}
+\begin{center}
+\Large
+\textbf{Higher Category Theory} \\
+Assignment 8
+\end{center}
+\rule{\linewidth}{1pt}
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%sheet4
+\newcommand{\La}{\Lambda}
+\newcommand{\pa}{\partial}
+\newcommand{\ob}{\operatorname{Ob}}
+\newcommand{\mor}{\operatorname{Mor}}
+\newcommand{\sto}{\twoheadrightarrow}
+
+%%%sheet5
+\newcommand{\plim}{\varprojlim}
+\newcommand{\sst}{\subseteq}
+\newcommand{\eq}{\operatorname{eq}}
+
+%%%sheet6
+\newcommand{\f}{\varphi}
+
+\exercise{1}
+\begin{proof}
+(1) From definition one sees that $\Ob(\cA)=\Ob(\cA_0)\cup\Ob(\cA_1)$. We construct the functor $u\colon\cA\to\cC*\cD$ as follows: on objects, 
+\[
+u(a):=\left\{
+\begin{array}{ll}
+u_0(a),&\text{if }a\in\Ob(\cA_0)\\
+u_1(a),&\text{if }a\in\Ob(\cA_1)
+\end{array}
+\right.
+\]
+and on morphisms,
+\[
+u(a\to b):=\left\{
+\begin{array}{ll}
+u_i(a\to b),&\text{if } a,b\in\Ob(\cA_i),\ i=0,1\\
+0,&\text{if $a\in\Ob(\cA_0)$ and $b\in\Ob(\cA_1)$}.
+\end{array}
+\right.
+\]
+Note that there is no $a\to b$ with $a\in\Ob(\cA_1)$ and $b\in\Ob(\cA_0)$, since otherwise applying $q\colon\cA\to[1]$ to it yields a morphism $1\to0$. From the definition it follows that the restriction of $u$ to $\cA_0$ and $\cA_1$ are $u_0$ and $u_1$ respectively. Next we check that $pu=q$. Indeed, we have $pu(a)=pu_i(a)=i=q(a)$ for $a\in\Ob(\cA_i)$ ($i=0,1$), and
+\[
+pu(a\to b)=\left\{
+\begin{array}{ll}
+pu_i(a\to b)=\id_i=q(a\to b),&\text{if }a,b\in\Ob(\cA_i),\ i=0,1\\
+0\to 1=q(a\to b),&\text{if }a\in\Ob(\cA_0)\text{ and }b\in\Ob(\cA_1).
+\end{array}
+\right.
+\]
+Suppose that there is another $u'\colon\cA\to\cC*\cD$ such that $pu'=q$ and that $u'$ restricts to $u_i$ on $\cA_i$. Then $u$ and $u'$ agree on $\cA_i$, and for any $a\to b$ in $\cA$ with $a\in\Ob(\cA_0)$, $b\in\Ob(\cA_1)$, $u'(a\to b)=u(a\to b)-0$ is the only morphism between $u(a)=u'(a)\in\Ob(\cC)$ and $u(b)=u'(b)\in\Ob(\cD)$. Hence $u=u'$.\\
+
+(2) Recall that $N(\cC)*N(\cD)$ is given by
+\[
+(N(\cC)*N(\cD))_n=\coprod_{\substack{i+1+j=n\\-1\leqslant i,j\leqslant n}}N(\cC)_i\times N(\cD)_j
+\]
+for each $[n]\in\Ob(\Delta)$. We then define a map
+\[
+\f_n\colon (N(\cC)*N(\cD))_n\to N(\cC*\cD)_n
+\]
+as below. Take an arbitrary $(x,y)\in N(\cC)_i\times N(\cD)_j$ with $-1\leqslant i,j\leqslant n$ and $i+1+j=n$, where $x$ or $y$ may be empty. Then $(x,y)$ corresponds to a unique $([i]\overset{u_0}{\to}\cC,[j]\overset{u_1}{\to}\cD)$ via the adjunction $\tau\dashv N$ plus the facts that the counit is an isomorphism and $\Delta^i=N([i])$. Moreover, let us define a functor $q\colon[n]\to[1]$ by sending $i\mapsto0$ and $i+1\mapsto 1$. Then by (1), we get a unique functor $u\colon[n]\to\cC*\cD$ such that $q=pu$ and $u|_{[i]}=u_0$, $u|_{[j]}=u_1$, where $p\colon\cC*\cD\to[1]$ is the same as in (1). Again under the adjunction, $u$ corresponds uniquely to a simplicial map $\Delta^n\to N(\cC*\cD)$ (a.k.a an element of $N(\cC*\cD)_n$), which we denote by $\f_n(x,y)$.
+
+We claim that $\f_n$ is a bijection. To this end, we construct an inverse $\psi_n$ to $\f_n$. Take an element $z$ in $N(\cC*\cD)_n$, and it corresponds via adjunction to some $u\colon[n]\to\cC*\cD$. Put $q:=pu$, $i:=\max\{i\mid q(i)=0\}$ and $j:=n-i-1$. Then we can define $u_0\colon[i]\to \cC$ by restricting $u$ to $[i]$, and $u_1\colon[j]\to\cD$ by the composition $[j]\overset{k\mapsto k+i+1}{\longrightarrow}[n]\overset{u}{\to}\cC*\cD$, which actually lands in $\cD$. Again the pair $(u_0,u_1)$ corresponds under adjunction to an element of $N(\cC)_i\times N(\cD)_j$, for which we write $\psi_n(z)$. 
+
+The well-definedness of $\f_n$ and $\psi_n$ lies in the adjunction bijection and the universal property of the join, which in every step of out construction provides a unique choice. 
+
+Verifying $\psi_n$ and $\f_n$ being mutually inverse is straightforward. For example, to check that $\f_n\psi_n=\id_{N(\cC*\cD)_n}$, we consider an arbitrary $u\colon[n]\to\cC*\cD$ and $u_0,u_1$ constructed as above. By the universal property of the join, the $u'\colon[n]\to\cC*\cD$ such that $q=pu'$ and $u'|_{[i]}=u_0$, $u'|_{[j]}=u_1$ is unique (and thus equals to $u$), which corresponds to the image under $\f_n\psi_n$. The argument for $\psi_n\f_n=\id_{(N(\cC)*N(\cD))_n}$ is similar.
+
+In what follows we show that the bijection $\f_n\colon (N(\cC)*N(\cD))_n\to
+    N(\cC*\cD)_n$ is natural in $[n]$. For this, we take a functor $f\colon[m]\to[n]$ and $-1\leqslant i,j\leqslant n$ such that $i+j+1=n$. Then there exists a unique pair of integers $(a,b)$  and functors $f_a\colon[a]\to[i]$, $f_b\colon[b]\to[j]$ satisfying $a+1+b=m$ and $f_a*f_b=f$. Explicitly, one has $a=\max\{a\mid f(a)\leqslant i\}$, $f_a(k)=f(k)$ and $f_b(k)=f(k+a+1)-i-1$. Consider the following diagram
+\[
+\begin{tikzcd}
+(N(\cC)*N(\cD))_n\arrow[r]\arrow[d]& N(\cC*\cD)_n\arrow[d]\\
+(N(\cC)*N(\cD))_m\arrow[r]& N(\cC*\cD)_m
+\end{tikzcd}
+\quad
+\begin{tikzcd}[sep=small]
+(x,y)\arrow[rr,mapsto]\arrow[d,mapsto]&& \f_n(x,y)\arrow[d,mapsto]\\
+(f^*_ax,f^*_by)\arrow[r,mapsto]& \f_m(f^*_ax,f^*_by)& f^*\f_n(x,y)
+\end{tikzcd}
+\]
+Note that under the adjunction, $f^*\f_n(x,y)$ corresponds to $u\circ f$,
+    whereas $f^*_ax$, $f^*_by$ corresponds to $u_0\circ f_a$ and $u_1\circ f_b$,
+    which correspond to some $u'\colon[m]\to\cC*\cD$. Note that the restriction
+    of $u\circ f$ on $[a]$ and $[b]$ are respectively $u_0\circ f_a$ and
+    $u_1\circ f_b$, and also that $p\circ u'=q_m=q_n\circ f=p\circ u\circ f$,
+    where $q_m\colon[m]\to[1]$ and $q_n\colon[n]\to[1]$ are given by
+    $[a]\mapsto0,[a+1]\mapsto1$ and $[i]\mapsto0,[i+1]\mapsto1$ respectively. By
+    the universal property of the join (1), one has $u'=u\circ f$. Therefore
+    $\f_m(f^*_ax,f^*_bx)=f^*\f_n(x,y)$, and in conclusion, $\f_n$ is natural
+    with regard to $[n]$.
+
+So far we have proved $N(\cC*\cD)\cong N(\cC)* N(\cD)$.
+\end{proof}
+
+\newpage
+\exercise{2}
+\begin{proof}
+    (1) Notice that $N(0)=\Delta^{-1}$. Now, applying (1.2), we see that
+    $\Delta^i*\Delta^{n-i-1}=N([i])*N([n-i-1])\cong N([i]*[n-i-1])$, so it is
+    enough to check that $[n]\cong [i]*[n-i-1]$.
+
+    In $[i]*[n-i-1]$ there is exactly one morphism between any pair of objects
+    coming from $[i]$ or from $[n-i-1]$. Also, given an object in $[i]$ and one
+    in $[n-i-1]$, by definition of $[i]*[n-i-1]$ there is exactly one morphism
+    between the two of them in this category, from the former to the latter.
+    This shows that $[i]*[n-i-1]$ is an order and, since its set of objects has
+    cardinality $n+1=(i+1)+((n-i-1)+1)$ like the one of $[n]$, we get that the
+    two categories are (uniquely) isomorphic, as desired. \\
+
+    (2) Note that the $m$-simplices of $\La^i_k$ are those non-surjective $f\colon[m]\to[i]$ whose images do not contain $[i]\setminus\{k\}$. Since $v(i)=0$, then $v$ carries each $m$-simplex to $0\colon[m]\to[1]$. Therefore $v$ sends $\La^i_k$ to $0$ in $\Delta^1$.
+
+Next we show that there exists $\alpha\colon\Delta^i\to X$ extending $u|_{\La^i_k}$. For this, we claim that $u|_{\La^i_k}\colon\La^i_k\to X*Y$ lands in $X$. Indeed, in the commutative diagram below,
+\[
+\begin{tikzcd}
+\La^i_k\arrow[r,"u|_{\Lambda^i_k}"]\arrow[d,hookrightarrow]& X*Y\arrow[d,"p"]\\
+\Delta^i\arrow[r,"v|_{\Delta^i}"]& \Delta^1
+\end{tikzcd}
+\]
+since the restriction of $v$ to $\La^i_k$ sends it to $0$, so does $pu|_{\La^i_k}$. Note also that $p\colon X*Y\to\Delta^0*\Delta^0=\Delta^1$ is given by sending each $n$-simplex $(x,y)\in X_r\times Y_s$ ($r+1+s=n$) to $([r]\to[0],[s]\to[0])$. Hence $pu|_{\La^i_k}$ sending $\La^i_k$ to $0$ in $\Delta^1$ means that the $Y$-entries of $u|_{\La^i_k}$ are all empty, i.e. it lands in $X$. Then by the fact that $X$ is an $\infty$-category, we get a lift $\alpha\colon\Delta^i\to X$ extending $u|_{\La^i_k}$.
+
+If there is $\beta\colon\Delta^{n-i-1}\to Y$, then by (1) we have $\alpha*\beta\colon\Delta^n=\Delta^i*\Delta^{n-i-1}\to X*Y$. To show $p(\alpha*\beta)=v$, we claim that $v=v_0*v_1$, where $v_0=(\Delta^i\to\Delta^0)$ and $v_1=(\Delta^{n-i-1}\to\Delta^0)$ are the unique simplicial maps. Indeed, it suffices to note that  $v$ is given by $[i]*[n-i-1]\to[0]*[0]$ since $i=\max\{i\mid v(i)=0\}$. Then we conclude that $p(\alpha*\beta)=(p_0\alpha)*(p_1\beta)=v_0*v_1=v$ by noting again that $\Delta^i\to\Delta^0$ and $\Delta^{n-i-1}\to\Delta^0$ are unique, where $p_0\colon X\to\Delta^0$ and $p_1\colon Y\to\Delta^0$ are the simplicial maps defining $p$ (i.e. $p=p_0*p_1$).\\
+
+    (3) Let's apply the operator $(-)^{\op}$ to the commutative diagram
+    \[\begin{tikzcd}
+	{\Lambda^n_k} & {X*Y} \\
+	{\Delta^n} & {\Delta^1}
+	\arrow["{u}", from=1-1, to=1-2]
+	\arrow["{v}"', from=2-1, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{p}", from=1-2, to=2-2]
+    \end{tikzcd},\]
+    giving us a commutative diagram which admits a filler $g$ by (2.2). Here we
+    use the fact that $(X*Y)^{\op}\cong Y^{\op}*X^{\op}$.
+    \[\begin{tikzcd}
+	{\Lambda^n_{n-k}} & {Y^{\op}*X^{\op}} \\
+	{\Delta^n} & {\Delta^1}
+	\arrow["{u^{\op}}", from=1-1, to=1-2]
+	\arrow["{v^{\op}}"', from=2-1, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{p^{\op}}", from=1-2, to=2-2]
+	\arrow["{g}" description, from=2-1, to=1-2, dotted]
+    \end{tikzcd}\]
+    By reapplying the operator (which is an involution) we get then the desired
+    filler $f=g^{\op}$.
+    \[\begin{tikzcd}
+	{\Lambda^n_k} & {X*Y} \\
+	{\Delta^n} & {\Delta^1}
+	\arrow["{u}", from=1-1, to=1-2]
+	\arrow["{v}"', from=2-1, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["{p}", from=1-2, to=2-2]
+	\arrow["{f}" description, from=2-1, to=1-2, dotted]
+    \end{tikzcd}\] \\
+
+    (4) Since the diagram is commutative and the map on the left is a
+    monomorphism bijective on objects, the fact that $v(j)=0$ is equivalent
+    to $pu(j)=0$ and therefore, by definition of $p$ and $i$, $u(j)\in X_0$ for
+    all $0\leq j\leq i$, $u(j)\in Y_0$ for all $i<j\leq n$.
+
+    Suppose to have a lifting $f$ already. We will start showing its uniqueness
+    by rewriting $\Delta^n$ as $\Delta^i*\Delta^{n-i-1}$. This gives us the
+    restrictions $v|_{\Delta^i}=v|_{v^{-1}(0)}$,
+    $v|_{\Delta^{n-i-1}}=v|_{v^{-1}(1)}$, which map all 0-simplices respectively
+    to 0 and 1 by our previous ovservation. Precomposing by the inclusion
+    $\Lambda^n_i\rightarrow\Delta^n_i$, we get that $v|_{\Delta^i}=pu|_{\Delta^i}$,
+    $v|_{\Delta^{n-i-1}}=pu|_{\Delta^{n-i-1}}$, thus all of $\Delta^i$ is sent
+    to $X$ and all of $\Delta^{n-i-1}$ to $Y$ under $u$ by the description of
+    $p$. This allows us to construct the following commutative diagram
+
+    \[\begin{tikzcd}
+	&& {X\sqcup Y} \\
+	{\Delta^i\sqcup\Delta^{n-i-1}} & {\Lambda^n_i} & {X*Y} \\
+	{\Delta^i*\Delta^{n-i-1}} & {\Delta^n} & {\Delta^1} \\
+	{\partial\Delta^1} \\
+	\arrow["{u}", from=2-2, to=2-3]
+	\arrow["{v}", from=3-2, to=3-3]
+	\arrow[from=2-2, to=3-2, hook]
+	\arrow["{p}", from=2-3, to=3-3]
+	\arrow[from=3-1, to=3-2, shift right=1, no head]
+	\arrow[from=3-1, to=3-2, no head]
+	\arrow[from=2-1, to=3-1, hook]
+	\arrow[from=1-3, to=2-3, hook]
+	\arrow[from=2-1, to=2-2, hook]
+    \arrow["{f}" description, from=3-2, to=2-3, dotted]
+	\arrow["{u|_{\Delta^i}\sqcup u|_{\Delta^{n-i-1}}}", from=2-1, to=1-3]
+	\arrow[from=2-1, to=4-1, curve={height=46pt}]
+	\arrow[from=4-1, to=3-3]
+    \end{tikzcd}\]
+    Now, restricting our focus to the commutative diagram
+    \[\begin{tikzcd}
+	& {X\sqcup Y} & {X*Y} \\
+	{\Delta^i\sqcup\Delta^{n-i-1}} & {\Delta^n} \\
+	{\partial\Delta^1} & {\Delta^1} \\
+	\arrow[from=1-2, to=1-3, hook]
+	\arrow["{v}", from=2-2, to=3-2]
+	\arrow["{p}", from=1-3, to=3-2, curve={height=-6pt}]
+	\arrow["{f}" description, from=2-2, to=1-3, dotted]
+	\arrow["{u|_{\Delta^i}\sqcup u|_{\Delta^{n-i-1}}}", from=2-1, to=1-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=3-1, to=3-2, hook]
+	\arrow[from=1-2, to=3-1, curve={height=-6pt}]
+	\arrow[from=2-1, to=2-2, hook, crossing over]
+    \end{tikzcd},\]
+    we see that there can be at most one $f$ solving our initial lifting problem
+    since all solutions must fill this diagram and we have the universal
+    property of the join.
+
+    Remember that
+    $v=v|_{\Delta^i}*v|_{\Delta^{n-i-1}}\colon\Delta^i*\Delta^{n-i-1}\rightarrow\Delta^0*\Delta^0$
+    and, by essentially the same argument,
+    $p=p|_X*p|_Y\colon X*Y\rightarrow\Delta^0*\Delta^0$.
+
+    Now,
+    $f:=u|_{\Delta^i}*u|_{\Delta^{n-i-1}}\colon\Delta^n\cong\Delta^i*\Delta^{n-i-1}\rightarrow
+    X*Y$ is such that
+    $pf=(p|_X*p|_Y)\cdot(u|_{\Delta^i}*u|_{\Delta^{n-i-1}})=(p|_X\cdot
+    u|_{\Delta^i})*(p|_Y\cdot
+    u|_{\Delta^{n-i-1}})=pu|_{\Delta^i}*pu|_{\Delta^{n-i-1}}=v|_{\Delta^i}*v|_{\Delta^{n-i-1}}=v$
+    and, by construction, $f$ coincides with $u$ when restricted to
+    $\Delta^i*\partial\Delta^1$ and $\Lambda^i_i*\Delta^{n-i-1}$ seen as
+    subobjects of $\Lambda^n_i$ covering it. This shows that
+    $u=f|_{\Lambda^n_i}$, thus $f$ solves the lifting problem we started from.
+    \\
+
+    (5) It is enough to check that $ho(X*Y)$ has the universal property of the
+    join of $ho(X)$ and $ho(Y)$. Let's consider then functors
+    $q\colon\cA\rightarrow [1]$, $u_0\colon\cA_0\rightarrow ho(X)$,
+    $u_1\colon\cA_1\rightarrow ho(Y)$, and the obvious embedding $ho(X)\sqcup
+    ho(Y)\rightarrow ho(X*Y)$ (it's
+    faithful because joining two $\infty$-categories does not produce new
+    2-simplices establishing homotopy relations between the morphisms in $X$ or
+    in $Y$). $p\colon ho(X*Y)\rightarrow [1]$ will be given by $x\mapsto 0$,
+    $y\mapsto 1$, and $p(x\rightarrow y)=(0\rightarrow 1)$. Notice that there's
+    no map $y\rightarrow x$ since it would come from $(y,x)\in Y_0\times X_0$.
+    \[\begin{tikzcd}
+	& {ho(X)\sqcup ho(Y)} & {ho(X*Y)} \\
+	{\cA_0\sqcup\cA_1} & {\cA} \\
+	{[0]\sqcup[0]} & {[1]}
+	\arrow["{u_0\sqcup u_1}", from=2-1, to=1-2]
+	\arrow["{f}" description, from=2-2, to=1-3, dotted]
+	\arrow[from=1-2, to=1-3, hook]
+	\arrow["{q}", from=2-2, to=3-2]
+	\arrow["{p}", from=1-3, to=3-2, curve={height=-6pt}]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=3-1, to=3-2, hook]
+	\arrow[from=1-2, to=3-1, curve={height=-6pt}]
+	\arrow[from=2-1, to=2-2, hook, crossing over]
+    \end{tikzcd}\]
+    To construct a factorization $f\colon\cA\rightarrow ho(X*Y)$ of $q$ making
+    the diagram commute we are forced to start
+    by composing $u_0\sqcup u_1$ with the embedding, which gives us
+    $a_i\mapsto u_i(a)$ for $a_i\in\Ob(\cA_i)$, $g\mapsto u_i(g)$ for
+    $g\in\mor(\cA_i)$. To extend then this functor to $\cA$, we have to to send
+    maps $a_0\rightarrow a_1$ to the unique morphism $f(a_0)\rightarrow f(a_1)$
+    given by the element $(f(a_0),f(a_1))\in X_0\times Y_0\subset (X*Y)_1$.
+    Notice that there are no morphisms $a_1\rightarrow a_0$ in $\cA$ by the
+    definition of the $\cA_i$ since they would need to be mapped to an arrow
+    $1\rightarrow 0$ under $q$, but it is not there.
+
+    We see that identities are trivially preserved and compositions of arrows all in $\cA_i$
+    are too since the $u_i$ and the embedding are functors. If one composes
+    instead an arrow $a'_0\rightarrow a_0$ with one $a_0\rightarrow a_1$ whose
+    domain and codomain lie in different
+    categories the result is again a map $a'_0\rightarrow a_1$ with domain and
+    codomain lying in
+    different categories and will therefore be mapped to the unique map
+    $f(a'_0)\rightarrow f(a_1)$. Likewise, the composition of the maps one
+    obtains by first applying $f$ and then composing in $ho(X*Y)$ is again the
+    unique map $f(a'_0)\rightarrow f(a_1)$. A symmetric argument for
+    $a_0\rightarrow a_1$ and $a_1\rightarrow a'_1$ then gives us functoriality.
+
+    By construction, the desired diagram commutes and uniqueness of
+    factorization follows from the fact that when we were defining $f$
+    we had a unique possible choice at every step.
+\end{proof}
+
+\end{document}

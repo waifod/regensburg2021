@@ -1,0 +1,161 @@
+\documentclass[a4paper,11pt,openany]{scrartcl}
+\usepackage{../reg2021}
+\usepackage{../quiver}
+
+\begin{document}
+\noindent\textbf{Authors}\hfill\textbf{Semester} \linebreak
+\vspace*{-.1cm} Matteo Durante, Yuhao Zhang\hfill WS 2020/21 \\
+
+\noindent
+\rule{\linewidth}{1pt}
+\begin{center}
+\Large
+\textbf{Higher Category Theory} \\
+Assignment 9
+\end{center}
+\rule{\linewidth}{1pt}
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%sheet4
+\newcommand{\La}{\Lambda}
+\newcommand{\pa}{\partial}
+\newcommand{\ob}{\operatorname{Ob}}
+\newcommand{\mor}{\operatorname{Mor}}
+\newcommand{\sto}{\twoheadrightarrow}
+
+%%%sheet5
+\newcommand{\plim}{\varprojlim}
+\newcommand{\sst}{\subseteq}
+\newcommand{\eq}{\operatorname{eq}}
+
+%%%sheet6
+\newcommand{\f}{\varphi}
+
+%%%sheet8
+\newcommand{\sing}{\operatorname{Sing}}
+
+~\\
+\exercise{2}
+\begin{proof}
+    $(1)$ Remembering that the map $I\times A\cup\{0\}\times B\rightarrow
+    I\times B$ induced by the monomorphism $i$ is a $(I,S)$-anodyne extension,
+    we construct the square
+    \[\begin{tikzcd}
+        {I\times A\cup\{0\}\times B} && X \\
+        {I\times B} & B & Y
+        \arrow["{h\cup f}", from=1-1, to=1-3]
+        \arrow["{j}", hook, from=1-1, to=2-1]
+        \arrow["{pr_2}"', from=2-1, to=2-2]
+        \arrow["b"', from=2-2, to=2-3]
+        \arrow["p", from=1-3, to=2-3]
+        \arrow["s"{description}, dotted, from=2-1, to=1-3]
+    \end{tikzcd},\]
+    which is possible since $h|_{\{0\}\times A}=h_0=f\cdot i=f|_A$. It commutes
+    because
+    \begin{align*}
+        p\cdot(h\cup f) &=(p\cdot h)\cup (p\cdot f) \\
+        &=(p\cdot a\cdot pr_2)\cup b \\
+        &=(b\cdot i\cdot pr_2)\cup b \\
+        &=(b\cdot pr_2\cdot(\id_I\times i))\cup b \\
+        &=b\cdot((pr_2\cdot(\id_I\times i))\cup\id_B) \\
+        &=b\cdot pr_2\cdot j,
+    \end{align*}
+    hence there is a filling $s\colon I\times B\rightarrow X$ as pictured.
+    We now choose $g=s|_{\{1\}\times B}$. By construction,
+    \begin{align*}
+        p\cdot g &=p\cdot s|_{\{1\}\times B} \\
+        &=b\cdot pr_2|_{\{1\}\times B} \\
+        &=b
+    \end{align*}
+    and
+    \begin{align*}
+        g\cdot i &=s|_{\{1\}\times B}\cdot i \\
+        &=s\cdot(\id_I\times i)|_{\{1\}\times A} \\
+        &=h|_{\{1\}\times A} \\
+        &=h_1 \\
+        &=a,
+    \end{align*}
+    which proves that the $g$ we constructed has the desired properties.
+
+    $(2)$ We first construct a constant homotopy $h'$ from $a$ to $a$ by
+    setting $h':=a\cdot pr_2\colon A\times I\rightarrow X$. Seeing $\partial
+    I\times A$, $\partial
+    I\times B$ as $A\sqcup A$, $B\sqcup B$, we can construct the diagram
+    \[\begin{tikzcd}
+        {I\times A\cup\partial I\times B} && X \\
+        {I\times B} & B & Y
+        \arrow["p", from=1-3, to=2-3]
+        \arrow["{h'\cup(f_0\sqcup f_1)}", from=1-1, to=1-3]
+        \arrow["{j}", from=1-1, to=2-1]
+        \arrow["{pr_2}"', from=2-1, to=2-2]
+        \arrow["b"', from=2-2, to=2-3]
+        \arrow["h"{description}, dashed, from=2-1, to=1-3]
+    \end{tikzcd},\]
+    which is possible because $h'|_{\partial I\times A}=a\sqcup a=f_0\sqcup
+    f_1|_{\partial I\times A}$ by definition. It also commutes because
+    \begin{align*}
+        p\cdot(h'\cup(f_0\sqcup f_1))&=(p\cdot h')\cup ((p\cdot f_0)\cup(p\cdot
+        f_1)) \\
+        &=(p\cdot a\cdot pr_2)\cup(b\sqcup b) \\
+        &=(b\cdot i\cdot pr_2)\cup(b\sqcup b) \\
+        &=b\cdot ((i\cdot pr_2)\cup(\id_B\sqcup\id_B)) \\
+        &=b\cdot((pr_2\cdot (\id_I\times i))\cup(\id_B\sqcup\id_B)) \\
+        &=b\cdot pr_2\cdot j
+    \end{align*}
+    Recall now that, since $i$ is a $(I,S)$-anodyne map, so is $j$, hence our
+    square admits a filling $h\colon I\times B\rightarrow X$, which will be our
+    desired homotopy from $f_0$ to $f_1$. Indeed, $h|_{\partial I\times
+    B}=f_0\sqcup f_1$ and $h|_{I\times A}=h'$, that is it is constant on $A$. We
+    still have to show that it is also constant over $Y$, but this follows again
+    by construction from $p\cdot h=b\cdot pr_2$, hence the thesis.
+\end{proof}
+
+~\\
+\exercise{3}
+\begin{proof}
+    First of all remember that, fixed a monomorphism $i\colon K\rightarrow L$ in
+    $\Set\cong\widehat{[1]}$, for $\epsilon =0,1$ the induced map $I\times
+    K\cup\{\epsilon\}\times L\rightarrow I\times L$ is $(I,S)$-anodyne.
+    This map comes from the pushout square
+    \[\begin{tikzcd}
+        {\{\epsilon\}\times K} & {\{\epsilon\}\times L} \\
+        {I\times K} & {I\times K\cup\{\epsilon\}\times L} \\
+        && {I\times L}
+        \arrow[curve={height=-12pt}, from=1-2, to=3-3]
+        \arrow[curve={height=12pt}, from=2-1, to=3-3]
+        \arrow["j", dashed, from=2-2, to=3-3]
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=1-2, to=2-2]
+    \end{tikzcd}\]
+    inducing the pictured factorization.
+
+    Since $I\cong 2$, studying the pushout we
+    get $I\times K\cup\{\epsilon\}\times L=(K\sqcup K) \cup
+    (\emptyset\sqcup L)=K\sqcup L$ for $\epsilon=1$ from a previous exercise and
+    $I\times L=L\sqcup L$. Also, the map $j\colon K\sqcup L\rightarrow L\sqcup
+    L$ is simply the inclusion $i\sqcup\id_L$. Assuming that $\emptyset\neq
+    K\subset L$, we will now show that $i$ is a retract of this map. In order to
+    do this, fix $k\in K$ and construct the diagram
+    \[\begin{tikzcd}
+        K & {K\sqcup L} & K \\
+        L & {L\sqcup L} & L
+        \arrow["{in_0}", from=1-1, to=1-2]
+        \arrow["{\id_K+k}", from=1-2, to=1-3]
+        \arrow["i"', from=1-3, to=2-3]
+        \arrow["{i\sqcup\id_L}"', from=1-2, to=2-2]
+        \arrow["{\id_L+k}"', from=2-2, to=2-3]
+        \arrow["{in_0}"', from=2-1, to=2-2]
+        \arrow["i"', from=1-1, to=2-1]
+    \end{tikzcd},\]
+    which proves our claim.
+
+    Since $(I,S)$-anodyne maps form a saturated class, it follows that $i$ is
+    one as well when $K$ (and therefore $L$) is not the empty set. Notice that
+    we didn't mention the small set $S$ at all.
+\end{proof}
+
+\end{document}
