@@ -1,0 +1,224 @@
+\documentclass[a4paper,11pt,openany]{scrartcl}
+\usepackage{../reg2021}
+\usepackage{../quiver}
+
+\begin{document}
+\noindent\textbf{Author}\hfill\textbf{Semester} \linebreak
+\vspace*{-.1cm} Matteo Durante, Yuhao Zhang\hfill WS 2020/21 \\
+
+\noindent
+\rule{\linewidth}{1pt}
+\begin{center}
+\Large
+\textbf{Higher Category Theory} \\
+Assignment 10
+\end{center}
+\rule{\linewidth}{1pt}
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%sheet4
+\newcommand{\La}{\Lambda}
+\newcommand{\pa}{\partial}
+\newcommand{\ob}{\operatorname{Ob}}
+\newcommand{\mor}{\operatorname{Mor}}
+\newcommand{\sto}{\twoheadrightarrow}
+
+%%%sheet5
+\newcommand{\plim}{\varprojlim}
+\newcommand{\sst}{\subseteq}
+\newcommand{\eq}{\operatorname{eq}}
+
+%%%sheet6
+\newcommand{\f}{\varphi}
+
+%%%sheet8
+\newcommand{\sing}{\operatorname{Sing}}
+
+%%%sheet9
+\newcommand{\ihom}{\underline{\Hom}}
+
+
+~\\
+\exercise{1}
+
+~\\
+\exercise{2}
+\begin{proof}
+    (1) We begin by considering a commutative diagram
+    \[\begin{tikzcd}
+        {\Lambda^n_k} & {p^{-1}(a)=X_a} & X \\
+        {\Delta^n} & {\Delta^0} & A
+        \arrow["p", from=1-3, to=2-3]
+        \arrow["a"', from=2-2, to=2-3]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow[from=1-1, to=1-2]
+        \arrow[dotted, from=2-1, to=1-3]
+        \arrow[dotted, from=2-1, to=1-2]
+        \arrow["\lrcorner"{anchor=center, pos=0.01}, draw=none, from=1-2, to=2-3]
+    \end{tikzcd},\]
+    where $0\leq k<n$ and the square on the right is a pullback. From the LLP of
+    $\Lambda^n_k\rightarrow\Delta^n$ against $p$ we get a lift
+    $\Delta^n\rightarrow X$ and then, using the universal property of the
+    pullback with respect to the lift and $\Delta^n\rightarrow\Delta^0$, we get
+    a lift of $\Lambda^n_k\rightarrow\Delta^n$ against $X_a\rightarrow\Delta^0$.
+
+    This implies that $X_a$ is an $\infty$-category, hence we only need to prove
+    that its morphisms are invertible, which will make it a $\infty$-groupoid
+    and therefore a Kan complex.
+
+    To prove this, for any morphism $f\colon x\rightarrow y$ in $X_a$ we
+    consider the diagram
+    \[\begin{tikzcd}
+        {\Lambda^2_0} & {X_a} \\
+        {\Delta^2}
+        \arrow["{(\id_x,f)}", from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["t"', dotted, from=2-1, to=1-2]
+    \end{tikzcd}\]
+    inducing the pictured 2-simplex $t$ by our previous observations. The
+    morphism $f$ is a right inverse of $d_2(t)=g\colon y\rightarrow x$ and from
+    \[\begin{tikzcd}
+        {\Lambda^2_0} & {X_a} \\
+        {\Delta^2}
+        \arrow["{(\id_y,g)}", from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["u"', dotted, from=2-1, to=1-2]
+    \end{tikzcd}\]
+    we also get a left inverse $d_2(u)=h$ of $g$. It follows that $g$ is
+    invertible and the same goes for $f$.
+
+    (2) Let's consider for any morphism $f\colon a_0\rightarrow a_1$ in $A$ the
+    commutative diagram
+    \[\begin{tikzcd}
+        {\Lambda^1_0=\Delta^0} & X \\
+        {\Delta^1} & A
+        \arrow["p", from=1-2, to=2-2]
+        \arrow["f"', from=2-1, to=2-2]
+        \arrow["{x_0}", from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["{\phi}"{description}, dotted, from=2-1, to=1-2]
+    \end{tikzcd},\]
+    which from the LLP of $\Lambda^1_0\rightarrow\Delta^1$ against $p$ grants us
+    the desired lift $\phi\colon x_0\rightarrow x_1$ of $f$ along $p$.
+
+    To prove that the equivalence class of $x_1$ in $\pi_0(X_{a_1})$ does not
+    depend on the choice of the lift we consider for any other such lift
+    $\psi\colon x_0\rightarrow y$ the commutative diagram
+    \[\begin{tikzcd}
+        {\Lambda^2_0} & X \\
+        {\Delta^2} & A
+        \arrow["{s_0(f)}"', from=2-1, to=2-2]
+        \arrow["{(\psi,\phi)}", from=1-1, to=1-2]
+        \arrow["p", from=1-2, to=2-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["t"{description}, dotted, from=2-1, to=1-2]
+    \end{tikzcd},\]
+    granting us a 2-simplex $t$ which induces a morphism $d_0(t)=\xi\colon
+    x_1\rightarrow y$. The commutative diagram
+    \[\begin{tikzcd}
+        {\Delta^1} \\
+        & {X_a} & X \\
+        & {\Delta^0} & A
+        \arrow[curve={height=6pt}, from=1-1, to=3-2]
+        \arrow["\xi", curve={height=-6pt}, from=1-1, to=2-3]
+        \arrow["\xi"{description}, dotted, from=1-1, to=2-2]
+        \arrow[from=2-2, to=3-2]
+        \arrow["{a_1}", from=3-2, to=3-3]
+        \arrow["p", from=2-3, to=3-3]
+        \arrow[from=2-2, to=2-3]
+        \arrow["\lrcorner"{anchor=center, pos=0.01}, draw=none, from=2-2, to=3-3]
+    \end{tikzcd}\]
+    then shows that this morphism also lies in $X_a$ through the universal
+    property of the pullback and therefore $[x_1]=[y]$ in $\pi_0(X_a)$.
+
+    We have just proven that distinct lifts through $p$ of the same morphism
+    have the same codomain up to equivalence as long as they have the same
+    domain.
+
+    (3) Let $t\colon\Delta^2\rightarrow A$ be the map corresponding to our
+    commutative trangle. We proceed by drawing the commutative diagram
+    \[\begin{tikzcd}
+        {\Lambda^2_1} & X \\
+        {\Delta^2} & A
+        \arrow["t"', from=2-1, to=2-2]
+        \arrow["p", from=1-2, to=2-2]
+        \arrow["{(\phi',\phi)}", from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["u"{description}, dotted, from=2-1, to=1-2]
+    \end{tikzcd},\]
+    which by the LLP of $\Lambda^2_0\rightarrow\Delta^2$ against $p$ grants us a
+    lift $u\colon\Delta^2\rightarrow X$ (and therefore a commutative triangle)
+    with $d_0(u)=\phi'$, $d_1(u)=\psi\colon x_0\rightarrow x_2$ and
+    $d_2(u)=\phi$ such that $p(\psi)=g$.
+
+    (4) The functor, which we will denote by $F$, has already been well defined
+    on objects, hence we only need to specify the action on morphisms. We know
+    that for any map $f\colon a_0\rightarrow a_1$ in $A$ we have a lift
+    $\phi\colon x_0\rightarrow x_1$ such that $p(\phi)=f$, thus we define
+    $F([f])\colon\pi_0(X_{a_0})\rightarrow\pi_0(X_{a_1})$ as
+    $F([f])([x_0])=[x_1]$, where $[x_1]$ lies in $\pi_0(X_{a_1})$ since
+    $p(d_0(\phi))=d_0(p(\phi))=d_0(f)=a_1$.
+    We need to show that this map is well defined, for which we will start with
+    proving that, after fixing a representative of $[f]$, if we have a morphism
+    $\psi\colon x_0\rightarrow x_0'$ in
+    $X_{a_0}$ then we also have a morphism $x_1\rightarrow x_1'$ in $X_{a_1}$
+    between the objects specified by the liftings $\phi$, $\phi'$ of $f$ with
+    domains $x_0$, $x_0'$.
+
+    We can construct a map
+    $(\phi'\cdot f,\phi)\colon\Lambda^2_0\rightarrow X$ which, composed
+    with $p$, gives us $(p(\phi'\cdot f),f)\colon\Lambda^2_0\rightarrow A$. We
+    want to extend this to a $2$-simplex $t\colon\Delta^2\rightarrow A$ where
+    $d_0(t)=\id_a$; we will then lift it through $p$ thanks to the RLP with
+    respect to $\Lambda^2_0\rightarrow\Delta^2$, getting a 2-simplex $t'$ in $X$
+    such that $d_0(t')$ will be by construction the desired morphism
+    $x_1\rightarrow x_1'$ in $X_{a_1}$.
+
+    Notice that we have 2-simplices $u$, $v$ showing that $p(\phi'\cdot\psi)\sim
+    p(\phi')\cdot p(\psi)=f\cdot\id_a$, $f=f\cdot\id_a$, thus we may construct
+    a horn $(s_0(f),v,u)\colon\Lambda^3_1\rightarrow A$ giving us a 3-simplex
+    $\alpha$ such that $t=d_1(\alpha)$ is the desired 2-simplex in $A$.
+
+    Having proven that $F([f])([x_0])$ does not depend on the representative of
+    $[x_0]$, we show that it also does not depend on the representative of
+    $[f]$.
+
+    Suppose that $g\in [f]$, i.e.\ we have a 2-simplex $t$ in $A$ showing that
+    $\id_a\cdot f\sim g$, meaning that $d_0(t)=\id_a$, $d_1(t)=g$, $d_2(t)=f$.
+    After choosing lifts $\phi\colon x_0\rightarrow x_1$, $\psi\colon
+    x_0\rightarrow x_1'$ of $f$, $g$ through $p$, we can construct the
+    commutative square
+    \[\begin{tikzcd}
+        {\Lambda^2_0} & X \\
+        {\Delta^2} & A
+        \arrow["{(\psi,\phi)}", from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["t"', from=2-1, to=2-2]
+        \arrow["p", from=1-2, to=2-2]
+        \arrow["u"{description}, dotted, from=2-1, to=1-2]
+    \end{tikzcd},\]
+    where the lift $u$ is such that $d_0(u)=h$ provides the desired morphism
+    $x_1\rightarrow x_1'$ in $X_{a_1}$.
+
+    This shows that $F([f])$ is well defined. We still have to prove that this
+    association is functorial.
+
+    If $[f]=[\id_a]$, then for any $[x]\in\pi_0(X_a)$ we may pick $\id_x$ as a
+    lift of $\id_a$ through $p$, which then shows that $F([\id_a])([x])=[x]$.
+
+    On the other hand, consider two composable morphisms $[f]$, $[g]$, where
+    $\dom(f)=a$. Given a
+    2-simplex $t$ in $A$ such that $d_0(t)=g$, $d_1(t)=g\cdot f$, $d_2(t)=f$ and
+    fixed an element $[x_0]\in\pi_0(X_a)$, by (3) we get a 2-simplex $u$ in $X$
+    such that $d_0(u)=\psi\colon x_1\rightarrow x_2$, $d_1(u)=\xi\colon
+    x_0\rightarrow x_2$, $d_2(u)=\phi\colon x_0\rightarrow x_1$ are lifts of
+    $g$, $g\cdot f$, $f$ through $p$ with $\phi\cdot\psi\sim\xi$. It follows
+    that $F([g]\cdot [f])=F([g])\cdot F([f])$.
+\end{proof}
+
+\end{document}
