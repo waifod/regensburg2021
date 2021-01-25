@@ -81,7 +81,7 @@ Assignment 10
         \arrow["t"', dotted, from=2-1, to=1-2]
     \end{tikzcd}\]
     inducing the pictured 2-simplex $t$ by our previous observations. The
-    morphism $f$ is a right inverse of $d_2(t)=g\colon y\rightarrow x$ and from
+    morphism $f$ is a right inverse of $d^2(t)=g\colon y\rightarrow x$ and from
     \[\begin{tikzcd}
         {\Lambda^2_0} & {X_a} \\
         {\Delta^2}
@@ -89,7 +89,7 @@ Assignment 10
         \arrow[from=1-1, to=2-1]
         \arrow["u"', dotted, from=2-1, to=1-2]
     \end{tikzcd}\]
-    we also get a left inverse $d_2(u)=h$ of $g$. It follows that $g$ is
+    we also get a left inverse $d^2(u)=h$ of $g$. It follows that $g$ is
     invertible and the same goes for $f$.
 
     (2) Let's consider for any morphism $f\colon a_0\rightarrow a_1$ in $A$ the
@@ -118,7 +118,7 @@ Assignment 10
         \arrow[from=1-1, to=2-1]
         \arrow["t"{description}, dotted, from=2-1, to=1-2]
     \end{tikzcd},\]
-    granting us a 2-simplex $t$ which induces a morphism $d_0(t)=\xi\colon
+    granting us a 2-simplex $t$ which induces a morphism $d^0(t)=\xi\colon
     x_1\rightarrow y$. The commutative diagram
     \[\begin{tikzcd}
         {\Delta^1} \\
@@ -153,8 +153,8 @@ Assignment 10
     \end{tikzcd},\]
     which by the LLP of $\Lambda^2_0\rightarrow\Delta^2$ against $p$ grants us a
     lift $u\colon\Delta^2\rightarrow X$ (and therefore a commutative triangle)
-    with $d_0(u)=\phi'$, $d_1(u)=\psi\colon x_0\rightarrow x_2$ and
-    $d_2(u)=\phi$ such that $p(\psi)=g$.
+    with $d^0(u)=\phi'$, $d^1(u)=\psi\colon x_0\rightarrow x_2$ and
+    $d^2(u)=\phi$ such that $p(\psi)=g$.
 
     (4) The functor, which we will denote by $F$, has already been well defined
     on objects, hence we only need to specify the action on morphisms. We know
@@ -162,7 +162,7 @@ Assignment 10
     $\phi\colon x_0\rightarrow x_1$ such that $p(\phi)=f$, thus we define
     $F([f])\colon\pi_0(X_{a_0})\rightarrow\pi_0(X_{a_1})$ as
     $F([f])([x_0])=[x_1]$, where $[x_1]$ lies in $\pi_0(X_{a_1})$ since
-    $p(d_0(\phi))=d_0(p(\phi))=d_0(f)=a_1$.
+    $p(d^0(\phi))=d^0(p(\phi))=d^0(f)=a_1$.
     We need to show that this map is well defined, for which we will start with
     proving that, after fixing a representative $f$ of $[f]$, if we have a
     morphism $\psi\colon x_0\rightarrow x_0'$ in $X_{a_0}$ then we also have a
@@ -173,22 +173,32 @@ Assignment 10
     $(\phi'\cdot\psi,\phi)\colon\Lambda^2_0\rightarrow X$ which, composed
     with $p$, gives us $(p(\phi'\cdot\psi),f)\colon\Lambda^2_0\rightarrow A$. We
     want to extend this to a $2$-simplex $t\colon\Delta^2\rightarrow A$ where
-    $d_0(t)=\id_a$; we will then lift it through $p$ thanks to the RLP with
+    $d^0(t)=\id_a$; we will then lift it through $p$ thanks to the RLP with
     respect to $\Lambda^2_0\rightarrow\Delta^2$, getting a 2-simplex $t'$ in $X$
-    such that $d_0(t')$ will be by construction the desired morphism
-    $x_1\rightarrow x_1'$ in $X_{a_1}$.
+    such that $d^0(t')$ is by construction the desired morphism $x_1\rightarrow
+    x_1'$ in $X_{a_1}$.
+    \[\begin{tikzcd}
+        {\Lambda^2_0} & X \\
+        {\Delta^2} & A
+        \arrow["{(\phi'\cdot\psi,\phi)}", from=1-1, to=1-2]
+        \arrow["p", from=1-2, to=2-2]
+        \arrow["t"', from=2-1, to=2-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["{u}"{description}, dotted, from=2-1, to=1-2]
+    \end{tikzcd}\]
 
-    Notice that we have 2-simplices $u$, $v$ showing that $p(\phi'\cdot\psi)\sim
-    p(\phi')\cdot p(\psi)=f\cdot\id_a$, $f=f\cdot\id_a$, thus we may construct
-    a horn $(s_0(f),v,u)\colon\Lambda^3_1\rightarrow A$ giving us a 3-simplex
-    $\alpha$ such that $t=d_1(\alpha)$ is the desired 2-simplex in $A$.
+    Notice that we have 2-simplices $v$, $v'$ showing that
+    $p(\phi'\cdot\psi)\sim p(\phi')\cdot p(\psi)=f\cdot\id_a$, $f=f\cdot\id_a$,
+    thus we may construct a horn $(s_0(f),v',v)\colon\Lambda^3_1\rightarrow A$
+    which can be extended to a 3-simplex $\alpha$ such that $t=d^1(\alpha)$ is
+    the desired 2-simplex in $A$.
 
     Having proven that $F([f])([x_0])$ does not depend on the representative of
     $[x_0]$, we show that it also does not depend on the representative of
     $[f]$.
 
     Suppose that $g\in [f]$, i.e.\ we have a 2-simplex $t$ in $A$ showing that
-    $\id_a\cdot f\sim g$, meaning that $d_0(t)=\id_a$, $d_1(t)=g$, $d_2(t)=f$.
+    $\id_a\cdot f\sim g$, meaning that $d^0(t)=\id_a$, $d^1(t)=g$, $d^2(t)=f$.
     After choosing lifts $\phi\colon x_0\rightarrow x_1$, $\psi\colon
     x_0\rightarrow x_1'$ of $f$, $g$ through $p$, we can construct the
     commutative square
@@ -201,7 +211,7 @@ Assignment 10
         \arrow["p", from=1-2, to=2-2]
         \arrow["u"{description}, dotted, from=2-1, to=1-2]
     \end{tikzcd},\]
-    where the lift $u$ is such that $d_0(u)=h$ provides the desired morphism
+    where the lift $u$ is such that $d^0(u)=h$ provides the desired morphism
     $x_1\rightarrow x_1'$ in $X_{a_1}$.
 
     This shows that $F([f])$ is well defined. We still have to prove that this
@@ -212,12 +222,12 @@ Assignment 10
 
     On the other hand, consider two composable morphisms $[f]$, $[g]$, where
     $\dom(f)=a$. Given a
-    2-simplex $t$ in $A$ such that $d_0(t)=g$, $d_1(t)=g\cdot f$, $d_2(t)=f$ and
+    2-simplex $t$ in $A$ such that $d^0(t)=g$, $d^1(t)=g\cdot f$, $d^2(t)=f$ and
     fixed an element $[x_0]\in\pi_0(X_a)$, after fixing lifts $\phi\colon
     x_0\rightarrow x_1$, $\psi\colon x_1\rightarrow x_2$ of $f$, $g$ by (3) we
     get a 2-simplex $u$ in $X$
-    such that $d_0(u)=\psi$, $d_1(u)=\xi\colon x_0\rightarrow x_2$,
-    $d_2(u)=\phi$ and $\xi$ is a lift of $g\cdot f$ through $p$ with
+    such that $d^0(u)=\psi$, $d^1(u)=\xi\colon x_0\rightarrow x_2$,
+    $d^2(u)=\phi$ and $\xi$ is a lift of $g\cdot f$ through $p$ with
     $\phi\cdot\psi\sim\xi$. It follows that $F([g]\cdot [f])=F([g])\cdot
     F([f])$.
 \end{proof}
