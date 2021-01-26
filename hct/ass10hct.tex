@@ -42,6 +42,30 @@ Assignment 10
 
 ~\\
 \exercise{1}
+\begin{proof}
+(1) Denote by $\cF$ the class of maps being sent to bijections through $\pi_0$. Firstly we observe that $\cF$ is stable under retracts. Indeed, if $f\colon K\to L$ is in $\cF$ and admits a retract $g\colon X\to Y$, then applying $\pi_0$ yields a commutative diagram
+\[
+\begin{tikzcd}
+\pi_0(X)\arrow[r,"s"]\arrow[d,"g_*"]& \pi_0(K)\arrow[d,"f_*", "\wr"']\arrow[r,"p"]& \pi_0(X)\arrow[d,"g_*"]\\
+\pi_0(Y)\arrow[r,"t"']& \pi_0(L)\arrow[r,"q"']& \pi_0(Y)
+\end{tikzcd}
+\]
+where $ps=\id$, $qt=\id$ and $f_*$ is a bijection. From $pf_*^{-1}tg_*=ps=\id$, one gets that $g_*$ is injective, while from $g_*pf_*^{-1}t=qt=\id$, it follows that $g_*$ is surjective. Hence $g_*$ is a bijection, i.e. $g\in\cF$. 
+
+Moreover, we claim that $\cF$ is closed under colimits, and hence under pushouts, coproducts and countable compositions. To this end, take any $f_i\colon K_i\to L_i$ in $\cF$ indexed by a small category $I$. Since $\pi_0$ is a left adjoint, we have $\pi_0(\colim_If_i)=\colim_I\pi_0(f_i)$ is a bijection and thus $\colim_If_i\in\cF$. Therefore $\cF$ is saturated.
+
+(2) Recall that
+\[
+(\La^n_k)_i=\{f\colon[i]\to[n]\mid\im(f)\not\supseteq\{0,\cdots,k-1,k+1,\cdots,n\}\}
+\]
+for any $i$. Hence it follows directly that $(\La^n_k)_i=\Delta^n_i$ for $n\geqslant2$ and $i=0,1$. Therefore $\pi_0(\La^n_k)=[\Delta^0,\La^n_k]\cong[\Delta^0,\Delta^n]=\pi_0(\Delta^n)$ for $n\geqslant2$. For $n=1$ we have $\La^1_0=\La^1_1=\Delta^0$ and $\pi_0(\La^1_k)=*$, while by Exercise 1.1 of Sheet 9 we know that $\pi_0(\Delta^n)=*$ for any $n$. Nevertheless, notice that this is not true for $n=0$, as the $0$-horn $\La^0_0=\emptyset$ but $\pi_0(\Delta^0)=*$.
+
+(3) From (2) it follows that the inclusions $\La^n_k\hookrightarrow\Delta^n$ (for $n\geqslant1$ and $0\leqslant k\leqslant n$) are in $\cF$. Hence by Gabriel-Zisman all anodyne extensions belong to $\cF$.
+
+(4) This follows immediately from (3) and a theorem in Lecture 17.
+
+(5) Recall that $\pi_0$ has an alternative definition $\pi_0(X)=\colim_{\Delta^{\op}}X$, which is equivalent to the homotopy class definition by Exercise 1 of Sheet 7. Since $\Delta^{\op}$ has a final object $[0]$, it is filtered. Note that small filtered colimits of presheaves respect finite products, and therefore we have $\pi_0(X\times Y)\cong\pi_0(X)\times\pi_0(Y)$ for all simplicial sets $X,Y$.
+\end{proof}
 
 ~\\
 \exercise{2}
