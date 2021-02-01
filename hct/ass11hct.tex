@@ -63,7 +63,9 @@ Assignment 11
         \arrow["{i_1}", from=2-1, to=1-2]
         \arrow["g"'{pos=0.7}, from=1-2, to=4-2]
     \end{tikzcd}\]
-    Next we apply the functor $\Fun(-,W)$, where $W$ is a Kan complex.
+    Since monomorphisms are saturated, we know that all of the horizontal maps
+    are monomorphisms. Next we apply the functor $\Fun(-,W)$, where $W$ is a Kan
+    complex.
     \[\begin{tikzcd}
         & {\Fun(B_2,W)} \\
         {\Fun(B_2\sqcup_{A_2}C_2,W)} &&& {\Fun(A_2,W)} \\
@@ -87,9 +89,8 @@ Assignment 11
     We know that a morphism is a weak homotopy equivalence if and only if its
     image under $\Fun(-,W)$ is a homotopy equivalence for any Kan complex
     $W$. Also, monomorphisms are mapped to Kan fibrations and, for any
-    simplicial set $X$, the simplicial set $\Fun(X,W)$ is
-    itself a Kan complex. Finally, $\Fun(-,W)$ preserves colimits by sending
-    them to limits due to its contravariance because
+    simplicial set $X$, the simplicial set $\Fun(X,W)$ is itself a Kan complex.
+    Finally, $\Fun(-,W)$ preserves colimits by sending them to limits
     \begin{align*}
         \sSet(X,\Fun(\colim_{\cI}D_i,W))
         &\cong\sSet(X\times\colim_{\cI}D_i,W) \\
@@ -99,13 +100,12 @@ Assignment 11
         &\cong\sSet(X,\lim_{\cI^{\op}}\Fun(D_i,W))
     \end{align*}
     naturally in $X$,
-    thus the top and bottom squares are pullbacks and, being Kan fibrations
-    cosaturated, all of the horizontal maps belong to their class.
+    thus the top and bottom squares are pullbacks.
 
-    From our observations it follows that the top and bottom squares are
-    pullbacks, the vertical morphisms (except for possibly the left one) in our
-    latest diagram are homotopy equivalences, the horizontal maps are Kan
-    fibrations and every object is a Kan complex.
+    Let's summarize what we have so far with respect to our latest diagram: the
+    top and bottom squares are pullbacks, the vertical morphisms (except for
+    possibly the left one) are homotopy equivalences, the horizontal maps are
+    Kan fibrations and every object is a Kan complex.
 
     We can now apply a proposition from lecture 20 and conclude that $\Fun(k,W)$
     is itself a homotopy equivalence for any $W$, hence $k$ is a weak homotopy
