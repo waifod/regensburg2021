@@ -39,4 +39,121 @@ Assignment 11
 %%%sheet9
 \newcommand{\ihom}{\underline{\Hom}}
 
+~\\
+\exercise{1}
+\begin{proof}
+    We start by drawing the commutative cube in question.
+    \[\begin{tikzcd}
+        & {B_1} \\
+        {A_1} &&& {B_1\sqcup_{A_1}C_1} \\
+        && {C_1} \\
+        & {B_2} \\
+        {A_2} &&& {B_2\sqcup_{A_2}C_2} \\
+        && {C_2}
+        \arrow["h"{pos=0.3}, from=3-3, to=6-3, crossing over]
+        \arrow["{a_2}"', from=5-1, to=6-3]
+        \arrow[from=6-3, to=5-4]
+        \arrow["{i_2}"', from=5-1, to=4-2]
+        \arrow[from=4-2, to=5-4]
+        \arrow["k", from=2-4, to=5-4]
+        \arrow["f"', from=2-1, to=5-1]
+        \arrow["{a_1}"'{pos=0.2}, from=2-1, to=3-3, crossing over]
+        \arrow[from=1-2, to=2-4]
+        \arrow[from=3-3, to=2-4]
+        \arrow["{i_1}", from=2-1, to=1-2]
+        \arrow["g"'{pos=0.7}, from=1-2, to=4-2]
+    \end{tikzcd}\]
+    Next we apply the functor $\Fun(-,W)$, where $W$ is a Kan complex.
+    \[\begin{tikzcd}
+        & {\Fun(B_2,W)} \\
+        {\Fun(B_2\sqcup_{A_2}C_2,W)} &&& {\Fun(A_2,W)} \\
+        && {\Fun(C_2,W)} \\
+        & {\Fun(B_1,W)} \\
+        {\Fun(B_1\sqcup_{A_1}C_1,W)} &&& {\Fun(A_1,W)} \\
+        && {\Fun(C_1,W)}
+        \arrow["{\Fun(h,W)}"{pos=0.3}, from=3-3, to=6-3, crossing over]
+        \arrow[from=5-1, to=6-3]
+        \arrow["{\Fun(i_1,W)}"', from=6-3, to=5-4]
+        \arrow[from=5-1, to=4-2]
+        \arrow["{\Fun(a_1,W)}"'{pos=0.3}, from=4-2, to=5-4]
+        \arrow["{\Fun(f,W)}", from=2-4, to=5-4]
+        \arrow["{\Fun(k,W)}"', from=2-1, to=5-1]
+        \arrow[from=2-1, to=3-3, crossing over]
+        \arrow["{\Fun(a_2,W)}", from=1-2, to=2-4]
+        \arrow["{\Fun(i_2,W)}", from=3-3, to=2-4]
+        \arrow[from=2-1, to=1-2]
+        \arrow["{\Fun(g,W)}"'{pos=0.7}, from=1-2, to=4-2]
+    \end{tikzcd}\]
+    We know that a morphism is a weak homotopy equivalence if and only if its
+    image under $\Fun(-,W)$ is a homotopy equivalence for any Kan complex
+    $W$. Also, monomorphisms are mapped to Kan fibrations and, for any
+    simplicial set $X$, the simplicial set $\Fun(X,W)$ is
+    itself a Kan complex. Finally, $\Fun(-,W)$ preserves colimits by sending
+    them to limits due to its contravariance because
+    \begin{align*}
+        \sSet(X,\Fun(\colim_{\cI}D_i,W))
+        &\cong\sSet(X\times\colim_{\cI}D_i,W) \\
+        &\cong\sSet(\colim_{\cI} X\times D_i,W) \\
+        &\cong\lim_{\cI^{\op}}\sSet(X\times D_i,W) \\
+        &\cong\lim_{\cI^{\op}}\sSet(X,\Fun(D_i,W)) \\
+        &\cong\sSet(X,\lim_{\cI^{\op}}\Fun(D_i,W))
+    \end{align*}
+    naturally in $X$,
+    thus the top and bottom squares are pullbacks and, being Kan fibrations
+    saturated, all of the horizontal maps belong to their class.
+
+    From our observations it follows that the top and bottom squares are
+    pullbacks, the vertical morphisms (except for possibly the left one) in our
+    latest diagram are homotopy equivalences, the horizontal maps are Kan
+    fibrations and every object is a Kan complex.
+
+    We can now apply a proposition from lecture 20 and conclude that $\Fun(k,W)$
+    is itself a homotopy equivalence for any $W$, hence $k$ is a weak homotopy
+    equivalence.
+\end{proof}
+
+~\\
+\exercise{4}
+\begin{proof}
+    Consider a filtered diagram $D\colon\cI\rightarrow\sSet$.
+    Since $\Lambda^n_k$ is a finite simplicial set, the functor
+    $\sSet(\Lambda^n_k,-)$ preserves
+    filtered colimits. It follows that, fixed a morphism
+    $\alpha\colon\Delta^n_k\rightarrow\colim_{\cI}D_i$, we have an element
+    $[\alpha_i]\in\colim_{\cI}\sSet(\Lambda^n_k,D_i)\cong\sSet(\Lambda^n_k,\colim_{\cI}D_i)$
+    corresponding to it. This means that there is a $i\in\cI$ with a morphism
+    $\alpha_i\colon\Lambda^n_k\rightarrow D_i$ such that
+    \[\begin{tikzcd}
+        {\Lambda^n_k} & {D_i} \\
+        {} & {\colim_{\cI}D_i}
+        \arrow["{\lambda_i}", from=1-2, to=2-2]
+        \arrow["{\alpha_i}", from=1-1, to=1-2]
+        \arrow["\alpha"', from=1-1, to=2-2]
+    \end{tikzcd}\]
+    commutes, where $\lambda_i$ is a leg of the cocone.
+
+    Now, if the simplicial set $D_i$ is a Kan complex (or a
+    $\infty$-category), the horn admits a
+    filling $t\colon\Delta^n\rightarrow D_i$ for $0\leq k\leq n$ (respectively
+    $0<k<n$), which gives us the commutative diagram
+    \[\begin{tikzcd}
+        {\Lambda^n_k} & {D_i} \\
+        {\Delta^n} & {\colim_{\cI}D_i}
+        \arrow["{\lambda_i}", from=1-2, to=2-2]
+        \arrow["{\alpha_i}", from=1-1, to=1-2]
+        \arrow["\alpha"{description, pos=0.25}, from=1-1, to=2-2]
+        \arrow["t"', dotted, from=2-1, to=2-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["{t_i}"{description, pos=0.25}, dotted, from=2-1, to=1-2]
+    \end{tikzcd}\]
+    and in particular the $n$-simplex $t=\lambda_i\cdot t_i$ of
+    $\colim_{\cI}D_i$ such that $t|_{\Lambda^n_k}=\lambda_i\cdot
+    t_i|_{\Lambda^n_k}=\lambda_i\cdot\alpha_i=\alpha$.
+
+    Now, if for every $i\in\cI$ the simplicial set $D_i$ is a Kan complex, this
+    filling is always possible and therefore the colimit is itself a Kan
+    complex. Similarly, if the simplicial sets in the diagram are
+    $\infty$-categories the same goes for $\colim_{\cI}D_i$.
+\end{proof}
+
 \end{document}
