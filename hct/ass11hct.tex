@@ -68,8 +68,7 @@ Assignment 11
         \arrow["g"'{pos=0.7}, from=1-2, to=4-2]
     \end{tikzcd}\]
     Since monomorphisms are saturated, we know that all of the horizontal maps
-    are monomorphisms (misread the assignment: I thought the maps $a_\epsilon$
-    were monomorphisms too).
+    are monomorphisms.
 
     Next we apply the functor $\Fun(-,W)$, where $W$ is a Kan
     complex.
@@ -95,8 +94,7 @@ Assignment 11
     \end{tikzcd}\]
     We know that a morphism is a weak homotopy equivalence if and only if its
     image under $\Fun(-,W)$ is a homotopy equivalence for any Kan complex
-    $W$ (Lecture 18). Also, monomorphisms are mapped to Kan fibrations (Lecture
-    9) and, for any
+    $W$. Also, monomorphisms are mapped to Kan fibrations and, for any
     simplicial set $X$, the simplicial set $\Fun(X,W)$ is itself a Kan complex.
     Finally, $\Fun(-,W)$ preserves colimits by sending them to limits because
     \begin{align*}
@@ -114,9 +112,9 @@ Assignment 11
     possibly the left one) are homotopy equivalences, the horizontal maps are
     Kan fibrations and every object is a Kan complex.
 
-    We can now conclude that $\Fun(k,W)$
-    is itself a homotopy equivalence for any $W$ (Lecture 20), hence $k$ is a
-    weak homotopy equivalence.
+    We can now apply a proposition from lecture 20 and conclude that $\Fun(k,W)$
+    is itself a homotopy equivalence for any $W$, hence $k$ is a weak homotopy
+    equivalence.
 \end{proof}
 
 ~\\
@@ -129,7 +127,14 @@ Applying $\Fun(-,W)$ to the diagram with $W$ an arbitrary Kan complex, we get a 
 \cdots\arrow[r]& \Fun(A_{n+1},W)\arrow[r,"i_{n+1}^*"]& \Fun(A_n,W)\arrow[r]& \cdots\arrow[r]& \Fun(A_1,W)\arrow[r,"i_1^*"]& \Fun(A_0,W)
 \end{tikzcd}
 \]
-where $\Fun(A_n,W)$, $\Fun(B_n,W)$ are Kan complexes and every $i_n^*$, $j_n^*$ are Kan fibrations for all $n\geqslant0$ (Lecture 9). Since $f_n$ are weak homotopy equivalences ($n\geqslant0$), one has $f_n^*$ being homotopy equivalences as well (Lecture 18). Hence by a proposition in Lecture 20, it follows that $\lim_{\N^{\op}}\Fun(f_n,W)$ is a homotopy equivalence. From the proof of Exercise 1, we have $\lim_{\N^{\op}}\Fun(f_n,W)\cong\Fun(\colim_{\N}f_n,W)$. Therefore $f_\infty=\colim_{\N}f_n\colon A_\infty\to B_\infty$ is a weak homotopy equivalence.
+where $\Fun(A_n,W)$, $\Fun(B_n,W)$ are Kan complexes and every $i_n^*$, $j_n^*$ are Kan fibrations for all $n\geqslant0$ (Lecture 9). Since $f_n$ are weak homotopy equivalences ($n\geqslant0$), one has $f_n^*$ being (weak) homotopy equivalences as well (Lecture 18). Hence by a proposition in Lecture 20, it follows that $\lim_{\N^{\op}}\Fun(f_n,W)$ is a (weak) homotopy equivalence. From the proof of Exercise 1, we have $\lim_{\N^{\op}}\Fun(f_n,W)\cong\Fun(\colim_{\N}f_n,W)$, since there is a commutative diagram
+\[
+\begin{tikzcd}
+\Fun(\colim_\cI Y_i,W)\arrow[r,equal,"\sim"]\arrow[d,"\Fun(\colim_\cI g_i\text{,}W)"']&\lim_{\cI^{\op}}(Y_i,W)\arrow[d,"\lim_{\cI^{\op}}\Fun(g_i\text{,}W)"]\\
+\Fun(\colim_\cI X_i,W)\arrow[r,equal,"\sim"]&\lim_{\cI^{\op}}X_i,W)\\
+\end{tikzcd}
+\]
+for morphisms $g_i\colon X_i\to Y_i$ in $\sSet$ indexed by a small category $\cI$. Therefore $f_\infty=\colim_{\N}f_n\colon A_\infty\to B_\infty$ is a weak homotopy equivalence.
 \end{proof}
 
 ~\\
@@ -143,16 +148,10 @@ C_1\arrow[d,"h"]& A_1\arrow[r,hookrightarrow,"i_1"]\arrow[d,"f"]\arrow[l,"a_1"']
 C_2& A_2\arrow[r,"i_2"]\arrow[l,hookrightarrow,"a_2"']& B_2
 \end{tikzcd}
 \]
-where the morphism $a_1\colon A_1\to C_1$ factorizes into $h'\cdot a_0$ with
-    $a_0$ a monomorphism and $h'$ a trivial fibration. Recall that a trivial
-    fibration is an absolute weak equivalence. Denote by $D_0$ the pushout of
-    $a_0$ along $i_1$. We apply Exercise 1 to the first two rows and get $D_0\to
-    D_1$ a weak homotopy equivalence. Also, applying Exercise 1 to the outer
-    diagram yields that $D_0\to D_2$ is a weak homotopy equivalence. Therefore
-    $D_1\to D_2$ is a weak homotopy equivalence.
+where the morphism $a_1\colon A_1\to C_1$ is factorizes into $h'a_0$ with $a_0$ a monomorphism and $h'$ a trivial fibration. Recall that a trivial fibration is an (absolute) weak equivalence. Denote by $D_0$ the pushout of $C_0$ along $i_1$. We apply Exercise 1 to the first two rows and get $D_0\to D_1$ a weak homotopy equivalence. Also, applying Exercise 1 to the outer diagram yields a weak homotopy equivalence $D_0\to D_2$. Therefore $D_1\to D_2$ is a weak homotopy equivalence.
 \end{proof}
-
-~\\
+\newpage
+%~\\
 \exercise{4}
 \begin{proof}
     Consider a filtered diagram $D\colon\cI\rightarrow\sSet$.
