@@ -1,0 +1,201 @@
+\documentclass[a4paper,11pt,openany]{scrartcl}
+\usepackage{../reg2021}
+\usepackage{../quiver}
+
+\begin{document}
+\noindent\textbf{Author}\hfill\textbf{Semester} \linebreak
+\vspace*{-.1cm} Matteo Durante, Yuhao Zhang\hfill WS 2020/21 \\
+
+\noindent
+\rule{\linewidth}{1pt}
+\begin{center}
+\Large
+\textbf{Higher Category Theory} \\
+Assignment 11
+\end{center}
+\rule{\linewidth}{1pt}
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%sheet4
+\newcommand{\La}{\Lambda}
+\newcommand{\pa}{\partial}
+\newcommand{\ob}{\operatorname{Ob}}
+\newcommand{\mor}{\operatorname{Mor}}
+\newcommand{\sto}{\twoheadrightarrow}
+
+%%%sheet5
+\newcommand{\plim}{\varprojlim}
+\newcommand{\sst}{\subseteq}
+\newcommand{\eq}{\operatorname{eq}}
+
+%%%sheet6
+\newcommand{\f}{\varphi}
+
+%%%sheet8
+\newcommand{\sing}{\operatorname{Sing}}
+
+%%%sheet9
+\newcommand{\ihom}{\underline{\Hom}}
+
+%%%sheet11
+\newcommand{\N}{\mathbb{N}}
+
+
+~\\
+\exercise{1}
+\begin{proof}
+    (1) Objects in $A/F$ are natural transformations $t\colon\yo_a\rightarrow
+    F$, that is elements $t\in Fa$ for some $a\in A$, while morphisms $f\colon
+    t\rightarrow t'$ are natural transformations $f^*\colon
+    \yo_a\rightarrow\yo_{a'}$ such that the triangle
+    \[
+        \begin{tikzcd}
+            h_a\ar["f^*", rr]\ar["t"', dr]
+            && h_{a'}\ar["t'", dl] \\
+            & F
+        \end{tikzcd}
+    \]
+    commutes, or equivalently morphisms $f\colon a\rightarrow a'$ in $A$ with
+    $F(f)(t')=t$ by Yoneda (we will be abusing the notation by referring to the
+    induced morphisms in the slice category by the same names as the original
+    ones).
+
+    After fixing an object $t$ in $A/F$, we get the functor $\Pi_F\colon
+    (A/F)/t\rightarrow A/a$, $(f\colon u\rightarrow t)\mapsto (f\colon
+    b\rightarrow a)$.
+
+    \noindent We start by proving that it is a bijection on objects,
+    for which we fix a $f\colon b\rightarrow a$ in $A/a$ and try to construct
+    an object $g\colon u\rightarrow t$ in $(A/F)/t$ mapped to it while proving
+    its uniqueness. Remember that this object is induced by a natural
+    transformation between representable presheaves $\yo_b\rightarrow\yo_a$,
+    for which we simply take $f_*\colon\yo_b\rightarrow\yo_a$, coming from
+    $f\colon b\rightarrow a$ in $A$.
+    Our previous description tells us that this is indeed the desired map. For
+    uniqueness, remember that the Yoneda embedding is fully faithful and
+    therefore there is a bijection between natural trasformation amongst
+    representable presheaves and morphisms in $A$.
+    \[
+        \begin{tikzcd}
+            \yo_b\ar["f_*", rr]\ar["u"', dr]
+            && \yo_a\ar["t", dl] \\
+            & F
+        \end{tikzcd}
+    \]
+
+    Observe that $\Pi_F$ is naturally faithful since distinct parallel
+    morphisms $f,f'$ are given by definition by distinct morphisms $f,f'$ in
+    $A/F$, which are themselves induced by distinct natural transformations
+    between representable presheaves coming from distinct morphisms in $A$. The
+    images of $f,f'$ under $\Pi_F$ are precisely the morphisms in $A/a$ induced
+    by these morphisms in $A$ and are therefore distinct by construction.
+
+    For fullness, consider two objects $g\colon u\rightarrow t,h\colon
+    v\rightarrow t$ in $(A/F)/t$ and a morphism $f\colon
+    g\rightarrow h$ in $A/a$ induced by $f\colon c=\dom h\rightarrow b=\dom g$.
+    We simply have to prove that $f$ induces a morphism $g\rightarrow h$ in
+    $(A/F)/t$. To do this, consider the diagram
+    \[\begin{tikzcd}
+        {\yo_c} && {\yo_a} \\
+        {\yo_b} && F
+        \arrow["{h_*}", from=1-1, to=1-3]
+        \arrow["t", from=1-3, to=2-3]
+        \arrow["v"', from=2-1, to=2-3]
+        \arrow["{f_*}"', from=1-1, to=2-1]
+        \arrow["{g_*}"{description, pos=0.2}, from=2-1, to=1-3]
+        \arrow["u"{description, pos=0.2}, crossing over, from=1-1, to=2-3]
+    \end{tikzcd}\]
+    and observe that
+    \begin{align*}
+        v\cdot f_* &=t\cdot g_*\cdot f_* \\
+        &=t\cdot h_* \\
+        &=u
+    \end{align*}
+    proving that $f$ does define a morphism $u\rightarrow v$ in $A/F$. Since
+    $h=g\cdot f$, we can conclude that $f$ does define the desired morphism
+    $h\rightarrow g$ and, under $\pi_F$, it is mapped to $f$ itself, proving
+    fullness.
+
+    (2) Consider a natural transformation $\alpha\colon F\Rightarrow G$. We can
+    define a functor $\psi(\alpha)\colon A/F\rightarrow A/G$ (here called $\phi$
+    for brevity) as
+    $(t\colon\yo_a\Rightarrow F)\mapsto (\alpha_a(t)=\alpha\cdot
+    t\colon\yo_a\Rightarrow G)$ on objects, $f\mapsto f$ on morphisms. It
+    truly is a functor since it is well defined and identities and compositions
+    are trivially preserved. Also, we see that $\dom t=\dom\alpha_a(t)$, which
+    since $\phi$ is an identity on morphisms implies that
+    $\pi_G\cdot\phi=\pi_F$. We only have to prove that this is a bijection.
+
+    We will do this by constructing a natural transformation $\beta(\phi)\colon
+    F\Rightarrow G$ (here called $\alpha$ for brevity) from a functor
+    $\phi\colon A/F\rightarrow A/G$ such that
+    $\pi_G\cdot\phi=\pi_F$. To do this, consider an object $a$ in $A$ and an
+    element $t\in Fa$. This corresponds to a natural transformation
+    $t\colon\yo_a\Rightarrow F$ which under $phi$ is sent to another natural
+    transformation $\phi(t)\colon\yo_b\Rightarrow A/G$. Observe that
+    \begin{align*}
+        b &=\pi_G(\phi(t)) \\
+        &=\pi_F(t) \\
+        &=a, \\
+        \pi_G(\phi(f)) &=\pi_F(f) \\
+        &=f,
+    \end{align*}
+    where $f$ denotes a morphism in $A$ and the corresponding ones in $A/F$ and
+    $A/G$. This means that the domains of the objects in the slices are
+    preserved by $\phi$ and so are the morphisms, allowing us to set
+    $\alpha_a(t)=\phi(t)$.
+
+    We only still have to check for naturality and for this first we take a
+    morphism $f\colon a\rightarrow b$ in $A$ and observe that $f\colon
+    t\rightarrow u$ in $A/F$ is sent to $f\colon\phi(t)\rightarrow\phi(u)$,
+    giving us the diagrams
+    \[\begin{tikzcd}
+        {\yo_a} && {\yo_b} \\
+        & F
+        \arrow["t"', from=1-1, to=2-2]
+        \arrow["u", from=1-3, to=2-2]
+        \arrow["{f_*}", from=1-1, to=1-3]
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+        {\yo_a} && {\yo_b} \\
+        & G
+        \arrow["\phi(t)"', from=1-1, to=2-2]
+        \arrow["\phi(u)", from=1-3, to=2-2]
+        \arrow["{f_*}", from=1-1, to=1-3]
+    \end{tikzcd}\]
+    from which we derive
+    \begin{align*}
+        (\alpha_b\cdot Ff)(t) &=\alpha_b(Ff(t)) \\
+        &=\phi(Ff(t)) \\
+        &=\phi(t\cdot f_*) \\
+        &=\phi(t)\cdot f_* \\
+        &=Gf(\phi(t)) \\
+        &=Gf(\alpha_a(t)) \\
+        &=(Gf\cdot\alpha_a)(t)
+    \end{align*}
+    We are left with checking that these associations are inverse to one
+    another.
+
+    Fix then $\alpha\colon F\Rightarrow G$ and pick $t\in Fa$. We have
+    \begin{align*}
+        (\beta_a(\psi(\alpha)))(t) &=(\psi(\alpha))(t) \\
+        &=\alpha\cdot t \\
+        &=\alpha_a(t)
+    \end{align*}
+    which gives us $\beta\cdot\psi=\id$. Also, fixing a functor $\phi\colon
+    A/F\Rrightarrow A/G$ and picking an object $t\in Fa$ and a morphism $f\colon
+    t\rightarrow u$, we see that
+    \begin{align*}
+        (\psi(\beta(\phi)))(t) &=\beta(\phi)_a\cdot t \\
+        &=(\beta(\phi)_a)(t) \\
+        &=\phi(t),
+        (\psi(\beta(\phi)))(f) &=f \\
+        &=\phi(f),
+    \end{align*}
+    proving that $\psi\cdot\beta=\id$ and therefore the thesis.
+\end{proof}
+
+\end{document}
