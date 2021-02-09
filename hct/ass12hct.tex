@@ -11,7 +11,7 @@
 \begin{center}
 \Large
 \textbf{Higher Category Theory} \\
-Assignment 11
+Assignment 12
 \end{center}
 \rule{\linewidth}{1pt}
 \\
@@ -196,6 +196,64 @@ Assignment 11
         &=\phi(f),
     \end{align*}
     proving that $\psi\cdot\beta=\id$ and therefore the thesis.
+\end{proof}
+
+~\\
+\exercise{2}
+\begin{proof}
+Suppose we have had $ho(A)^{\op}\to\Set$, $a\mapsto X_a$.
+
+Next we construct a functor $ho(A)^{\op}\to\Set$, $a\mapsto\pi_0(\Fun(W,X_a))$ for each simplicial set $W$. To this end, note that $\Fun(W,X)\to\Fun(W,A)$ is a right fibration since $p\colon X\to A$ is so, and $\Fun(W,A)$ is an $\infty$-category since $A$ is so. Hence we get a functor 
+\[
+ho(\Fun(W,A))^{\op}\to\Set
+\]
+sending $f\mapsto\pi_0(\Fun(W,X)_f)$. On the other hand, let us apply the homotopy category functor to $A=\Fun(\Delta^0,A)\to\Fun(W,A)$ and get 
+\[
+ho(A)\to ho(\Fun(W,A)).
+\]
+So we obtain a functor $ho(A)^{\op}\to\Set$ sending $a\mapsto\pi_0(\Fun(W,X)_{\Fun(W,a)})$. Recall that $\Fun(W,-)$ is a right adjoint, applying which to the pullback diagram left-hand side below yields the pullback diagram on the right:
+\[
+\begin{tikzcd}
+X_a\arrow[r]\arrow[d]\arrow[dr,phantom,"\lrcorner",very near start]& X\arrow[d]\\
+\Delta^0\arrow[r]& A
+\end{tikzcd}
+\qquad\qquad
+\begin{tikzcd}
+\Fun(W,X_a)\arrow[r]\arrow[d]\arrow[dr,phantom,"\lrcorner",very near start]& \Fun(W,X)\arrow[d]\\
+\Delta^0=\Fun(W,\Delta^0)\arrow[r,"\Fun(W\text{,}a)"]& \Fun(W,A)
+\end{tikzcd}
+\]
+Thence $\Fun(W,X)_{\Fun(W,a)}=\Fun(W,X_a)$ and this leads to our prescribed functor $ho(A)^{\op}$ $\to\Set$.
+
+Finally, we come back to show that $ho(A)^{\op}\to ho(\sSet)$, $a\mapsto X_a$ is well-defined. In fact, suppose that $a,b\in A_0$ and two $1$-simplex with source $a$ and target $b$ are homotopic. Then for every simplicial set $W$, their induced map $\pi_0(\Fun(W,X_b))\to\pi_0(\Fun(W,X_a))$ are the same by the previous paragraph. Therefore if $a$ and $b$ are homotopy equivalent, then we have a bijection (and by Exercise 1(3) of Sheet 9)
+\[
+[W,X_b]\cong\pi_0(\Fun(W,X_b))\cong\pi_0(\Fun(W,X_a))\cong[W,X_a].
+\]
+Hence $X_a$ and $X_b$ are (weak) homotopy equivalent, which shows the well-definedness on objects. For the well-definedness on morphisms, given two homotopic $1$-simplex from $a$ to $b$, it suffices to take $W=X_a$ in the induced maps $[W,X_b]\to[W,X_a]$ and so their induced $X_b\to X_a$ lie in the same homotopy class.
+\end{proof}
+
+~\\
+\exercise{3}
+\begin{proof}
+By a lemma in Lecture 12 we have the following correspondence of lifting problems
+\[\tag{$*$}
+\begin{tikzcd}
+\pa\Delta^n\arrow[r]\arrow[d]& X_{/x}\arrow[d]\\
+\Delta^n\arrow[r]\arrow[ur,dotted]& Y_{/px}
+\end{tikzcd}
+\rightsquigarrow
+\begin{tikzcd}
+\pa\Delta^n*\Delta^0\arrow[r]\arrow[d]& X\arrow[d,"p"]\\
+\Delta^n*\Delta^0\arrow[r]\arrow[ur,dotted]& Y
+\end{tikzcd}
+\]
+We claim that $\pa\Delta^n*\Delta^0\cong\La^{n+1}_{n+1}$. In fact\footnote{\ Or we can just cite a proposition in Lecture 11, that $\Delta^n*\La^m_l\cup\pa\Delta^n*\Delta^m=\La^{n+1+m}_{n+1+l}$ as a simplicial subset of $\Delta^n*\Delta^m$, and take $m=l=0$.}, for every $[m]\in\Delta$ we have by definition
+\[
+(\pa\Delta^n*\Delta^0)_m=\coprod_{\substack{i+1+j=m\\ -1\leqslant i,j\leqslant m}}\pa\Delta^n_i\times\Delta^0_j=\pa\Delta^n_m\amalg(\pa\Delta^n_{m-1}\times\Delta^0_0)\cong\La^{n+1}_{n+1}([m]).
+\]
+where the last bijection is given by $\pa\Delta^n_m\to\La^{n+1}_{n+1}([m])$, $([m]\to[n])\mapsto([m]\to[n]\hookrightarrow[n+1])$ and $\Delta^n_{m-1}\times\Delta^0_0\to\La^{n+1}_{n+1}([m])$, $(f\colon[m-1]\to[n],*)\mapsto(g\colon[m]\to[n+1])$ such that $g(m)=n+1$, $g|_{[m-1]}=f$.
+
+Therefore, if $p$ is a right fibration, then it admits a lift against $\La^{n+1}_{n+1}\to\Delta^{n+1}$ for all $n\geqslant0$ and hence the left-hand side of $(*)$ has a filler $\Delta^n\to X_{/x}$, so that $X_{/x}\to Y_{/px}$ is a trivial fibration. Conversely, if $X_{/x}\to Y_{/px}$ is a trivial fibration, then the right-hand side of $(*)$ admits a filler. With $p$ being also an inner fibration, we see that it has RLP against all $\La^n_k\to\Delta^n$ for $0<k\leqslant n$, and thus is a right fibration.
 \end{proof}
 
 \end{document}
